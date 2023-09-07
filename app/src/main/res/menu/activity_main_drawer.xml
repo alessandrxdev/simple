@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_unfill_24px"
+            android:title="@string/title_home" />
+
+        <item
+            android:id="@+id/nav_servicios"
+            android:icon="@drawable/ic_message_24px"
+            android:title="@string/title_servicios" />
+
+        <item
+            android:id="@+id/nav_entumovil"
+            android:icon="@drawable/ic_entumovil_24px"
+            android:title="@string/title_entumovil" />
+
+        <item
+            android:id="@+id/nav_telepuntos"
+            android:icon="@drawable/ic_location_24px"
+            android:title="@string/title_telepunto" />
+
+        <item
+            android:id="@+id/nav_legal"
+            android:icon="@drawable/ic_politicas_24px"
+            android:title="@string/title_politicas" />
+
+        <item
+            android:id="@+id/nav_invite"
+            android:icon="@drawable/ic_share_24px"
+            android:title="@string/title_invite" />
+
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings_24px"
+            android:title="@string/title_settings" />
+
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_about_24px"
+            android:title="@string/title_about" />
+
+
+    </group>
+</menu>

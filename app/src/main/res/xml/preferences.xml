@@ -1,0 +1,51 @@
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.arr.preference.WaPerfilPreference
+        app:key="perfil"
+        app:title="@string/title_perfil_preference"
+        app:summary="sin número"
+        app:iconQR="@drawable/ic_qr_code_24px" />
+
+    <PreferenceCategory
+        app:key="line"
+        app:iconSpaceReserved="false" />
+
+    <com.arr.preference.M3Preference
+        app:key="ui"
+        app:icon="@drawable/ic_palette_24px"
+        app:title="@string/title_preference_apariencia"
+        app:summary="@string/summary_preference_apariencia" />
+
+    <com.arr.preference.M3Preference
+        app:key="seguridad"
+        app:icon="@drawable/ic_security_24px"
+        app:title="@string/title_preference_security"
+        app:summary="@string/summary_preference_security" />
+
+    <com.arr.preference.M3Preference
+        app:key="balance"
+        app:icon="@drawable/ic_balances"
+        app:title="@string/balances_preference"
+        app:summary="@string/summary_balances" />
+
+    <com.arr.preference.M3Preference
+        app:key="simcard"
+        app:icon="@drawable/ic_sim_card_24px"
+        app:title="SIM"
+        app:summary="Cambiar de sim, activar consulta de saldo para líneas estatales" />
+
+    <com.arr.preference.M3Preference
+        app:key="idioma"
+        app:icon="@drawable/ic_language_24px"
+        app:title="Idioma"
+        app:summary="Idioma predeterminado de la aplicación" />
+
+    <com.arr.preference.M3Preference
+        app:key="help"
+        app:icon="@drawable/ic_help_24px"
+        app:title="Ayuda"
+        app:summary="Obten ayuda, contáctenos" />
+
+
+</PreferenceScreen>

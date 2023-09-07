@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="balances_preference">Balances</string>
+    <string name="title_home">Home</string>
+    <string name="title_about">About</string>
+    <string name="title_servicios">Serevices</string>
+    <string name="summary_balances">Manege los ajustes de sus balances</string>
+    <string name="actualizar_balances">Actualizar</string>
+    <string name="summary_actualizacion_de_balances">Actualizacion de sus balances segun el periodo de tiempo seleccionado</string>
+    <string name="description_numero_movil_del_usuario">numero movil del usuario</string>
+    <string name="hint_nombre">Nombre</string>
+    <string name="hint_numero_welcome">Numero</string>
+    <string name="title_bienvenido">Bienvenido</string>
+    <string name="diaria_vencimiento">24 horas a partir de su uso</string>
+    <string name="precio_diaria">25.00 CUP</string>
+    <string name="diaria_title">Diaria</string>
+</resources>

@@ -1,0 +1,62 @@
+<resources>
+
+    <string-array name="entries_theme">
+        <item>@string/theme_system</item>
+        <item>@string/theme_light</item>
+        <item>@string/theme_dark</item>
+    </string-array>
+    <string-array name="entry_theme">
+        <item>system</item>
+        <item>light</item>
+        <item>dark</item>
+    </string-array>
+
+    <string-array name="entries_sim">
+        <item>SIM1 (Predeterminada)</item>
+        <item>SIM2</item>
+    </string-array>
+    <string-array name="entry_sim">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="entries_home">
+        <item>Consultas</item>
+        <item>Recarga</item>
+        <item>Transferir</item>
+        <item>Adelanta</item>
+    </string-array>
+    <string-array name="entry_home">
+        <item>consulta</item>
+        <item>recarga</item>
+        <item>transferir</item>
+        <item>adelanta</item>
+    </string-array>
+    <string-array name="default_home">
+        <item>consulta</item>
+        <item>recarga</item>
+        <item>transferir</item>
+        <item>adelanta</item>
+    </string-array>
+
+    <string-array name="adelanta">
+        <item>25.00 CUP</item>
+        <item>50.00 CUP</item>
+    </string-array>
+
+    <string-array name="call">
+        <item>Privado</item>
+        <item>Asterisco</item>
+        
+    </string-array>
+    <string-array name="update_balances">
+        <item>Manual</item>
+        <item>1 hora</item>
+        <item>24 horas</item>
+    </string-array>
+    <string-array name="default_update_balances">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+</resources>

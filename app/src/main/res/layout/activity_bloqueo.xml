@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:padding="16dp">
+
+    <TextView
+         android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+         android:drawablePadding="6dp"
+         android:textAppearance="?textAppearanceHeadlineMedium"
+         android:layout_centerHorizontal="true"
+         android:drawableTint="@color/colorPrimary"
+         android:layout_alignParentTop="true"
+         android:drawableTop="@drawable/ic_security_24px"
+         android:text="Bloqueado" />
+
+    <LinearLayout
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent"
+         android:gravity="center"
+         android:layout_centerVertical="true"
+         android:orientation="vertical"
+         android:layout_centerHorizontal="true">
+
+        <ImageView
+             android:layout_height="45dp"
+             android:layout_width="45dp"
+             android:contentDescription="Presionar para abrir dialogo de desbloqueo"
+             android:src="@drawable/ic_huella_24px"
+             android:background="?attr/selectableItemBackgroundBorderless"
+             android:clickable="true"
+             android:layout_margin="5dp"
+             android:id="@+id/firgenprint" />
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:textAppearance="?textAppearanceBodySmall"
+             android:id="@+id/textMessage"
+             android:text="Presione para desbloquear" />
+
+    </LinearLayout>
+
+</RelativeLayout>

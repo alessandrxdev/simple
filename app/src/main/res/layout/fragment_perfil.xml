@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <ImageView
+        android:layout_height="160dp"
+        android:layout_width="160dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_account_circle_24px"
+        android:contentDescription="@string/description_photo_profile"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/imageProfile" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignEnd="@+id/imageProfile"
+        android:contentDescription="@string/description_add_photo"
+        android:src="@drawable/ic_add_photo_24px"
+        style="?attr/floatingActionButtonSmallStyle"
+        android:layout_alignParentTop="true"
+        android:id="@+id/add_photo" />
+
+    <FrameLayout
+        android:layout_marginTop="10dp"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/imageProfile"
+        android:id="@+id/frameLayout">
+
+    </FrameLayout>
+
+</RelativeLayout>

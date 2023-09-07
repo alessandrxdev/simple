@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <color name="colorPrimary">#5854A8</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorPrimaryContainer">#E3DFFF</color>
+    <color name="colorOnPrimaryContainer">#120463</color>
+    <color name="colorSecondary">#5E5C71</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+    <color name="colorSecondaryContainer">#E3E0F9</color>
+    <color name="colorOnSecondaryContainer">#1B1A2C</color>
+    <color name="colorTertiary">#7A5367</color>
+    <color name="colorOnTertiary">#FFFFFF</color>
+    <color name="colorTertiaryContainer">#FFD8EA</color>
+    <color name="colorOnTertiaryContainer">#2F1123</color>
+    <color name="colorError">#BA1A1A</color>
+    <color name="colorErrorContainer">#FFDAD6</color>
+    <color name="colorOnError">#FFFFFF</color>
+    <color name="colorOnErrorContainer">#410002</color>
+    <color name="colorBackground">#FFFBFF</color>
+    <color name="colorOnBackground">#1C1B1F</color>
+    <color name="colorSurface">#FFFBFF</color>
+    <color name="colorOnSurface">#1C1B1F</color>
+    <color name="colorSurfaceVariant">#E5E1EC</color>
+    <color name="colorOnSurfaceVariant">#47464F</color>
+    <color name="colorOutline">#787680</color>
+    <color name="colorOnSurfaceInverse">#F3EFF4</color>
+    <color name="colorSurfaceInverse">#313034</color>
+    <color name="colorPrimaryInverse">#C4C0FF</color>
+    <color name="colorSurfaceTint">#5854A8</color>
+    <color name="colorOutlineVariant">#C8C5D0</color>
+
+    <!-- Here you can add color of your choice -->
+    <color name="ucrop_color_toolbar">@color/colorBackground</color>
+    <color name="ucrop_color_statusbar">@color/colorBackground</color>
+    <color name="ucrop_color_widget_active">@color/colorSecondary</color>
+    <color name="ucrop_color_widget_background">@color/colorBackground</color>
+    <color name="ucrop_color_widget_text">@color/colorOnBackground</color>
+
+</resources>

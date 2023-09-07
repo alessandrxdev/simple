@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:focusableInTouchMode="true"
+    android:fitsSystemWindows="true"
+    android:focusable="false"
+    android:id="@+id/content"
+    tools:context=".activity.WelcomeActivity">
+
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_margin="16dp">
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textAppearance="?textAppearanceHeadlineMedium"
+                android:id="@+id/title"
+                android:text="@string/title_bienvenido" />
+            
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textAppearance="?textAppearanceLabelSmall"
+                android:id="@+id/subtitle"
+                android:text="@string/subtitle_bienvenido" />
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginTop="20dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    app:boxCornerRadiusTopEnd="30dp"
+                    android:hint="@string/hint_nombre"
+                    app:boxCornerRadiusBottomStart="30dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:boxCornerRadiusBottomEnd="30dp"
+                    style="?attr/textInputFilledStyle"
+                    app:boxCornerRadiusTopStart="30dp"
+                    app:errorEnabled="true"
+                    app:boxStrokeWidth="0dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:contentDescription="@string/description_nombre_del_usuario"
+                        android:maxLength="15"
+                        android:inputType="text"
+                        android:id="@+id/edit_nombre" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    app:boxCornerRadiusTopEnd="30dp"
+                    android:hint="@string/hint_numero_welcome"
+                    app:boxCornerRadiusBottomStart="30dp"
+                    app:boxStrokeWidthFocused="0dp"
+                    app:boxCornerRadiusBottomEnd="30dp"
+                    style="?attr/textInputFilledStyle"
+                    app:prefixText="+53"
+                    app:boxCornerRadiusTopStart="30dp"
+                    app:errorEnabled="true"
+                    app:boxStrokeWidth="0dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:contentDescription="@string/description_numero_movil_del_usuario"
+                        android:maxLength="8"
+                        android:inputType="phone"
+                        android:id="@+id/edit_numero" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/button_next"
+                    android:text="@string/button_aceptar" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:clickable="true"
+            android:textAppearance="?textAppearanceBodySmall"
+            android:layout_margin="16dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/text_politicas"
+            android:text="@string/text_politicas" />
+
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

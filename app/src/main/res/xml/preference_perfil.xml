@@ -1,0 +1,24 @@
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.arr.preference.BSEditTextPreference
+        app:key="name"
+        app:icon="@drawable/ic_user_24px"
+        app:title="Nombre"
+        app:dialogHint="Su nombre"
+        app:summary="Este no es un nombre de usuario ni un PIN, solo será usado para dar una mejor experiencia al usuario" />
+
+    <com.arr.preference.BSEditTextPreference
+        app:key="number"
+        app:icon="@drawable/ic_llamadas_unfill_24px"
+        app:title="Número"
+        app:dialogHint="Número móvil"
+        app:summary="Su número de teléfono" />
+
+    <com.arr.preference.M3Preference
+        app:key="nauta"
+        app:icon="@drawable/ic_nauta_email_24px"
+        app:title="Nauta"
+        app:summary="Cuenta de navegación nacional e internacional" />
+
+</PreferenceScreen>

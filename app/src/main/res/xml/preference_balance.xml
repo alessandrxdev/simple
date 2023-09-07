@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.arr.preference.M3ListPreference
+        app:key="update_balances"
+        app:icon="@drawable/ic_update_balances"
+        app:title="@string/actualizar_balances"
+        app:entries="@array/update_balances"
+        app:entryValues="@array/default_update_balances"
+        app:defaultValue="0"
+        app:summary="@string/summary_actualizacion_de_balances" />
+
+    <com.arr.preference.M3SwitchPreference
+        app:key="balance_notif"
+        app:icon="@drawable/ic_balances_unfill_24px"
+        app:summary="@string/summary_notification_balance"
+        app:title="@string/title_notification_balance" />
+    <com.arr.preference.M3SwitchPreference
+        app:key="not_update_balances"
+        app:icon="@drawable/ic_notification_24px"
+        app:summary="No notificar cuando se actualice automaticamente sus balances"
+        app:title="Alerta" />
+    <com.arr.preference.M3SwitchPreference
+        app:key="vence"
+        app:icon="@drawable/ic_calendar_20px"
+        app:summary="Notificar cuando estén próximo a vencer sus balances"
+        app:title="Vencimiento" />
+</PreferenceScreen>

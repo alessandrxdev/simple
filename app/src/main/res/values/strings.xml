@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">Applify</string>
+    <string name="nav_header_subtitle" translatable="false">soporteapplify@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="app_name">SIMple</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_about">Acerca de</string>
+    <string name="title_politicas">Políticas de la app</string>
+    <string name="title_telepunto">Telepuntos</string>
+    <string name="title_entumovil">enTuMovil</string>
+    <string name="title_servicios">Servicios</string>
+    <string name="title_invite">Invitar amigo</string>
+    <string name="title_settings">Configuración</string>
+    <string name="title_preference_apariencia">Apariencia</string>
+    <string name="summary_preference_apariencia">Ajustes de la ui, temas, actualizaciones de la aplicación</string>
+    <string name="title_preference_theme">Tema</string>
+    <string name="theme_system">Según el Sistema</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Oscuro</string>
+    <string name="title_preference_home">Inicio</string>
+    <string name="summary_preference_home">Personalice su pantalla de inicio según sus necesidades</string>
+    <string name="good_day">Buenos días</string>
+    <string name="good_night">Buenas noches</string>
+    <string name="good_afternoon">Buenas tardes</string>
+
+    <string name="consulta_saldo">Saldo</string>
+    <string name="consulta_bono">Bonos</string>
+    <string name="consulta_datos">Datos</string>
+    <string name="consulta_pospago">Pospago</string>
+    <string name="consulta_adelanta">Adelanta</string>
+    <string name="title_categoria_recarga">Recarga</string>
+    <string name="hint_recarga">Código de recarga</string>
+    <string name="button_recarga">Recargar</string>
+
+    <string name="title_categoria_transferir">Enviar saldo</string>
+    <string name="hint_numero">Número</string>
+    <string name="hint_monto">Monto</string>
+    <string name="hint_clave">Clave</string>
+    <string name="button_transferir">Transferir</string>
+
+    <string name="title_categoria_adelanta">Adelanta saldo</string>
+    <string name="hint_cantidad">Cantidad</string>
+    <string name="button_adelanta">Solicitar</string>
+    <string name="title_balances">Balances</string>
+    <string name="title_compras">Compras</string>
+    <string name="title_llamadas">Llamadas</string>
+    <string name="title_nauta">Nauta</string>
+    <string name="balances_preference">Balances</string>
+    <string name="summary_balances">Actualización periodica de sus balances, alerta de vencimiento y resumen en las notificaciones</string>
+    <string name="actualizar_balances">Actualizar</string>
+    <string name="summary_actualizacion_de_balances">Actualizacion de sus balances segun el periodo de tiempo seleccionado</string>
+    <string name="title_perfil_preference">Usuario</string>
+    <string name="summary_perfil_preference">sin número</string>
+    <string name="button_aceptar">Continuar</string>
+    <string name="description_nombre_del_usuario">Nombre del usuario</string>
+    <string name="description_numero_movil_del_usuario">numero movil del usuario</string>
+    <string name="hint_nombre">Nombre</string>
+    <string name="hint_numero_welcome">Número</string>
+    <string name="title_bienvenido">¡Bienvenido!</string>
+    <string name="subtitle_bienvenido">Antes de comenzar necesitamos complete los siguientes datos para poder brindarle una mejor experiencia con SIMple.</string>
+    <string name="text_snackbarinserte_su_numero_y_su_nombre">¡Inserte su número y nombre!</string>
+    <string name="summary_notification_balance">Mostrar el estado de sus balances en las notificaciones</string>
+    <string name="title_notification_balance">Notificación</string>
+    <string name="text_politicas">
+        Al continuar usted acepta las
+        <a href="https://applifycu.github.io/website/politicas.html">Políticas de Privacidad</a>
+        y
+        <a href="https://applifycu.github.io/website/politicas.html">Términos de Uso</a>
+        de Applify.
+    </string>
+
+    <string name="summary_security">Desbloquear la aplicación con su huella o reconocimiento facial</string>
+    <string name="title_security">Desbloquear</string>
+    <string name="summary_confirma">Saltar el mensaje de confirmación predeterminado de su operador al ejecutar los códigos USSD</string>
+    <string name="title_confirma">Confirmación</string>
+    <string name="title_preference_security">Seguridad</string>
+    <string name="summary_preference_security">Bloqueo de la aplicación, confirmación antes de ejecutar una acción</string>
+    <string name="title_bug">Error encontrado</string>
+    <string name="message_bug">¡Oops! No eres tú, soy yo...\n\nAl parecer, existe un problema aquí y debemos resolverlo. Envía el reporte para darle una solución en próximas versiones.</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
+    <string name="diaria_vencimiento">24 horas a partir de su uso</string>
+    <string name="diaria_lte" translatable="false">200 MB solo para la red lte</string>
+    <string name="precio_diaria">25.00 CUP</string>
+    <string name="diaria_title">Diaria</string>
+    <string name="mensajeria_vencimiento">30 días a partir de su uso</string>
+    <string name="mensajeria_datos">600 MB para toDus y correo nauta</string>
+    <string name="mensajeria">25.00 CUP</string>
+    <string name="mensajeria_title">Mensajería</string>
+    <string name="paquetes">LTE</string>
+    <string name="lte_extra_precio">950 CUP</string>
+    <string name="lte_extra_paquete_all">4.5 GB para todas las redes</string>
+    <string name="lte_paquete_lte">12 GB solo para la red lte</string>
+    <string name="lte_extra_nacional">300 MB para la red nacional</string>
+    <string name="lte_extra_vencimiento">30 días a partir de su uso</string>
+    <string name="message_activar_amigo">Podrás llamar a tres números con una tarifa preferencial de 5.00 CUP el minuto en un horario de 7:00 a.m - 10:45 p.m. A partir de la 4ta. suscripción se le cobrará 2.50 CUP por cada número.</string>
+    <string name="title_activar_amigo">Activar</string>
+    <string name="precio_activar_amigo">25.00 CUP</string>
+    <string name="message_add_amigo">Las tres primeras suscripciones son gratis, a patir de la 4ta se le descontará de su saldo principal.</string>
+    <string name="title_add_amigo">Agregar</string>
+    <string name="precio_add_amigo">2.50 CUP</string>
+    <string name="message_disable_amigo">Al desactivar su plan amigo no podrá seguir haciendo uso del mismo, para volver a activarlo deberá pagar 25.00 CUP.</string>
+    <string name="title_disable_amigo">Desactivar</string>
+    <string name="message_delete_amigo">Eliminar las suscripciones es libre de costo, si desea agregar un nuevo número a partir del 4to se le cobrará 2.50 CUP por cada uno.</string>
+    <string name="title_delete_amigo">Eliminar</string>
+    <string name="message_contact_transfer">Se necesitan permisos para leer sus contactos y poder obtener su número móvil para insertarlo en el número de transferencia de saldo.</string>
+    <string name="title_contact_transfer">Contactos</string>
+    <string name="summary_tarifa">Mantenga su tarifa por consumo desactivada para proteger su saldo principal, dado que si la activa sufrira un consumo elevado de saldo</string>
+    <string name="title_tarifa">Tarifa por consumo</string>
+    <string name="description_add_photo">Agregar foto de perfil</string>
+    <string name="description_photo_profile">Iaagen de perfil</string>
+    <string name="description_security">Para activar el bloqueo de la aplicación debe de tener configurado en su disposotivo al menos una de las dos opciones biométricas compatibles, desbloqueo facial o por huella.</string>
+    <string name="nauta_login">Iniciar Sesión</string>
+    <string name="nauta_portal">Portal Usuario</string>
+    <string name="hint_usuario_login">Usuario</string>
+    <string name="hint_password_login">Contraseña</string>
+    <string name="hint_captcha">Captcha</string>
+    <string name="login_button">Conectarse</string>
+    <string name="login_portal_button">Acceder</string>
+    
+</resources>

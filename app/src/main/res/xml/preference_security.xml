@@ -1,0 +1,20 @@
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.arr.preference.M3SwitchPreference
+        app:key="confirma"
+        app:icon="@drawable/ic_check_24px"
+        app:summary="@string/summary_confirma"
+        app:title="@string/title_confirma" />
+
+    <com.arr.preference.M3SwitchPreference
+        app:key="bloqueo"
+        app:icon="@drawable/ic_security_24px"
+        app:summary="@string/summary_security"
+        app:title="@string/title_security" />
+
+    <com.arr.preference.HelpPreference
+        app:key="help"
+        app:summary="@string/description_security" />
+    
+</PreferenceScreen>

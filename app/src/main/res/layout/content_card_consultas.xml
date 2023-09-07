@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:clickable="true"
+            android:layout_margin="4dp"
+            app:cardElevation="3dp"
+            app:strokeWidth="0dp"
+            app:cardCornerRadius="20dp"
+            android:layout_weight="1.0"
+            android:id="@+id/card_saldo">
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:padding="13dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_height="20dp"
+                    android:layout_width="20dp"
+                    android:src="@drawable/ic_saldo_24px" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textAppearance="?textAppearanceBodyMedium"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/consulta_saldo" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:clickable="true"
+            android:layout_margin="4dp"
+            app:cardElevation="3dp"
+            app:strokeWidth="0dp"
+            app:cardCornerRadius="20dp"
+            android:layout_weight="1.0"
+            android:id="@+id/card_bonos">
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:padding="13dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_height="20dp"
+                    android:layout_width="20dp"
+                    android:src="@drawable/ic_bonos_24px" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textAppearance="?textAppearanceBodyMedium"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/consulta_bono" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:clickable="true"
+            android:layout_margin="4dp"
+            app:cardElevation="3dp"
+            app:strokeWidth="0dp"
+            app:cardCornerRadius="20dp"
+            android:layout_weight="1.0"
+            android:id="@+id/card_datos">
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:padding="13dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_height="20dp"
+                    android:layout_width="20dp"
+                    android:src="@drawable/ic_datos_24px" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textAppearance="?textAppearanceBodyMedium"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/consulta_datos" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:clickable="true"
+            android:layout_margin="4dp"
+            app:cardElevation="3dp"
+            app:strokeWidth="0dp"
+            app:cardCornerRadius="20dp"
+            android:layout_weight="1.0"
+            android:id="@+id/card_adealnta">
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:padding="13dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/icon_adelanta"
+                    android:layout_height="20dp"
+                    android:layout_width="20dp"
+                    android:src="@drawable/ic_adelanta_24px" />
+
+                <TextView
+                    android:id="@+id/text_adelanta"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textAppearance="?textAppearanceBodyMedium"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/consulta_adelanta" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</LinearLayout>

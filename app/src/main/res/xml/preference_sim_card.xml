@@ -1,0 +1,25 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.arr.preference.M3SwitchPreference
+        app:key="pospago"
+        app:icon="@drawable/ic_pospago_24px"
+        app:summary="Si dispone de una línea pospago puede activar esta opción para consultar su saldo desde la pantalla principal"
+        app:title="Pospago" />
+
+    <com.arr.preference.M3SwitchPreference
+        app:key="tarifa"
+        app:icon="@drawable/ic_tarifa_consumo_24px"
+        app:summary="@string/summary_tarifa"
+        app:title="@string/title_tarifa" />
+
+    <com.arr.preference.M3ListPreference
+        app:defaultValue="0"
+        app:entries="@array/entries_sim"
+        app:entryValues="@array/entry_sim"
+        app:icon="@drawable/ic_sim_card_24px"
+        app:key="sim"
+        app:summary="Seleccione la SIM por la cual desea que se ejecute la aplicación"
+        app:title="Dual SIM" />
+
+</PreferenceScreen>

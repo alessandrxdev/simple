@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:enabled="true"
+        android:icon="@drawable/selector_home"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/nav_balance"
+        android:enabled="true"
+        android:icon="@drawable/selector_balances"
+        android:title="@string/title_balances" />
+
+    <item
+        android:id="@+id/nav_compras"
+        android:enabled="true"
+        android:icon="@drawable/selector_compras"
+        android:title="@string/title_compras" />
+
+    <item
+        android:id="@+id/nav_llamadas"
+        android:enabled="true"
+        android:icon="@drawable/selector_llamadas"
+        android:title="@string/title_llamadas" />
+
+    <item
+        android:id="@+id/nav_nauta"
+        android:enabled="true"
+        android:icon="@drawable/selector_nauta"
+        android:title="@string/title_nauta" />
+</menu>

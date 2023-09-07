@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_gravity="center_horizontal" />
+
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="5dp">
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:textAppearance="?textAppearanceTitleLarge"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:id="@+id/title"
+            android:text="Title" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@drawable/background_text"
+            android:layout_centerVertical="true"
+            android:textAppearance="?textAppearanceBodySmall"
+            android:padding="4dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:id="@+id/precio"
+            android:text="0.00 CUP" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        android:drawablePadding="20dp"
+        android:drawableLeft="@drawable/ic_all_data_20px"
+        android:textAppearance="?textAppearanceBodyMedium"
+        android:layout_margin="5dp"
+        android:drawableTint="@color/colorPrimary"
+        android:id="@+id/text_all_redes"
+        android:layout_gravity="center_horizontal"
+        android:text="" />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:drawablePadding="20dp"
+        android:drawableLeft="@drawable/ic_data_lte_20px"
+        android:textAppearance="?textAppearanceBodyMedium"
+        android:layout_margin="5dp"
+        android:drawableTint="@color/colorPrimary"
+        android:id="@+id/text_lte"
+        android:layout_gravity="center_horizontal"
+        android:text="" />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:drawablePadding="20dp"
+        android:drawableLeft="@drawable/ic_nacional_20px"
+        android:textAppearance="?textAppearanceBodyMedium"
+        android:layout_margin="5dp"
+        android:drawableTint="@color/colorPrimary"
+        android:id="@+id/text_nacional"
+        android:layout_gravity="center_horizontal"
+        android:text="" />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:drawablePadding="20dp"
+        android:drawableLeft="@drawable/ic_voz_20px"
+        android:textAppearance="?textAppearanceBodyMedium"
+        android:layout_margin="5dp"
+        android:drawableTint="@color/colorPrimary"
+        android:id="@+id/text_minutos"
+        android:layout_gravity="center_horizontal"
+        android:text="" />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:drawablePadding="20dp"
+        android:drawableLeft="@drawable/ic_sms_20px"
+        android:textAppearance="?textAppearanceBodyMedium"
+        android:layout_margin="5dp"
+        android:drawableTint="@color/colorPrimary"
+        android:id="@+id/text_mensajes"
+        android:layout_gravity="center_horizontal"
+        android:text="" />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:drawablePadding="20dp"
+        android:drawableLeft="@drawable/ic_calendar_20px"
+        android:textAppearance="?textAppearanceBodyMedium"
+        android:layout_margin="5dp"
+        android:drawableTint="@color/colorPrimary"
+        android:id="@+id/text_vence"
+        android:layout_gravity="center_horizontal"
+        android:text="" />
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_margin="4dp"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:id="@+id/negative_buttom"
+            android:text="@android:string/cancel" />
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_margin="4dp"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:id="@+id/positive_buttom"
+            android:text="@android:string/ok" />
+
+    </LinearLayout>
+
+</LinearLayout>

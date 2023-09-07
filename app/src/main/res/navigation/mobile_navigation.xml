@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.arr.simple.ui.home.HomeFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.arr.simple.ui.settings.SettingsFragment"
+        android:label="@string/title_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/nav_ui"
+        android:name="com.arr.simple.ui.settings.UiFragment"
+        android:label="UI"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/nav_pref_balance"
+        android:name="com.arr.simple.ui.settings.BalancesPreference"
+        android:label="Balances"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/nav_balance"
+        android:name="com.arr.simple.ui.balances.BalancesFragment"
+        android:label="@string/title_balances"
+        tools:layout="@layout/fragment_balances" />
+
+    <fragment
+        android:id="@+id/nav_compras"
+        android:name="com.arr.simple.ui.compras.ComprasFragment"
+        android:label="@string/title_compras"
+        tools:layout="@layout/fragment_compras" />
+
+    <fragment
+        android:id="@+id/nav_nauta"
+        android:name="com.arr.simple.ui.nauta.NautaFragment"
+        android:label="Nauta"
+        tools:layout="@layout/fragment_compras" />
+
+    <fragment
+        android:id="@+id/nav_security"
+        android:name="com.arr.simple.ui.settings.SecurityPreference"
+        android:label="@string/title_preference_security"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/nav_sim"
+        android:name="com.arr.simple.ui.settings.SimFragment"
+        android:label="SIM"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/nav_llamadas"
+        android:name="com.arr.simple.ui.llamadas.LlamadasFragment"
+        android:label="Llamadas"
+        tools:layout="@layout/fragment_compras" />
+
+    <fragment
+        android:id="@+id/nav_perfil"
+        android:name="com.arr.simple.ui.perfil.PerfilFragment"
+        android:label="Tú"
+        tools:layout="@layout/fragment_perfil" />
+
+</navigation>

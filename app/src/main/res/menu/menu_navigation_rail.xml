@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:title="@string/title_home"
+        android:icon="@drawable/selector_home" />
+
+    <item
+        android:id="@+id/nav_servicios"
+        android:title="@string/title_servicios"
+        android:icon="@drawable/ic_message_24px" />
+
+    <item
+        android:id="@+id/nav_entumovil"
+        android:title="@string/title_entumovil"
+        android:icon="@drawable/ic_entumovil_24px" />
+
+    <item
+        android:id="@+id/nav_telepuntos"
+        android:title="@string/title_telepunto"
+        android:icon="@drawable/ic_location_24px" />
+
+    <item
+        android:id="@+id/nav_settings"
+        android:title="@string/title_settings"
+        android:icon="@drawable/ic_settings_24px" />
+
+    <item
+        android:id="@+id/nav_about"
+        android:title="@string/title_about"
+        android:icon="@drawable/ic_about_24px" />
+</menu>

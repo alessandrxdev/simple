@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/coordinator">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior"
+        android:background="@null"
+        android:id="@+id/appbar">
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_height="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            app:tabIndicator="@drawable/m3_tabs_rounded_line_indicator"
+            app:tabIndicatorAnimationMode="elastic"
+            app:tabMode="fixed"
+            android:id="@+id/tablayout" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:paddingBottom="80dp"
+        android:id="@+id/viewPage" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
