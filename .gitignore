@@ -88,4 +88,5 @@ lint/tmp/
 /fingerprint
 /ussd
 /photopicker
+/nautamail
 .androidide
