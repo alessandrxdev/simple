@@ -127,7 +127,7 @@
     <string name="login_button">Conectarse</string>
     <string name="login_portal_button">Acceder</string>
     <string name="button_delete_mail">Eliminar correos</string>
-    <string name="button_info_conection">Información de conexión</string>
     <string name="button_sync">Sincronizar</string>
     <string name="hint_correo_nauta">Correo</string>
+    <string name="button_info_login">Información de conexión</string>
 </resources>

@@ -69,7 +69,7 @@ public class PaquetesFragment extends Fragment {
         list.add(new Header("Combinados"));
         list.add(new Grid("1.4 GB", "110 CUP / 30 días"));
         list.add(new Grid("3.5 GB", "250 CUP / 30 días"));
-        list.add(new Grid("1.4 GB", "500 CUP / 30 días"));
+        list.add(new Grid("8 GB", "500 CUP / 30 días"));
         list.add(new Header("LTE"));
         list.add(new Grid("1 GB", "100 CUP / 30 días"));
         list.add(new Grid("2.5 GB", "200 CUP / 30 días"));
