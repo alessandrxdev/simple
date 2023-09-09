@@ -26,7 +26,7 @@ Es ligera, útil y moderna, además de estar en constante desarrollo es una de l
 - [x] Comprar Planes y Paquetes.
 - [x] Llamar con *99 o número privado.
 - [ ] Conectarse a redes WIFI públicas y acceder al portal nauta.
-- [ ] Borrar correos nauta del servidor.
+- [x] Borrar correos nauta del servidor.
 - [x] Actualización periódica de sus Balances.
 - [ ] Widgets en pantalla.
 - [ ] Realizar conexión a las wifi desde la barra de acción.
@@ -40,6 +40,7 @@ Es ligera, útil y moderna, además de estar en constante desarrollo es una de l
 
 ### License
 ========
+    
     Copyright (C) 2023  Applify
 
     This program is free software: you can redistribute it and/or modify
