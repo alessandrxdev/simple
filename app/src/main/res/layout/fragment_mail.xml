@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@id/coordinator"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.core.widget.NestedScrollView
+        android:id="@id/nested_scroll_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="16.0dip">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4.0dip"
+                app:cardCornerRadius="20.0dip"
+                app:cardElevation="3.0dip">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="10.0dip">
+                    <ImageView
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="45.0dip"
+                        android:layout_height="45.0dip"
+                        android:layout_margin="6.0dip"
+                        android:src="@drawable/ic_mail_24px" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_correo_nauta"
+                        app:boxCornerRadiusBottomEnd="30.0dip"
+                        app:boxCornerRadiusBottomStart="30.0dip"
+                        app:boxCornerRadiusTopEnd="30.0dip"
+                        app:boxCornerRadiusTopStart="30.0dip"
+                        app:boxStrokeWidth="0.0dip"
+                        app:boxStrokeWidthFocused="0.0dip"
+                        app:errorEnabled="true"
+                        app:startIconDrawable="@drawable/ic_arroba_24px"
+                        style="?textInputFilledStyle">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_user"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:inputType="textEmailAddress"
+                            android:contentDescription="@string/description_nombre_del_usuario" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_password_login"
+                        app:boxCornerRadiusBottomEnd="30.0dip"
+                        app:boxCornerRadiusBottomStart="30.0dip"
+                        app:boxCornerRadiusTopEnd="30.0dip"
+                        app:boxCornerRadiusTopStart="30.0dip"
+                        app:boxStrokeWidth="0.0dip"
+                        app:boxStrokeWidthFocused="0.0dip"
+                        app:errorEnabled="true"
+                        app:passwordToggleEnabled="true"
+                        app:startIconDrawable="@drawable/ic_security_24px"
+                        style="?textInputFilledStyle">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_password"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:inputType="textPassword"
+                            android:contentDescription="@string/description_numero_movil_del_usuario" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <Button
+                        android:id="@+id/button_sync"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4.0dip"
+                        android:text="@string/button_sync"
+                        android:contentDescription="Sincronizar correos del servidor" />
+                    <Button
+                        android:id="@+id/button_delete"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4.0dip"
+                        android:text="@string/button_delete_mail"
+                        android:contentDescription="Eliminar correos electrónicos del servidor"
+                        style="?materialButtonOutlinedStyle" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10.0dip">
+                <View
+                    android:background="@color/colorOutline"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1.0dip"
+                    android:layout_weight="1.0" />
+                <TextView
+                    android:textAppearance="?textAppearanceBodyLarge"
+                    android:gravity="center_horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Correos"
+                    android:layout_weight="1.0" />
+                <View
+                    android:background="@color/colorOutline"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1.0dip"
+                    android:layout_weight="1.0" />
+            </LinearLayout>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4.0dip"
+                app:cardCornerRadius="20.0dip"
+                app:cardElevation="3.0dip">
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="10.0dip">
+                    <ImageView
+                        android:layout_width="20.0dip"
+                        android:layout_height="20.0dip"
+                        android:layout_margin="6.0dip"
+                        android:src="@drawable/ic_inbox_mail_24px" />
+                    <TextView
+                        android:textAppearance="?textAppearanceBodyMedium"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Entrada:"
+                        android:layout_weight="1.0" />
+                    <TextView
+                        android:textAppearance="?textAppearanceBodySmall"
+                        android:gravity="right"
+                        android:id="@+id/text_inbox"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0 correos"
+                        android:layout_weight="1.0" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4.0dip"
+                android:layout_marginTop="10.0dip"
+                app:cardCornerRadius="20.0dip"
+                app:cardElevation="3.0dip">
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="10.0dip">
+                    <ImageView
+                        android:layout_width="20.0dip"
+                        android:layout_height="20.0dip"
+                        android:layout_margin="6.0dip"
+                        android:src="@drawable/ic_send_mail_24px" />
+                    <TextView
+                        android:textAppearance="?textAppearanceBodyMedium"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Enviados:"
+                        android:layout_weight="1.0" />
+                    <TextView
+                        android:textAppearance="?textAppearanceBodySmall"
+                        android:gravity="right"
+                        android:id="@+id/text_send"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0 correos"
+                        android:layout_weight="1.0" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4.0dip"
+                android:layout_marginTop="10.0dip"
+                app:cardCornerRadius="20.0dip"
+                app:cardElevation="3.0dip">
+                <LinearLayout
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="10.0dip">
+                    <ImageView
+                        android:layout_width="20.0dip"
+                        android:layout_height="20.0dip"
+                        android:layout_margin="6.0dip"
+                        android:src="@drawable/ic_delete_mail_24px" />
+                    <TextView
+                        android:textAppearance="?textAppearanceBodyMedium"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Eliminados:"
+                        android:layout_weight="1.0" />
+                    <TextView
+                        android:textAppearance="?textAppearanceBodySmall"
+                        android:gravity="right"
+                        android:id="@+id/text_delete"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0 correos"
+                        android:layout_weight="1.0" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

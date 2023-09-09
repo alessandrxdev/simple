@@ -149,7 +149,8 @@ public class MainActivity extends AppCompatActivity {
                             || id == R.id.nav_pref_balance
                             || id == R.id.nav_security
                             || id == R.id.nav_sim
-                            || id == R.id.nav_perfil) {
+                            || id == R.id.nav_perfil
+                            || id == R.id.nav_correo) {
                         binding.appBarMain.contentToolbar.setVisibility(View.GONE);
                         getWindow().setNavigationBarColor(SurfaceColors.SURFACE_0.getColor(this));
                         binding.appBarMain.bottomNavigation.setVisibility(View.GONE);
@@ -157,7 +158,12 @@ public class MainActivity extends AppCompatActivity {
                         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
                             binding.drawerLayout.closeDrawer(GravityCompat.START);
                         }
-                    } else {
+                    }
+                    if (id == R.id.nav_home
+                            || id == R.id.nav_balance
+                            || id == R.id.nav_compras
+                            || id == R.id.nav_llamadas
+                            || id == R.id.nav_nauta) {
                         loadProfile();
                         binding.appBarMain.contentToolbar.setVisibility(View.VISIBLE);
                         getWindow().setNavigationBarColor(SurfaceColors.SURFACE_2.getColor(this));
@@ -249,33 +255,5 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        navController.addOnDestinationChangedListener(
-                (controller, destination, arguments) -> {
-                    int id = destination.getId();
-                    if (id == R.id.nav_home
-                            || id == R.id.nav_balance
-                            || id == R.id.nav_compras
-                            || id == R.id.nav_llamadas
-                            || id == R.id.nav_nauta) {
-                        loadProfile();
-                        binding.appBarMain.contentToolbar.setVisibility(View.VISIBLE);
-                        getWindow().setNavigationBarColor(SurfaceColors.SURFACE_2.getColor(this));
-                        binding.appBarMain.bottomNavigation.setVisibility(View.VISIBLE);
-                    }
-                    if (id == R.id.nav_settings
-                            || id == R.id.nav_ui
-                            || id == R.id.nav_pref_balance
-                            || id == R.id.nav_security
-                            || id == R.id.nav_sim
-                            || id == R.id.nav_perfil) {
-                        binding.appBarMain.contentToolbar.setVisibility(View.GONE);
-                        getWindow().setNavigationBarColor(SurfaceColors.SURFACE_0.getColor(this));
-                        binding.appBarMain.bottomNavigation.setVisibility(View.GONE);
-                        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-                        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                            binding.drawerLayout.closeDrawer(GravityCompat.START);
-                        }
-                    }
-                });
     }
 }

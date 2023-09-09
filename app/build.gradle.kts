@@ -69,4 +69,5 @@ dependencies {
     implementation(project(":fingerprint"))
     implementation(project(":photopicker"))
     implementation(project(":ussd"))
+    implementation(project(":nautamail"))
 }
