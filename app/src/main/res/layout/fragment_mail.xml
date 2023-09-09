@@ -73,11 +73,12 @@
                             android:inputType="textPassword"
                             android:contentDescription="@string/description_numero_movil_del_usuario" />
                     </com.google.android.material.textfield.TextInputLayout>
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/button_sync"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="4.0dip"
+                        android:ellipsize="end"
                         android:text="@string/button_sync"
                         android:contentDescription="Sincronizar correos del servidor" />
                     <Button
