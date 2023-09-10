@@ -40,11 +40,13 @@ public class SettingsFragment extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        requireActivity()
-                .getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.frame, new SettingsPreference())
-                .commit();
+        if (root != null) {
+            requireActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame, new SettingsPreference())
+                    .commit();
+        }
         return root;
     }
 
@@ -52,13 +54,20 @@ public class SettingsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        
     }
 
     public static class SettingsPreference extends PreferenceFragmentCompat {
 
-        private NavController nav;
         private PhotoPicker picker;
+        private NavController nav;
+
+        @Override
+        public void onViewCreated(View view, Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+
+            // navigation controller
+            nav = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
+        }
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -66,11 +75,6 @@ public class SettingsFragment extends Fragment {
 
             // TODO: PhotoPicker
             picker = new PhotoPicker(getActivity());
-
-            // navigation controller
-            nav =
-                    Navigation.findNavController(
-                            requireActivity(), R.id.nav_host_fragment_content_main);
 
             // TODO: Perfil
             Bitmap bitmap = picker.picBitmap();
