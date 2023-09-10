@@ -70,11 +70,16 @@
         android:label="Tú"
         tools:layout="@layout/fragment_perfil" />
 
-
     <fragment
         android:id="@+id/nav_correo"
         android:name="com.arr.simple.ui.email.DeleteMailFragment"
         android:label="Eliminar Correos"
         tools:layout="@layout/fragment_mail" />
+
+    <fragment
+        android:id="@+id/nav_servicios"
+        android:name="com.arr.simple.ui.servicios.SmsFragment"
+        android:label="Servicios SMS"
+        tools:layout="@layout/fragment_compras" />
 
 </navigation>

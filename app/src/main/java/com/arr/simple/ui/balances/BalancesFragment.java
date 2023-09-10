@@ -232,7 +232,7 @@ public class BalancesFragment extends Fragment {
                         executeUssdRequest(handler, index);
                     }
                 },
-                6000);
+                5000);
     }
 
     @Override

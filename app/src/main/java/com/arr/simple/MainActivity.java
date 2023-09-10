@@ -150,7 +150,8 @@ public class MainActivity extends AppCompatActivity {
                             || id == R.id.nav_security
                             || id == R.id.nav_sim
                             || id == R.id.nav_perfil
-                            || id == R.id.nav_correo) {
+                            || id == R.id.nav_correo
+                            || id == R.id.nav_servicios) {
                         binding.appBarMain.contentToolbar.setVisibility(View.GONE);
                         getWindow().setNavigationBarColor(SurfaceColors.SURFACE_0.getColor(this));
                         binding.appBarMain.bottomNavigation.setVisibility(View.GONE);

@@ -1,5 +1,6 @@
 package com.arr.simple.broadcast;
 
+import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
@@ -44,7 +45,10 @@ public class UpdateBalances extends BroadcastReceiver {
         spBalance = PreferenceManager.getDefaultSharedPreferences(context);
         editor = spBalance.edit();
         ussd = new UssdUtils(context);
+        Handler handler = new Handler(Looper.getMainLooper());
+        executeUssdRequest(handler, 0);
 
+        /*
         String spTime = spBalance.getString("update_balances", "0");
         int time = Integer.parseInt(spTime);
 
@@ -54,7 +58,7 @@ public class UpdateBalances extends BroadcastReceiver {
         } else if (time == 2) {
             Handler handler = new Handler(Looper.getMainLooper());
             executeUssdRequest(handler, 0);
-        }
+        }*/
     }
 
     private void executeUssdRequest(Handler handler, int index) {

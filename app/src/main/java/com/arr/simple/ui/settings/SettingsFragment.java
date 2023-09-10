@@ -52,6 +52,7 @@ public class SettingsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        
     }
 
     public static class SettingsPreference extends PreferenceFragmentCompat {
@@ -67,7 +68,9 @@ public class SettingsFragment extends Fragment {
             picker = new PhotoPicker(getActivity());
 
             // navigation controller
-            nav = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
+            nav =
+                    Navigation.findNavController(
+                            requireActivity(), R.id.nav_host_fragment_content_main);
 
             // TODO: Perfil
             Bitmap bitmap = picker.picBitmap();
@@ -177,6 +180,12 @@ public class SettingsFragment extends Fragment {
         public String getNumero() {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
             return sp.getString("number", "");
+        }
+
+        @Override
+        public void onDestroyView() {
+            super.onDestroyView();
+            nav = null;
         }
     }
 }

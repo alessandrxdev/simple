@@ -46,14 +46,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/balances_widget_info" />
         </receiver>
-
-        <activity
-            android:name=".widget.BalancesWidgetConfigureActivity"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-        </activity>
+        
         <receiver
             android:name=".broadcast.UpdateBalances"
             android:exported="true"
