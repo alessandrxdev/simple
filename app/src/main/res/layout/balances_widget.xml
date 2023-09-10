@@ -1,19 +1,124 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/Widget.Application.AppWidget.Container"
-    android:layout_width="match_parent"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    style="@style/Widget.Application.AppWidget.Container"
     android:theme="@style/AppTheme.AppWidgetContainer">
 
     <TextView
-        android:id="@+id/appwidget_text"
-        style="@style/Widget.Application.AppWidget.InnerView"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="8dp"
+        android:layout_width="wrap_content"
         android:contentDescription="@string/appwidget_text"
-        android:text="@string/appwidget_text"
-        android:textSize="24sp"
-        android:textStyle="bold|italic" />
+        android:layout_margin="8dp"
+        android:textSize="16sp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/appwidget_title"
+        android:text="Balances"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="8dp"
+        style="@style/Widget.Application.AppWidget.InnerView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/appwidget_sync">
+
+        <ImageView
+            android:layout_height="20dp"
+            android:layout_width="20dp"
+            android:src="@drawable/ic_sync_24px"
+            android:tint="@color/colorBackground" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/appwidget_title"
+        android:padding="2dp"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:contentDescription="@string/appwidget_text"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_voz_20px"
+            android:layout_margin="4dp"
+            android:textSize="15sp"
+            android:drawableTint="@color/colorPrimary"
+            android:id="@+id/appwidget_text_minutos"
+            android:text="00.00.00"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:contentDescription="@string/appwidget_text"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_sms_20px"
+            android:layout_margin="4dp"
+            android:textSize="15sp"
+            android:drawableTint="@color/colorPrimary"
+            android:id="@+id/appwidget_text_sms"
+            android:text="0 SMS"
+            android:textStyle="normal" />
+
+        <LinearLayout
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorOutline"
+            android:layout_margin="4dp">
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:contentDescription="@string/appwidget_text"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_all_data_20px"
+            android:layout_margin="4dp"
+            android:textSize="15sp"
+            android:drawableTint="@color/colorPrimary"
+            android:id="@+id/appwidget_text_paquete"
+            android:text="0 MB"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:contentDescription="@string/appwidget_text"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_data_lte_20px"
+            android:layout_margin="4dp"
+            android:textSize="15sp"
+            android:drawableTint="@color/colorPrimary"
+            android:id="@+id/appwidget_text_lte"
+            android:text="0 MB LTE"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:contentDescription="@string/appwidget_text"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_calendar_20px"
+            android:layout_margin="4dp"
+            android:textSize="15sp"
+            android:drawableTint="@color/colorPrimary"
+            android:id="@+id/appwidget_text_vence"
+            android:text="0 días"
+            android:textStyle="normal" />
+
+    </LinearLayout>
+
 </RelativeLayout>

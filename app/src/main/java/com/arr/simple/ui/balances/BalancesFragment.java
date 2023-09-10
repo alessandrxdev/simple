@@ -156,11 +156,8 @@ public class BalancesFragment extends Fragment {
         }
         binding.textTarifa.setText(response.getTarifaConsumo());
         binding.textDatos.setText(response.getDataAll());
-        binding.textDatosLte.setText(response.getLTE());
+        binding.textDatosLte.setText("/ " + response.getLTE());
         binding.textVenceDatos.setText(response.getVenceData());
-
-        // TOAST PARA PROBAR LAS CONSULTAS
-        // Toast.makeText(getActivity(), response.getVenceData(), Toast.LENGTH_LONG).show();
 
         binding.mensajes.setText(response.getMensajes() + " / " + response.getVenceMensajes());
         binding.textMinutos.setText(response.getMinutos() + " / " + response.getVenceMinutos());
