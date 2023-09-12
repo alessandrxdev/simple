@@ -1,10 +1,5 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.arr.preference.M3SwitchPreference
-        app:key="update_app"
-        app:icon="@drawable/ic_update_balances"
-        app:summary="Mostrar cuando exista una nueva versión de la aplicación"
-        app:title="Actualización" />
 
     <com.arr.preference.M3ListPreference
         app:defaultValue="system"
@@ -15,13 +10,16 @@
         app:summary="%s"
         app:title="@string/title_preference_theme" />
 
-    <com.arr.simple.preferences.M3MultiSelectPreference
-        app:defaultValue="@array/default_home"
-        app:entries="@array/entries_home"
-        app:entryValues="@array/entry_home"
-        app:icon="@drawable/ic_home_unfill_24px"
-        app:key="home"
-        app:summary="@string/summary_preference_home"
-        app:title="@string/title_preference_home" />
+    <com.arr.preference.M3SwitchPreference
+        app:key="update_app"
+        app:icon="@drawable/ic_update_balances"
+        app:summary="Mostrar cuando exista una nueva versión de la aplicación en Apklis"
+        app:title="Actualización" />
+
+    <com.arr.preference.M3SwitchPreference
+        app:key="traffic"
+        app:icon="@drawable/ic_traffic_network_24px"
+        app:summary="Mostrar burbuja flotante con la velocidad de su tráfico en la red"
+        app:title="Tráfico" />
 
 </PreferenceScreen>

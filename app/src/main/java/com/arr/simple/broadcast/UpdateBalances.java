@@ -67,7 +67,7 @@ public class UpdateBalances extends BroadcastReceiver {
             updateHora();
             boolean isChecked = spBalance.getBoolean("not_update_balances", false);
             if (!isChecked) {
-                createNotification(mContext, "Balances", "Se ha actualizado sus balances");
+                createNotification(mContext, "Balances", "¡Se han actualizado sus balances!");
             }
 
             return;
@@ -110,7 +110,7 @@ public class UpdateBalances extends BroadcastReceiver {
         // Crear la notificación utilizando NotificationCompat.Builder
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(context, CHANNEL_ID)
-                        .setSmallIcon(R.drawable.ic_balances_unfill_24px)
+                        .setSmallIcon(R.drawable.ic_logo_simple)
                         .setContentTitle(title)
                         .setContentText(message)
                         .setPriority(NotificationCompat.PRIORITY_HIGH)

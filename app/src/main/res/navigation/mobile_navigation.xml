@@ -79,7 +79,7 @@
     <fragment
         android:id="@+id/nav_servicios"
         android:name="com.arr.simple.ui.servicios.SmsFragment"
-        android:label="Servicios SMS"
+        android:label="Servicios"
         tools:layout="@layout/fragment_compras" />
 
 </navigation>

@@ -26,12 +26,14 @@
         <item>Transferir</item>
         <item>Adelanta</item>
     </string-array>
+
     <string-array name="entry_home">
         <item>consulta</item>
         <item>recarga</item>
         <item>transferir</item>
         <item>adelanta</item>
     </string-array>
+
     <string-array name="default_home">
         <item>consulta</item>
         <item>recarga</item>
@@ -47,7 +49,7 @@
     <string-array name="call">
         <item>Privado</item>
         <item>Asterisco</item>
-        
+
     </string-array>
     <string-array name="update_balances">
         <item>Manual</item>
@@ -59,4 +61,50 @@
         <item>1</item>
         <item>2</item>
     </string-array>
+
+    <string-array name="clima">
+        <item>VLC - Villa Clara</item>
+        <item>GTM - Guantánamo</item>
+        <item>HLG - Holguin</item>
+        <item>ART - Artemiza</item>
+        <item>GRM - Granma</item>
+        <item>LHA - La Habana</item>
+        <item>MAY - Mayabeque</item>
+        <item>IJU - Isla de la Juventud</item>
+        <item>CMG - Camagüey</item>
+        <item>CFG - Cienfuegos</item>
+        <item>PRL - Pinal del Rio</item>
+        <item>SCU - Santiago de Cuba</item>
+        <item>SSP - Santi Spiritus</item>
+        <item>LTU - Las Tunas</item>
+        <item>MTZ - Matanzas</item>
+        <item>CAV - Ciego de Ávila</item>
+    </string-array>
+
+
+    <string-array name="apagon">
+        <item>Bloque 1</item>
+        <item>Bloque 2</item>
+        <item>Bloque 3</item>
+        <item>Bloque 4</item>
+    </string-array>
+
+    <string-array name="cambio">
+        <item>EUR - Euro</item>
+        <item>USD - Dólar</item>
+        <item>MXN - Peso mexicano</item>
+        <item>CAD - Dólar canadiense</item>
+        <item>GBP - Libra esterlina</item>
+        <item>JPY - Yen japonés</item>
+        <item>CHF - Franco suizo</item>
+        <item>DKK - Corona danesa</item>
+        <item>NOK - Corona noruega</item>
+        <item>SEK - Corona sueca</item>
+    </string-array>
+
+    <string-array name="periodicos">
+        <item>Suscribirse</item>
+        <item>Darse de baja</item>
+    </string-array>
+
 </resources>

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card"
-    android:layout_height="120dp"
+    android:layout_height="110dp"
     android:layout_width="match_parent"
     android:clickable="true"
     android:layout_margin="4dp"
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:gravity="center_horizontal"
-            android:textAppearance="?textAppearanceTitleLarge"
+            android:textAppearance="?textAppearanceTitleMedium"
             android:id="@+id/title" />
 
         <TextView

@@ -63,6 +63,7 @@ public class UiFragment extends Fragment {
                     });
 
             // home preference
+            /*
             M3MultiSelectPreference home = findPreference("home");
             home.setVisible(false);
             home.setOnPreferenceChangeListener(
@@ -74,7 +75,7 @@ public class UiFragment extends Fragment {
                         }
                         return true;
                     });
-            
+            */
         }
     }
 }
