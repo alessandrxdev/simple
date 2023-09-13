@@ -28,7 +28,7 @@ Es ligera, útil y moderna, además de estar en constante desarrollo es una de l
 - [ ] Conectarse a redes WIFI públicas y acceder al portal nauta.
 - [x] Borrar correos nauta del servidor.
 - [x] Actualización periódica de sus Balances.
-- [ ] Widgets en pantalla.
+- [x] Widgets en pantalla.
 - [ ] Realizar conexión a las wifi desde la barra de acción.
 - [x] Bloqueo por huella o facial.
 - [x] Apartado de Perfil.

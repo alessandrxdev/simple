@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:id="@+id/coordinator">
+
+    <androidx.core.widget.NestedScrollView
+         android:layout_height="match_parent"
+         android:layout_width="match_parent"
+         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+         android:id="@+id/nested_scroll_view">
+
+        <LinearLayout
+             android:layout_height="match_parent"
+             android:layout_width="match_parent"
+             android:layout_margin="10dp"
+             android:orientation="vertical">
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 android:gravity="center"
+                 android:textAppearance="?textAppearanceHeadlineMedium"
+                 android:text="Cuenta" />
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 android:gravity="center"
+                 android:textAppearance="?textAppearanceBodyMedium"
+                 android:id="@+id/text_time"
+                 android:text="" />
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 android:gravity="center"
+                 android:textAppearance="?textAppearanceBodySmall"
+                 android:id="@+id/text_account"
+                 android:text="" />
+
+            <LinearLayout
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 android:gravity="center_vertical"
+                 android:orientation="horizontal"
+                 android:layout_marginLeft="10dp"
+                 android:layout_marginRight="10dp"
+                 android:layout_marginTop="20dp">
+
+                <View
+                     android:layout_height="1dp"
+                     android:layout_width="match_parent"
+                     android:background="@color/colorOutline"
+                     android:layout_weight="1.0" />
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:gravity="center"
+                     android:textAppearance="?textAppearanceBodySmall"
+                     android:layout_weight="1.0"
+                     android:text="Información" />
+
+                <View
+                     android:layout_height="1dp"
+                     android:layout_width="match_parent"
+                     android:background="@color/colorOutline"
+                     android:layout_weight="1.0" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:layout_margin="6dp"
+                     app:cardElevation="3dp"
+                     app:cardCornerRadius="20dp"
+                     android:layout_weight="1.0">
+
+                    <RelativeLayout
+                         android:layout_height="match_parent"
+                         android:layout_width="match_parent"
+                         android:layout_margin="10dp">
+
+                        <TextView
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             android:textAppearance="?textAppearanceLabelSmall"
+                             android:layout_alignParentLeft="true"
+                             android:layout_alignParentTop="true"
+                             android:id="@+id/saldo"
+                             android:text="Saldo" />
+
+                        <ImageView
+                             android:layout_height="20dp"
+                             android:layout_width="20dp"
+                             android:src="@drawable/ic_diaria_24px"
+                             android:layout_alignParentRight="true"
+                             android:layout_alignParentTop="true" />
+
+                        <TextView
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             android:layout_below="@+id/saldo"
+                             android:textAppearance="?textAppearanceBodySmall"
+                             android:layout_marginTop="5dp"
+                             android:id="@+id/text_saldo"
+                             android:text="" />
+
+                    </RelativeLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:layout_margin="6dp"
+                     app:cardElevation="3dp"
+                     app:cardCornerRadius="20dp"
+                     android:layout_weight="1.0">
+
+                    <RelativeLayout
+                         android:layout_height="match_parent"
+                         android:layout_width="match_parent"
+                         android:layout_margin="10dp">
+
+                        <TextView
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             android:textAppearance="?textAppearanceLabelSmall"
+                             android:layout_alignParentLeft="true"
+                             android:layout_alignParentTop="true"
+                             android:id="@+id/bloqueo"
+                             android:text="Bloqueo" />
+
+                        <ImageView
+                             android:layout_height="20dp"
+                             android:layout_width="20dp"
+                             android:src="@drawable/ic_security_24px"
+                             android:layout_alignParentRight="true"
+                             android:layout_alignParentTop="true" />
+
+                        <TextView
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             android:layout_below="@+id/bloqueo"
+                             android:textAppearance="?textAppearanceBodySmall"
+                             android:layout_marginTop="5dp"
+                             android:id="@+id/text_bloqueo"
+                             android:text="" />
+
+                    </RelativeLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:layout_margin="6dp"
+                     app:cardElevation="3dp"
+                     app:cardCornerRadius="20dp"
+                     android:layout_weight="1.0">
+
+                    <RelativeLayout
+                         android:layout_height="match_parent"
+                         android:layout_width="match_parent"
+                         android:layout_margin="10dp">
+
+                        <TextView
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             android:textAppearance="?textAppearanceLabelSmall"
+                             android:layout_alignParentLeft="true"
+                             android:layout_alignParentTop="true"
+                             android:id="@+id/delete"
+                             android:text="Eliminación" />
+
+                        <ImageView
+                             android:layout_height="20dp"
+                             android:layout_width="20dp"
+                             android:src="@drawable/ic_delete_24px"
+                             android:layout_alignParentRight="true"
+                             android:layout_alignParentTop="true" />
+
+                        <TextView
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             android:layout_below="@+id/delete"
+                             android:textAppearance="?textAppearanceBodySmall"
+                             android:layout_marginTop="5dp"
+                             android:id="@+id/text_delete"
+                             android:text="" />
+
+                    </RelativeLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:layout_margin="6dp"
+                     app:cardElevation="3dp"
+                     app:cardCornerRadius="20dp"
+                     android:layout_weight="1.0">
+
+                    <RelativeLayout
+                         android:layout_height="match_parent"
+                         android:layout_width="match_parent"
+                         android:layout_margin="10dp">
+
+                        <TextView
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             android:textAppearance="?textAppearanceLabelSmall"
+                             android:layout_alignParentLeft="true"
+                             android:layout_alignParentTop="true"
+                             android:id="@+id/type"
+                             android:text="Tipo de cuenta" />
+
+                        <ImageView
+                             android:layout_height="20dp"
+                             android:layout_width="20dp"
+                             android:src="@drawable/ic_mail_24px"
+                             android:layout_alignParentRight="true"
+                             android:layout_alignParentTop="true" />
+
+                        <TextView
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             android:layout_below="@+id/type"
+                             android:textAppearance="?textAppearanceBodySmall"
+                             android:layout_marginTop="5dp"
+                             android:id="@+id/text_type"
+                             android:text="" />
+
+                    </RelativeLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 app:cardElevation="3dp"
+                 android:layout_marginLeft="6dp"
+                 android:layout_marginRight="6dp"
+                 android:layout_marginTop="10dp"
+                 app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                     android:layout_height="match_parent"
+                     android:layout_width="match_parent"
+                     android:layout_margin="10dp"
+                     android:orientation="vertical">
+
+                    <TextView
+                         android:layout_height="wrap_content"
+                         android:layout_width="match_parent"
+                         android:layout_marginBottom="8dp"
+                         android:textAppearance="?textAppearanceBodyMedium"
+                         android:text="Recargar cuenta" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                         android:layout_height="wrap_content"
+                         android:layout_width="match_parent"
+                         app:boxCornerRadiusTopEnd="30dp"
+                         android:hint="Código de recarga"
+                         app:boxCornerRadiusBottomStart="30dp"
+                         app:boxStrokeWidthFocused="0dp"
+                         app:boxCornerRadiusBottomEnd="30dp"
+                         style="?attr/textInputFilledStyle"
+                         app:boxCornerRadiusTopStart="30dp"
+                         app:errorEnabled="true"
+                         app:boxStrokeWidth="0dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                             android:layout_height="match_parent"
+                             android:layout_width="match_parent"
+                             android:contentDescription="@string/description_nombre_del_usuario"
+                             android:inputType="number"
+                             android:id="@+id/edit_code" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                         android:layout_height="wrap_content"
+                         android:layout_width="match_parent"
+                         android:layout_margin="4dp"
+                         android:id="@+id/button_recargar"
+                         android:text="Recargar" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 app:cardElevation="3dp"
+                 android:layout_marginLeft="6dp"
+                 android:layout_marginRight="6dp"
+                 android:layout_marginTop="10dp"
+                 app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                     android:layout_height="match_parent"
+                     android:layout_width="match_parent"
+                     android:layout_margin="10dp"
+                     android:orientation="vertical">
+
+                    <TextView
+                         android:layout_height="wrap_content"
+                         android:layout_width="match_parent"
+                         android:layout_marginBottom="8dp"
+                         android:textAppearance="?textAppearanceBodyMedium"
+                         android:text="Enviar saldo" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                         android:layout_height="wrap_content"
+                         android:layout_width="match_parent"
+                         app:boxCornerRadiusTopEnd="30dp"
+                         android:hint="Cuenta de destino"
+                         app:boxCornerRadiusBottomStart="30dp"
+                         app:boxStrokeWidthFocused="0dp"
+                         app:boxCornerRadiusBottomEnd="30dp"
+                         style="?attr/textInputFilledStyle"
+                         app:boxCornerRadiusTopStart="30dp"
+                         app:errorEnabled="true"
+                         app:boxStrokeWidth="0dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                             android:layout_height="match_parent"
+                             android:layout_width="match_parent"
+                             android:contentDescription="@string/description_nombre_del_usuario"
+                             android:inputType="textEmailAddress"
+                             android:id="@+id/edit_account" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                         android:layout_height="wrap_content"
+                         android:layout_width="150dp"
+                         app:boxCornerRadiusTopEnd="30dp"
+                         android:hint="Cantidad"
+                         app:boxCornerRadiusBottomStart="30dp"
+                         app:boxStrokeWidthFocused="0dp"
+                         app:boxCornerRadiusBottomEnd="30dp"
+                         style="?attr/textInputFilledStyle"
+                         app:boxCornerRadiusTopStart="30dp"
+                         app:errorEnabled="true"
+                         app:boxStrokeWidth="0dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                             android:layout_height="match_parent"
+                             android:layout_width="match_parent"
+                             android:contentDescription="@string/description_nombre_del_usuario"
+                             android:inputType="numberDecimal"
+                             android:id="@+id/edit_monto" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                         android:layout_height="wrap_content"
+                         android:layout_width="match_parent"
+                         android:layout_margin="4dp"
+                         android:id="@+id/button_transfer"
+                         android:text="Enviar saldo" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

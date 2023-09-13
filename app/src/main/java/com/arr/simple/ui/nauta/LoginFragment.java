@@ -27,7 +27,7 @@ public class LoginFragment extends Fragment {
         binding = FragmentLoginBinding.inflate(inflater, parent, false);
 
         // TODO: importar NautaLogin para realizar la coneccion
-        login = new NautaLogin();
+        login = new NautaLogin(requireContext());
 
         // TODO: button login
         binding.buttonLogin.setOnClickListener(
