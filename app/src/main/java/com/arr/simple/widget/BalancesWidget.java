@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.widget.RemoteViews;
 import com.arr.simple.R;
@@ -24,36 +25,44 @@ public class BalancesWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        for (int appWidgetId : appWidgetIds) {
-            ussd = new UssdUtils(context);
-            response = new ResponseUssd(ussd);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            for (int appWidgetId : appWidgetIds) {
+                ussd = new UssdUtils(context);
+                response = new ResponseUssd(ussd);
 
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.balances_widget);
-            Intent intent = new Intent(context, UpdateBalances.class);
-            intent.setAction(SYNC);
-            PendingIntent pending =
-                    PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_MUTABLE);
-            views.setOnClickPendingIntent(R.id.appwidget_sync, pending);
+                RemoteViews views =
+                        new RemoteViews(context.getPackageName(), R.layout.balances_widget);
+                Intent intent = new Intent(context, UpdateBalances.class);
+                intent.setAction(SYNC);
+                PendingIntent pending =
+                        PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_MUTABLE);
+                views.setOnClickPendingIntent(R.id.appwidget_sync, pending);
 
-            update(views);
+                update(views);
+                appWidgetManager.updateAppWidget(appWidgetId, views);
+            }
+
+            handler = new Handler(); // Inicializar el objeto Handler
+            runnable =
+                    new Runnable() {
+                        public void run() {
+                            for (int appWidgetId : appWidgetIds) {
+                                RemoteViews views =
+                                        new RemoteViews(
+                                                context.getPackageName(), R.layout.balances_widget);
+                                update(views);
+                                appWidgetManager.updateAppWidget(appWidgetIds, views);
+                            }
+                            handler.postDelayed(this, timeUpdate);
+                        }
+                    };
+            handler.post(runnable);
+        } else {
+            RemoteViews views =
+                    new RemoteViews(
+                            context.getPackageName(), R.layout.layout_widget_not_compatible);
             appWidgetManager.updateAppWidget(appWidgetIds, views);
         }
-
-        handler = new Handler(); // Inicializar el objeto Handler
-        runnable =
-                new Runnable() {
-                    public void run() {
-                        for (int appWidgetId : appWidgetIds) {
-                            RemoteViews views =
-                                    new RemoteViews(
-                                            context.getPackageName(), R.layout.balances_widget);
-                            update(views);
-                            appWidgetManager.updateAppWidget(appWidgetIds, views);
-                        }
-                        handler.postDelayed(this, timeUpdate);
-                    }
-                };
-        handler.post(runnable);
     }
 
     private void update(RemoteViews views) {

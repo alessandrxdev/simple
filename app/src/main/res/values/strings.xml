@@ -87,7 +87,7 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="configure">Configure</string>
     <string name="add_widget">Add widget</string>
-    <string name="app_widget_description">This is an app widget description</string>
+    <string name="app_widget_description">Widget con informacion de sus Balances (Android 8+)</string>
     <string name="diaria_vencimiento">24 horas a partir de su uso</string>
     <string name="diaria_lte" translatable="false">200 MB solo para la red lte</string>
     <string name="precio_diaria">25.00 CUP</string>
@@ -130,4 +130,5 @@
     <string name="button_sync">Sincronizar</string>
     <string name="hint_correo_nauta">Correo</string>
     <string name="button_info_login">Información de conexión</string>
+    <string name="view_telepuntos" translatable="false">https://www.google.com/maps/search/ETECSA/</string>
 </resources>

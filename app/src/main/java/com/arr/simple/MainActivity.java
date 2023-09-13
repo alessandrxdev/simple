@@ -1,9 +1,11 @@
 package com.arr.simple;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -97,6 +99,23 @@ public class MainActivity extends AppCompatActivity {
         drawer = binding.drawerLayout;
         NavigationRailView railView = binding.navRail;
         NavigationView navigationView = binding.navView;
+        railView.setOnItemSelectedListener(
+                menuItem -> {
+                    int id = menuItem.getItemId();
+                    if (id == R.id.nav_servicios) {
+                        navController.navigate(id, null);
+                    }
+                    if (id == R.id.nav_correo) {
+                        navController.navigate(id, null);
+                    }
+                    if (id == R.id.nav_telepuntos) {
+                        openGoogleMap();
+                    }
+                    if (id == R.id.nav_settings) {
+                        navController.navigate(id, null);
+                    }
+                    return false;
+                });
 
         // TODO: Ocultar balances para android inferior a 8
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
@@ -137,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         supporNavigateBottomNavigation();
-        NavigationUI.setupWithNavController(railView, navController);
+        NavigationUI.setupWithNavController(navigationView, navController);
         // loadProfile();
 
         // TODO: Navigation destination
@@ -171,6 +190,11 @@ public class MainActivity extends AppCompatActivity {
                         binding.appBarMain.bottomNavigation.setVisibility(View.VISIBLE);
                     }
                 });
+    }
+
+    private void openGoogleMap() {
+        startActivity(
+                new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.view_telepuntos))));
     }
 
     @Override
