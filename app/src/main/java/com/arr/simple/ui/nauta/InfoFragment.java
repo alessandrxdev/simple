@@ -34,9 +34,16 @@ public class InfoFragment extends Fragment {
         binding.buttonRecargar.setOnClickListener(
                 view -> {
                     String code = binding.editCode.getText().toString().trim();
-                    login.topUpAccount(code);
+                    login.topUpCuenta(code);
                 });
 
+        // transfer
+        binding.buttonTransfer.setOnClickListener(
+                view -> {
+                    String account = binding.editAccount.getText().toString().trim();
+                    String monto = binding.editMonto.getText().toString().trim();
+                    login.transferToAccount(account, monto);
+                });
         return binding.getRoot();
     }
 

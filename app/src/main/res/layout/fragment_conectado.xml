@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/coordinator">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:id="@+id/nested_scroll_view">
+
+        <RelativeLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+            <LinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_margin="10dp"
+                android:orientation="vertical"
+                android:layout_centerHorizontal="true">
+
+                <ImageView
+                    android:layout_height="55dp"
+                    android:layout_width="55dp"
+                    android:src="@drawable/ic_check_24px"
+                    android:tint="@color/colorPrimary"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textAppearance="?textAppearanceHeadlineLarge"
+                    android:textColor="@color/colorError"
+                    android:layout_marginTop="20dp"
+                    android:text="00.00.00"
+                    android:id="@+id/chronometer" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textAppearance="?textAppearanceBodySmall"
+                    android:id="@+id/text_account"
+                    android:text="usuario@nauta.com.cu" />
+
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_margin="4dp"
+                    android:id="@+id/button_desconectar"
+                    android:text="Desconectarme" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

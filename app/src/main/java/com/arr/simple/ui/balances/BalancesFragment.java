@@ -98,6 +98,7 @@ public class BalancesFragment extends Fragment {
         } else {
             dots.setVisibility(View.VISIBLE);
             dots.attachTo(viewpager);
+            slider.notifyDataSetChanged();
         }
         handlerr = new Handler(Looper.getMainLooper());
         Runnable runnable =

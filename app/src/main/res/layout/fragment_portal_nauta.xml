@@ -66,6 +66,7 @@
                         app:boxCornerRadiusBottomStart="30dp"
                         app:boxStrokeWidthFocused="0dp"
                         app:boxCornerRadiusBottomEnd="30dp"
+                        app:passwordToggleContentDescription="Mostrar contraseña"
                         style="?attr/textInputFilledStyle"
                         app:passwordToggleEnabled="true"
                         app:boxCornerRadiusTopStart="30dp"
@@ -119,6 +120,7 @@
                             android:layout_width="match_parent"
                             android:layout_marginBottom="9dp"
                             android:layout_marginLeft="5dp"
+                            android:contentDescription="Imagen captcha"
                             android:layout_weight="1.0"
                             android:id="@+id/image_captcha" />
 
@@ -129,7 +131,7 @@
                         android:layout_width="match_parent"
                         android:layout_margin="4dp"
                         android:id="@+id/button_connect"
-                        android:text="@string/login_button" />
+                        android:text="Acceder" />
 
                 </LinearLayout>
 

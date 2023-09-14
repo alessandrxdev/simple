@@ -66,6 +66,8 @@
                         app:boxCornerRadiusBottomStart="30dp"
                         app:boxStrokeWidthFocused="0dp"
                         app:boxCornerRadiusBottomEnd="30dp"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleContentDescription="Mostrar contraseña"
                         style="?attr/textInputFilledStyle"
                         app:boxCornerRadiusTopStart="30dp"
                         app:errorEnabled="true"
@@ -88,6 +90,7 @@
                         android:layout_margin="4dp" />
 
                     <Button
+                        android:visibility="gone"
                         style="?attr/materialButtonOutlinedStyle"
                         android:id="@+id/button_info"
                         android:layout_height="wrap_content"

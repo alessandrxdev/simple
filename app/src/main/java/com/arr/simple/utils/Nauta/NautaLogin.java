@@ -6,34 +6,28 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
+import com.arr.simple.App;
 import com.arr.simple.R;
 import com.arr.simple.MainActivity;
-import com.arr.simple.utils.Nauta.exception.NautaException;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import cu.suitetecsa.sdk.nauta.domain.model.NautaUser;
-import cu.suitetecsa.sdk.nauta.framekork.JsoupConnectPortalScraper;
-import cu.suitetecsa.sdk.nauta.framekork.JsoupUserPortalScrapper;
 import cu.suitetecsa.sdk.nauta.framekork.NautaApi;
 import cu.suitetecsa.sdk.nauta.framework.model.NautaConnectInformation;
-import cu.suitetecsa.sdk.nauta.framework.network.DefaultNautaSession;
-import cu.suitetecsa.sdk.nauta.framework.network.JsoupConnectPortalCommunicator;
-import cu.suitetecsa.sdk.nauta.framework.network.JsoupUserPortalCommunicator;
-import java.io.IOException;
 import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import kotlin.Pair;
-import kotlinx.coroutines.CoroutineScope;
-import kotlinx.coroutines.Dispatchers;
 
 public class NautaLogin {
 
@@ -44,6 +38,7 @@ public class NautaLogin {
     private String statusAccount;
     private String creditAccount;
     private String expireAccount;
+    private String formattedTime = "";
 
     public NautaLogin(String status, String credit, String expire) {
         this.statusAccount = status;
@@ -61,12 +56,7 @@ public class NautaLogin {
 
     public NautaLogin(Context context) {
         mContext = context;
-        api =
-                new NautaApi(
-                        new JsoupConnectPortalCommunicator(new DefaultNautaSession()),
-                        new JsoupConnectPortalScraper(),
-                        new JsoupUserPortalCommunicator(new DefaultNautaSession()),
-                        new JsoupUserPortalScrapper());
+        this.api = App.getInstance().apiNauta();
     }
 
     /*
@@ -81,6 +71,11 @@ public class NautaLogin {
                             try {
                                 api.setCredentials(new Pair<>(usuario, password));
                                 api.connect();
+                                ((Activity) mContext)
+                                        .runOnUiThread(
+                                                () -> {
+                                                    navegateTo(R.id.nav_conectado);
+                                                });
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -129,7 +124,7 @@ public class NautaLogin {
     public void connectPortal(String usuario, String password, String captcha) {
         new AsyncTask<Void, Void, NautaUser>() {
 
-            private Exception exeption;
+            private String message;
 
             @Override
             protected NautaUser doInBackground(Void... params) {
@@ -139,7 +134,8 @@ public class NautaLogin {
                     NautaUser user = api.login(captcha);
                     return user;
                 } catch (Exception e) {
-                    exeption = e;
+                    e.printStackTrace();
+                    message = e.getMessage();
                     Log.e("ERROR ", "SIMPLE: " + e);
                     return null;
                 }
@@ -147,9 +143,8 @@ public class NautaLogin {
 
             @Override
             protected void onPostExecute(NautaUser result) {
-                if (exeption != null) {
-                    exeption.printStackTrace();
-                    showSnackBar("Error, compruebe sus datos y conexión!", true);
+                if (message != null) {
+                    showSnackBar("error" + message, true);
                 }
                 if (result != null) {
                     Log.w("CONECRADO ", "Conexión: " + result);
@@ -173,29 +168,163 @@ public class NautaLogin {
         }.execute();
     }
 
+    public void topUpCuenta(String code) {
+        Executor executor = Executors.newSingleThreadExecutor();
+        executor.execute(
+                () -> {
+                    try {
+                        api.topUp(code);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        String error = e.getMessage();
+                        ((Activity) mContext)
+                                .runOnUiThread(
+                                        () -> {
+                                            showSnackBar("Error" + error, false);
+                                        });
+                    }
+                });
+    }
+
+    public void transferToAccount(String account, String monto) {
+        Executor executor = Executors.newSingleThreadExecutor();
+        executor.execute(
+                () -> {
+                    try {
+                        float ammount = Float.parseFloat(monto);
+                        api.transferFunds(ammount, account);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        String error = e.getMessage();
+                        ((Activity) mContext)
+                                .runOnUiThread(
+                                        () -> {
+                                            showSnackBar("Error" + error, false);
+                                        });
+                    }
+                });
+    }
+
     @SuppressWarnings("deprecation")
     public void topUpAccount(String code) {
         new AsyncTask<Void, Void, Void>() {
-            private Exception ex;
-
             @Override
             protected Void doInBackground(Void... voids) {
                 try {
                     api.topUp(code);
+                    Log.w("Recargado con éxito", "se ha recargado la cuenta");
                 } catch (Exception err) {
                     err.printStackTrace();
-                    ex = err;
+                    errorMessage = err.getMessage();
+                    Log.e("Error de recarga", errorMessage);
                 }
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                showSnackBar("Cuenta recargads", false);
-                if (ex != null) {
-                    String error = ex.getMessage();
-                    showSnackBar("Error " + error, false);
+                if (errorMessage != null) {
+                    Log.e("Error", errorMessage);
+                    showSnackBar("Error " + errorMessage, false);
                 }
+            }
+        }.execute();
+    }
+
+    // TODO: información obtenida de login
+    @SuppressWarnings("deprecation")
+    public void formatTime(TextView text) {
+        new AsyncTask<Void, Void, NautaConnectInformation>() {
+            @Override
+            protected NautaConnectInformation doInBackground(Void... voids) {
+                try {
+                    return api.getConnectInformation();
+                } catch (Exception err) {
+                    err.printStackTrace();
+                    errorMessage = err.getMessage();
+                    Log.e("Error de recarga", errorMessage);
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(NautaConnectInformation result) {
+                if (result != null) {
+                    // Map
+                    Map<String, Object> map = new HashMap<String, Object>();
+                    map.put("accessAreas", result.getAccountInfo().getAccessAreas());
+                    map.put("expireDate", result.getAccountInfo().getExpirationDate());
+                    map.put("ddd", result.getAccountInfo().getAccountStatus());
+                    saveInfo("LOGIN", map);
+                }
+            }
+        }.execute();
+    }
+
+    // TODO: desconectar la cuenta
+    @SuppressWarnings("deprecation")
+    public void getTiempo(TextView text) {
+        new AsyncTask<Void, Void, Long>() {
+            @Override
+            protected Long doInBackground(Void... voids) {
+                try {
+                    return api.getRemainingTime();
+                } catch (Exception err) {
+                    err.printStackTrace();
+                    errorMessage = err.getMessage();
+                    Log.e("Error de recarga", errorMessage);
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Long millisecods) {
+                if (millisecods != null) {
+                    new CountDownTimer(millisecods, 1000) {
+                        public void onTick(long millisUntilFinished) {
+                            int h = (int) (millisUntilFinished / 3600000);
+                            int m = (int) (millisUntilFinished - h * 3600000) / 60000;
+                            int s = (int) (millisUntilFinished - h * 3600000 - m * 60000) / 1000;
+                            String hh = h < 10 ? "0" + h : String.valueOf(h);
+                            String mm = m < 10 ? "0" + m : String.valueOf(m);
+                            String ss = s < 10 ? "0" + s : String.valueOf(s);
+                            formattedTime = String.format("%s:%s:%s", hh, mm, ss);
+                            text.setText(formattedTime);
+                        }
+
+                        public void onFinish() {
+                            formattedTime = "00:00:00";
+                            text.setText(formattedTime);
+                        }
+                    }.start();
+                }
+            }
+        }.execute();
+    }
+
+    // TODO: desconectar la cuenta
+    @SuppressWarnings("deprecation")
+    public void disconnect() {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                try {
+                    api.disconnect();
+                } catch (Exception err) {
+                    err.printStackTrace();
+                    errorMessage = err.getMessage();
+                    Log.e("Error de recarga", errorMessage);
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                if (errorMessage != null) {
+                    Log.e("Error", errorMessage);
+                    showSnackBar("Error " + errorMessage, false);
+                }
+                showSnackBar("Desconectado", false);
             }
         }.execute();
     }

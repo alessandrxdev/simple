@@ -88,5 +88,10 @@
         android:label="Portal Usuario"
         tools:layout="@layout/fragment_info_portal" />
 
-    
+    <fragment
+        android:id="@+id/nav_conectado"
+        android:name="com.arr.simple.ui.nauta.ConectadoFragment"
+        android:label="OnLine"
+        tools:layout="@layout/fragment_conectado" />
+
 </navigation>
