@@ -2,6 +2,7 @@ package com.arr.simple.ui.llamadas;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -21,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.arr.simple.adapter.ContactAdapter;
@@ -44,10 +46,14 @@ public class ContactosFragment extends Fragment {
     private FragmentContactosBinding binding;
     private ContactAdapter adapter;
     private List<Items> list = new ArrayList<>();
+    private SharedPreferences sp;
+    private String SIM;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle arg2) {
         binding = FragmentContactosBinding.inflate(inflater, container, false);
+        sp = PreferenceManager.getDefaultSharedPreferences(requireActivity());
+        SIM = sp.getString("sim", "0");
 
         // TODO: Adapter and recyclerView
         binding.recyclerView.setHasFixedSize(true);
@@ -75,13 +81,13 @@ public class ContactosFragment extends Fragment {
     private void callAsterisck(Contact item) {
         String number = item.getNumber();
         Call call = new Call(requireContext());
-        call.code("*99" + number, "0");
+        call.code("*99" + number, SIM);
     }
 
     private void callPrivate(Contact item) {
         String number = item.getNumber();
         Call call = new Call(requireContext());
-        call.code(Uri.encode("#") + "31" + Uri.encode("#") + number, "0");
+        call.code(Uri.encode("#") + "31" + Uri.encode("#") + number, SIM);
     }
 
     private void loadContacts() {

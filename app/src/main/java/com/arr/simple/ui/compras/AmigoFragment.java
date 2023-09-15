@@ -29,12 +29,14 @@ public class AmigoFragment extends Fragment {
     private ViewAdapter adapter;
     private final ArrayList<Items> list = new ArrayList<>();
     private SharedPreferences sp;
+    private String SIM;
 
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentPaquetesBinding.inflate(inflater, container, false);
         sp = PreferenceManager.getDefaultSharedPreferences(requireActivity());
+        SIM = sp.getString("sim", "0");
         return binding.getRoot();
     }
 
@@ -76,10 +78,10 @@ public class AmigoFragment extends Fragment {
     private void onClick(int position) {
         switch (position) {
             case 1:
-                new Call(getActivity()).code("*222*264" + Uri.encode("#"), "0");
+                new Call(getActivity()).code("*222*264" + Uri.encode("#"), SIM);
                 break;
             case 2:
-                new Call(getActivity()).code("*133*4*3*" + Uri.encode("#"), "0");
+                new Call(getActivity()).code("*133*4*3*" + Uri.encode("#"), SIM);
                 break;
             case 4:
                 activate_amigo();
@@ -105,7 +107,7 @@ public class AmigoFragment extends Fragment {
                 view -> {
                     boolean isConfirm = !sp.getBoolean("confirma", false);
                     String confirm = isConfirm ? "" : "*1";
-                    new Call(getActivity()).code("*133*4*1*1" + confirm + Uri.encode("#"), "0");
+                    new Call(getActivity()).code("*133*4*1*1" + confirm + Uri.encode("#"), SIM);
                 });
         bSheet.setNegativeButtom(null);
         bSheet.setNavColorSurface(true);
@@ -120,7 +122,7 @@ public class AmigoFragment extends Fragment {
                 view -> {
                     boolean isConfirm = !sp.getBoolean("confirma", false);
                     String confirm = isConfirm ? "" : "*1";
-                    new Call(getActivity()).code("*133*4*1*2" + confirm + Uri.encode("#"), "0");
+                    new Call(getActivity()).code("*133*4*1*2" + confirm + Uri.encode("#"), SIM);
                 });
         bSheet.setNegativeButtom(null);
         bSheet.setNavColorSurface(true);
@@ -140,7 +142,7 @@ public class AmigoFragment extends Fragment {
         bSheet.setPositiveButtom(
                 view -> {
                     String numero = bSheet.getEditTextValue();
-                    new Call(getActivity()).code("*133*4*2*1" + numero + Uri.encode("#"), "0");
+                    new Call(getActivity()).code("*133*4*2*1" + numero + Uri.encode("#"), SIM);
                 });
         bSheet.setNegativeButtom(null);
         bSheet.setNavColorSurface(true);
@@ -159,7 +161,7 @@ public class AmigoFragment extends Fragment {
         bSheet.setPositiveButtom(
                 view -> {
                     String numero = bSheet.getEditTextValue();
-                    new Call(getActivity()).code("*133*4*2*2" + numero + Uri.encode("#"), "0");
+                    new Call(getActivity()).code("*133*4*2*2" + numero + Uri.encode("#"), SIM);
                 });
         bSheet.setNegativeButtom(null);
         bSheet.setNavColorSurface(true);

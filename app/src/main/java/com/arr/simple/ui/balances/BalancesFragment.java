@@ -60,6 +60,7 @@ public class BalancesFragment extends Fragment {
     private final String[] ussdKeys = {"saldo", "datos", "bonos", "sms", "min"};
     private SharedPreferences spBalance;
     private SharedPreferences.Editor editor;
+    private String SIM;
 
     @Nullable
     @Override
@@ -72,6 +73,7 @@ public class BalancesFragment extends Fragment {
         // TODO: preferences
         spBalance = PreferenceManager.getDefaultSharedPreferences(requireActivity());
         editor = spBalance.edit();
+        SIM = spBalance.getString("sim", "0");
 
         // USSD
         ussd = new UssdUtils(getActivity());
@@ -175,7 +177,7 @@ public class BalancesFragment extends Fragment {
             int dias = Integer.parseInt(diasDatos.replace(" dias", ""));
             updateProgress(dias);
         } else {
-            updateProgress(2);
+            updateProgress(0);
         }
 
         // TODO: dias restante de sms
@@ -184,7 +186,7 @@ public class BalancesFragment extends Fragment {
             int dias = Integer.parseInt(smsDias.replace(" días", ""));
             updateLinearProgress(dias, binding.smsLinearProgress);
         } else {
-            updateLinearProgress(2, binding.smsLinearProgress);
+            updateLinearProgress(0, binding.smsLinearProgress);
         }
 
         // TODO: dias restante de voz
@@ -193,7 +195,7 @@ public class BalancesFragment extends Fragment {
             int dias = Integer.parseInt(vozDias.replace(" días", ""));
             updateLinearProgress(dias, binding.progressLinearVoz);
         } else {
-            updateLinearProgress(2, binding.progressLinearVoz);
+            updateLinearProgress(0, binding.progressLinearVoz);
         }
 
         String venceNacional = response.getVenceDataCu();
@@ -201,7 +203,7 @@ public class BalancesFragment extends Fragment {
             int dias = Integer.parseInt(venceNacional.replace(" días", ""));
             updateLinearProgress(dias, binding.progressDatosCu);
         } else {
-            updateLinearProgress(2, binding.progressDatosCu);
+            updateLinearProgress(0, binding.progressDatosCu);
         }
     }
 
@@ -223,7 +225,7 @@ public class BalancesFragment extends Fragment {
         }
         String ussdCode = ussdCodes[index];
         String ussdKey = ussdKeys[index];
-        ussd.execute(0, ussdCode, ussdKey);
+        ussd.execute(Integer.parseInt(SIM), ussdCode, ussdKey);
         handler.postDelayed(
                 () -> {
                     String response = ussd.response(ussdKey);

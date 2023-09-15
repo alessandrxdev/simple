@@ -36,6 +36,7 @@ public class UpdateBalances extends BroadcastReceiver {
     private static final String CHANNEL_ID = "Balances";
     private static final String CHANNEL = "Update balances";
     private Context mContext;
+    private String SIM;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -44,6 +45,9 @@ public class UpdateBalances extends BroadcastReceiver {
         // TODO: SharedPreferences
         spBalance = PreferenceManager.getDefaultSharedPreferences(context);
         editor = spBalance.edit();
+        SIM = spBalance.getString("sim", "0");
+
+        // ussd
         ussd = new UssdUtils(context);
         Handler handler = new Handler(Looper.getMainLooper());
         executeUssdRequest(handler, 0);
@@ -74,7 +78,7 @@ public class UpdateBalances extends BroadcastReceiver {
         }
         String ussdCode = ussdCodes[index];
         String ussdKey = ussdKeys[index];
-        ussd.execute(0, ussdCode, ussdKey);
+        ussd.execute(Integer.parseInt(SIM), ussdCode, ussdKey);
         handler.postDelayed(
                 () -> {
                     String response = ussd.response(ussdKey);

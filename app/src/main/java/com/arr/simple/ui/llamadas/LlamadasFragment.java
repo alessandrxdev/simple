@@ -1,11 +1,13 @@
 package com.arr.simple.ui.llamadas;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 import androidx.viewpager2.widget.ViewPager2;
 import com.arr.simple.adapter.TabAdapter;
 import com.arr.simple.databinding.FragmentComprasBinding;

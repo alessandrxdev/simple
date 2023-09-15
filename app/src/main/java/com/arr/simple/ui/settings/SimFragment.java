@@ -1,6 +1,7 @@
 package com.arr.simple.ui.settings;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,11 +18,14 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import androidx.preference.PreferenceManager;
+import com.arr.preference.M3ListPreference;
 import com.arr.preference.M3SwitchPreference;
 import com.arr.simple.R;
 import com.arr.simple.databinding.FragmentSettingsBinding;
 
 import com.arr.ussd.Call;
+import com.arr.ussd.utils.SimUtils;
 
 public class SimFragment extends Fragment {
 
@@ -47,9 +51,18 @@ public class SimFragment extends Fragment {
 
     public static class SIMPreference extends PreferenceFragmentCompat {
 
+        private SimUtils sim;
+        private SharedPreferences spSIM;
+        private String SIM;
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.preference_sim_card, rootKey);
+
+            // simUtils
+            sim = new SimUtils(getContext());
+            spSIM = PreferenceManager.getDefaultSharedPreferences(requireActivity());
+            SIM = spSIM.getString("sim", "0");
 
             // Find the tariff preference
             M3SwitchPreference tarifa = (M3SwitchPreference) findPreference("tarifa");
@@ -67,7 +80,7 @@ public class SimFragment extends Fragment {
                                                 getActivity(), Manifest.permission.CALL_PHONE)
                                         == PackageManager.PERMISSION_GRANTED) {
                                     new Call(getActivity())
-                                            .code("*133*1*1*1" + Uri.encode("#"), "0");
+                                            .code("*133*1*1*1" + Uri.encode("#"), SIM);
 
                                 } else {
                                     requestPermissionLauncher.launch(
@@ -76,12 +89,22 @@ public class SimFragment extends Fragment {
                                 }
                             } else {
                                 // La tarifa está desactivada
-                                new Call(getActivity()).code("*133*1*1*2" + Uri.encode("#"), "0");
+                                new Call(getActivity()).code("*133*1*1*2" + Uri.encode("#"), SIM);
                             }
 
                             return true;
                         }
                     });
+
+            // dualsim
+            boolean isDual = sim.isDualSIM();
+            M3ListPreference dualSim = findPreference("sim");
+            if (isDual) {
+                dualSim.setEnabled(true);
+            } else {
+                dualSim.setEnabled(false);
+                dualSim.setSummary(R.string.is_not_dual_sim);
+            }
         }
 
         private ActivityResultLauncher<String> requestPermissionLauncher =
@@ -93,8 +116,8 @@ public class SimFragment extends Fragment {
                                 if (result) {
                                     // PERMISSION GRANTED
                                     new Call(getActivity())
-                                            .code("*133*1*1*1" + Uri.encode("#"), "0");
-                                } 
+                                            .code("*133*1*1*1" + Uri.encode("#"), SIM);
+                                }
                             }
                         });
     }

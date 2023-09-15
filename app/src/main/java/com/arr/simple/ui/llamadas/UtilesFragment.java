@@ -1,11 +1,13 @@
 package com.arr.simple.ui.llamadas;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import com.arr.simple.adapter.ViewAdapter;
 import com.arr.simple.databinding.FragmentPaquetesBinding;
@@ -20,10 +22,14 @@ public class UtilesFragment extends Fragment {
     private FragmentPaquetesBinding binding;
     private ViewAdapter adapter;
     private ArrayList<Items> list = new ArrayList<>();
+    private SharedPreferences sp;
+    private String SIM;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle arg2) {
         binding = FragmentPaquetesBinding.inflate(inflater, container, false);
+        sp = PreferenceManager.getDefaultSharedPreferences(requireActivity());
+        SIM = sp.getString("sim", "0");
 
         // TODO: Adapter in recyclerView
         binding.recyclerView.setHasFixedSize(true);
@@ -71,34 +77,34 @@ public class UtilesFragment extends Fragment {
     private void onClick(int position) {
         switch (position) {
             case 1:
-                new Call(getActivity()).code("103", "0");
+                new Call(getActivity()).code("103", SIM);
                 break;
             case 2:
-                new Call(getActivity()).code("104", "0");
+                new Call(getActivity()).code("104", SIM);
                 break;
             case 3:
-                new Call(getActivity()).code("105", "0");
+                new Call(getActivity()).code("105", SIM);
                 break;
             case 4:
-                new Call(getActivity()).code("106", "0");
+                new Call(getActivity()).code("106", SIM);
                 break;
             case 5:
-                new Call(getActivity()).code("107", "0");
+                new Call(getActivity()).code("107", SIM);
                 break;
             case 7:
-                new Call(getActivity()).code("52642266", "0");
+                new Call(getActivity()).code("52642266", SIM);
                 break;
             case 8:
-                new Call(getActivity()).code("80043434", "0");
+                new Call(getActivity()).code("80043434", SIM);
                 break;
             case 9:
-                new Call(getActivity()).code("114", "0");
+                new Call(getActivity()).code("114", SIM);
                 break;
             case 10:
-                new Call(getActivity()).code("18888", "0");
+                new Call(getActivity()).code("18888", SIM);
                 break;
             case 11:
-                new Call(getActivity()).code("118", "0");
+                new Call(getActivity()).code("118", SIM);
                 break;
         }
     }

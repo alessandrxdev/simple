@@ -131,4 +131,5 @@
     <string name="hint_correo_nauta">Correo</string>
     <string name="button_info_login">Información de conexión</string>
     <string name="view_telepuntos" translatable="false">https://www.google.com/maps/search/ETECSA/</string>
+    <string name="is_not_dual_sim">Su dispositivo no puede usar esta función porque no es compatible con dual SIM</string>
 </resources>

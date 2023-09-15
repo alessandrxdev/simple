@@ -41,6 +41,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private SharedPreferences sp;
     private boolean isConfirm;
+    private String SIM;
 
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class HomeFragment extends Fragment {
         setReturnTransition(transition);
 
         sp = PreferenceManager.getDefaultSharedPreferences(requireActivity());
+        SIM = sp.getString("sim", "0");
 
         // TODO: consulta adelanta
         isConfirm = !sp.getBoolean("pospago", false);
@@ -66,25 +68,25 @@ public class HomeFragment extends Fragment {
         binding.content.cardAdealnta.setOnClickListener(
                 v -> {
                     String consulta = isConfirm ? "*222*233" : "*111";
-                    new Call(getActivity()).code(consulta + Uri.encode("#"), "0");
+                    new Call(getActivity()).code(consulta + Uri.encode("#"), SIM);
                 });
 
         // TODO: Consultar saldo principal
         binding.content.cardSaldo.setOnClickListener(
                 view -> {
-                    new Call(getActivity()).code("*222" + Uri.encode("#"), "0");
+                    new Call(getActivity()).code("*222" + Uri.encode("#"), SIM);
                 });
 
         // TODO: Consultar bonos
         binding.content.cardBonos.setOnClickListener(
                 view -> {
-                    new Call(getActivity()).code("*222*266" + Uri.encode("#"), "0");
+                    new Call(getActivity()).code("*222*266" + Uri.encode("#"), SIM);
                 });
 
         // TODO: Consulto datos
         binding.content.cardDatos.setOnClickListener(
                 view -> {
-                    new Call(getActivity()).code("*222*328" + Uri.encode("#"), "0");
+                    new Call(getActivity()).code("*222*328" + Uri.encode("#"), SIM);
                 });
 
         // TODO: Scanner QR recarga
@@ -134,7 +136,7 @@ public class HomeFragment extends Fragment {
                                                 + "*"
                                                 + monto
                                                 + Uri.encode("#"),
-                                        "0");
+                                        SIM);
                     }
                     binding.inputEditTextClave.getText().clear();
                     binding.inputEditTextMonto.getText().clear();
@@ -157,7 +159,7 @@ public class HomeFragment extends Fragment {
                                         .toString()
                                         .replace("-", "")
                                         .trim();
-                        new Call(getActivity()).code("*662" + code + Uri.encode("#"), "0");
+                        new Call(getActivity()).code("*662" + code + Uri.encode("#"), SIM);
                     }
                     binding.inputEditTextRecarga.getText().clear();
                 });
@@ -201,7 +203,7 @@ public class HomeFragment extends Fragment {
                         isConfirm = !sp.getBoolean("confirma", false);
                         String confirm = isConfirm ? "" : "*1";
                         new Call(getActivity())
-                                .code("*234*3*1*" + cantidad + confirm + Uri.encode("#"), "0");
+                                .code("*234*3*1*" + cantidad + confirm + Uri.encode("#"), SIM);
                     }
                     binding.inputEditTextAdelanta.getText().clear();
                     binding.inputEditTextAdelanta.clearFocus();

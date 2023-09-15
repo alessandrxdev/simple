@@ -25,12 +25,14 @@ public class PaquetesFragment extends Fragment {
     private ViewAdapter adapter;
     private ArrayList<Items> list = new ArrayList<>();
     private SharedPreferences sp;
+    private String SIM;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentPaquetesBinding.inflate(inflater, container, false);
         sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SIM = sp.getString("sim", "0");
         return binding.getRoot();
     }
 
@@ -123,7 +125,7 @@ public class PaquetesFragment extends Fragment {
                             boolean isConfirm = !sp.getBoolean("confirma", false);
                             String confirm = isConfirm ? "" : "*1";
                             new Call(getActivity())
-                                    .code("*133*5*1" + confirm + Uri.encode("#"), "0");
+                                    .code("*133*5*1" + confirm + Uri.encode("#"), SIM);
                         })
                 .setNegativeButtom(v -> {})
                 .setNavColorSurface(true)
@@ -145,7 +147,7 @@ public class PaquetesFragment extends Fragment {
                             boolean isConfirm = !sp.getBoolean("confirma", false);
                             String confirm = isConfirm ? "" : "*1";
                             new Call(getActivity())
-                                    .code("*133*5*2" + confirm + Uri.encode("#"), "0");
+                                    .code("*133*5*2" + confirm + Uri.encode("#"), SIM);
                         })
                 .setNegativeButtom(v -> {})
                 .setNavColorSurface(true)
@@ -167,7 +169,7 @@ public class PaquetesFragment extends Fragment {
                             boolean isConfirm = !sp.getBoolean("confirma", false);
                             String confirm = isConfirm ? "" : "*1";
                             new Call(getActivity())
-                                    .code("*133*5*3" + confirm + Uri.encode("#"), "0");
+                                    .code("*133*5*3" + confirm + Uri.encode("#"), SIM);
                         })
                 .setNegativeButtom(v -> {})
                 .setNavColorSurface(true)
@@ -187,7 +189,7 @@ public class PaquetesFragment extends Fragment {
                             boolean isConfirm = !sp.getBoolean("confirma", false);
                             String confirm = isConfirm ? "" : "*1";
                             new Call(getActivity())
-                                    .code("*133*1*4*1" + confirm + Uri.encode("#"), "0");
+                                    .code("*133*1*4*1" + confirm + Uri.encode("#"), SIM);
                         })
                 .setNegativeButtom(null)
                 .show();
@@ -206,7 +208,7 @@ public class PaquetesFragment extends Fragment {
                             boolean isConfirm = !sp.getBoolean("confirma", false);
                             String confirm = isConfirm ? "" : "*1";
                             new Call(getActivity())
-                                    .code("*133*1*4*2" + confirm + Uri.encode("#"), "0");
+                                    .code("*133*1*4*2" + confirm + Uri.encode("#"), SIM);
                         })
                 .setNegativeButtom(null)
                 .show();
@@ -226,7 +228,7 @@ public class PaquetesFragment extends Fragment {
                             boolean isConfirm = !sp.getBoolean("confirma", false);
                             String confirm = isConfirm ? "" : "*1";
                             new Call(getActivity())
-                                    .code("*133*1*4*3" + confirm + Uri.encode("#"), "0");
+                                    .code("*133*1*4*3" + confirm + Uri.encode("#"), SIM);
                         })
                 .setNegativeButtom(null)
                 .show();
@@ -244,7 +246,7 @@ public class PaquetesFragment extends Fragment {
                             boolean isConfirm = !sp.getBoolean("confirma", false);
                             String confirm = isConfirm ? "" : "*1";
                             new Call(getActivity())
-                                    .code("*133*1*2" + confirm + Uri.encode("#"), "0");
+                                    .code("*133*1*2" + confirm + Uri.encode("#"), SIM);
                         })
                 .setNegativeButtom(null)
                 .show();
@@ -262,7 +264,7 @@ public class PaquetesFragment extends Fragment {
                             boolean isConfirm = !sp.getBoolean("confirma", false);
                             String confirm = isConfirm ? "" : "*1";
                             new Call(getActivity())
-                                    .code("*133*1*3" + confirm + Uri.encode("#"), "0");
+                                    .code("*133*1*3" + confirm + Uri.encode("#"), SIM);
                         })
                 .setNegativeButtom(null)
                 .show();

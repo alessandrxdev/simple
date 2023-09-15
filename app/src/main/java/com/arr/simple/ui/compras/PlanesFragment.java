@@ -27,12 +27,14 @@ public class PlanesFragment extends Fragment {
     private ViewAdapter adapter;
     private ArrayList<Items> list = new ArrayList<>();
     private SharedPreferences sp;
+    private String SIM;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentPaquetesBinding.inflate(inflater, container, false);
         sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        SIM = sp.getString("sim", "0");
         return binding.getRoot();
     }
 
@@ -86,10 +88,10 @@ public class PlanesFragment extends Fragment {
     private void onClick(int position) {
         switch (position) {
             case 1:
-                new Call(getActivity()).code("*222*767" + Uri.encode("#"), "0");
+                new Call(getActivity()).code("*222*767" + Uri.encode("#"), SIM);
                 break;
             case 2:
-                new Call(getActivity()).code("*222*869" + Uri.encode("#"), "0");
+                new Call(getActivity()).code("*222*869" + Uri.encode("#"), SIM);
                 break;
             case 4:
                 five_minutos();
@@ -135,7 +137,7 @@ public class PlanesFragment extends Fragment {
                             boolean isConfirm = !sp.getBoolean("confirma", false);
                             String confirm = isConfirm ? "" : "*1";
                             new Call(getActivity())
-                                    .code("*133*3*1" + confirm + Uri.encode("#"), "0");
+                                    .code("*133*3*1" + confirm + Uri.encode("#"), SIM);
                         })
                 .setNegativeButtom(null)
                 .show();
@@ -154,7 +156,7 @@ public class PlanesFragment extends Fragment {
                             boolean isConfirm = !sp.getBoolean("confirma", false);
                             String confirm = isConfirm ? "" : "*1";
                             new Call(getActivity())
-                                    .code("*133*3*2" + confirm + Uri.encode("#"), "0");
+                                    .code("*133*3*2" + confirm + Uri.encode("#"), SIM);
                         })
                 .setNegativeButtom(null)
                 .show();
@@ -173,7 +175,7 @@ public class PlanesFragment extends Fragment {
                             boolean isConfirm = !sp.getBoolean("confirma", false);
                             String confirm = isConfirm ? "" : "*1";
                             new Call(getActivity())
-                                    .code("*133*3*3" + confirm + Uri.encode("#"), "0");
+                                    .code("*133*3*3" + confirm + Uri.encode("#"), SIM);
                         })
                 .setNegativeButtom(null)
                 .show();
@@ -192,7 +194,7 @@ public class PlanesFragment extends Fragment {
                             boolean isConfirm = !sp.getBoolean("confirma", false);
                             String confirm = isConfirm ? "" : "*1";
                             new Call(getActivity())
-                                    .code("*133*3*4" + confirm + Uri.encode("#"), "0");
+                                    .code("*133*3*4" + confirm + Uri.encode("#"), SIM);
                         })
                 .setNegativeButtom(null)
                 .show();
@@ -211,7 +213,7 @@ public class PlanesFragment extends Fragment {
                             boolean isConfirm = !sp.getBoolean("confirma", false);
                             String confirm = isConfirm ? "" : "*1";
                             new Call(getActivity())
-                                    .code("*133*3*5" + confirm + Uri.encode("#"), "0");
+                                    .code("*133*3*5" + confirm + Uri.encode("#"), SIM);
                         })
                 .setNegativeButtom(null)
                 .show();
@@ -231,7 +233,7 @@ public class PlanesFragment extends Fragment {
                             boolean isConfirm = !sp.getBoolean("confirma", false);
                             String confirm = isConfirm ? "" : "*1";
                             new Call(getActivity())
-                                    .code("*133*2*1" + confirm + Uri.encode("#"), "0");
+                                    .code("*133*2*1" + confirm + Uri.encode("#"), SIM);
                         })
                 .setNegativeButtom(null)
                 .show();
@@ -250,7 +252,7 @@ public class PlanesFragment extends Fragment {
                             boolean isConfirm = !sp.getBoolean("confirma", false);
                             String confirm = isConfirm ? "" : "*1";
                             new Call(getActivity())
-                                    .code("*133*2*2" + confirm + Uri.encode("#"), "0");
+                                    .code("*133*2*2" + confirm + Uri.encode("#"), SIM);
                         })
                 .setNegativeButtom(null)
                 .show();
@@ -269,7 +271,7 @@ public class PlanesFragment extends Fragment {
                             boolean isConfirm = !sp.getBoolean("confirma", false);
                             String confirm = isConfirm ? "" : "*1";
                             new Call(getActivity())
-                                    .code("*133*2*3" + confirm + Uri.encode("#"), "0");
+                                    .code("*133*2*3" + confirm + Uri.encode("#"), SIM);
                         })
                 .setNegativeButtom(null)
                 .show();
@@ -288,7 +290,7 @@ public class PlanesFragment extends Fragment {
                             boolean isConfirm = !sp.getBoolean("confirma", false);
                             String confirm = isConfirm ? "" : "*1";
                             new Call(getActivity())
-                                    .code("*133*2*4" + confirm + Uri.encode("#"), "0");
+                                    .code("*133*2*4" + confirm + Uri.encode("#"), SIM);
                         })
                 .setNegativeButtom(null)
                 .show();
