@@ -5,6 +5,4 @@ git:
       source_language: es
       source_file: app/src/main/res/values/strings.xml
       translation_files_expression: 'app/src/main/res/values-<lang>/strings.xml'
-  settings:
-      language_mapping:
-      en_US: en-rUS
+  
