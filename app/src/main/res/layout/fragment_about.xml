@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:id="@+id/coordinator">
+
+    <LinearLayout
+         android:layout_height="match_parent"
+         android:layout_width="match_parent"
+         android:orientation="vertical"
+         android:layout_marginLeft="16dp"
+         android:layout_marginRight="16dp"
+         android:layout_marginTop="16dp">
+
+        <com.google.android.material.card.MaterialCardView
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             app:cardElevation="1dp"
+             app:strokeWidth="1dp"
+             app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                 android:layout_height="match_parent"
+                 android:layout_width="match_parent"
+                 android:orientation="vertical">
+
+                <RelativeLayout
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:layout_margin="10dp">
+
+                    <ImageView
+                         android:layout_height="60dp"
+                         android:layout_width="60dp"
+                         android:src="@mipmap/ic_launcher"
+                         android:layout_centerVertical="true"
+                         android:layout_alignParentLeft="true"
+                         android:id="@+id/logo" />
+
+                    <TextView
+                         android:layout_height="wrap_content"
+                         android:layout_width="wrap_content"
+                         android:textAppearance="?textAppearanceHeadlineMedium"
+                         android:layout_toRightOf="@+id/logo"
+                         android:layout_marginLeft="10dp"
+                         android:id="@+id/nameApp"
+                         android:text="@string/app_name" />
+
+                    <TextView
+                         android:layout_height="wrap_content"
+                         android:layout_width="wrap_content"
+                         android:layout_below="@+id/nameApp"
+                         android:textAppearance="?textAppearanceBodySmall"
+                         android:layout_toRightOf="@+id/logo"
+                         android:layout_marginLeft="10dp"
+                         android:id="@+id/version"
+                         android:text="0.0.0" />
+
+                </RelativeLayout>
+
+                <HorizontalScrollView
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:layout_marginBottom="10dp"
+                     android:scrollbars="none"
+                     android:layout_marginTop="10dp">
+
+                    <LinearLayout
+                         android:layout_height="wrap_content"
+                         android:layout_width="match_parent"
+                         android:gravity="center_vertical"
+                         android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             app:icon="@drawable/ic_twitter_24px"
+                             android:layout_marginLeft="20dp"
+                             android:layout_marginRight="4dp"
+                             style="?attr/materialButtonOutlinedStyle"
+                             android:layout_weight="1.0"
+                             android:text="Twitter" />
+
+                        <com.google.android.material.button.MaterialButton
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             app:icon="@drawable/ic_github_24px"
+                             android:layout_margin="4dp"
+                             style="?attr/materialButtonOutlinedStyle"
+                             android:layout_weight="1.0"
+                             android:text="GitHub" />
+
+                        <com.google.android.material.button.MaterialButton
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             app:icon="@drawable/ic_telegram_24px"
+                             android:layout_margin="4dp"
+                             style="?attr/materialButtonOutlinedStyle"
+                             android:layout_weight="1.0"
+                             android:text="Telegram" />
+
+                        <com.google.android.material.button.MaterialButton
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             app:icon="@drawable/ic_facebook_24px"
+                             android:layout_margin="4dp"
+                             style="?attr/materialButtonOutlinedStyle"
+                             android:layout_weight="1.0"
+                             android:text="Facebook" />
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:clickable="true"
+             app:cardElevation="1dp"
+             app:strokeWidth="1dp"
+             android:layout_marginTop="10dp"
+             app:cardCornerRadius="10dp"
+             android:id="@+id/donate">
+
+            <LinearLayout
+                 android:layout_height="match_parent"
+                 android:layout_width="match_parent"
+                 android:gravity="center_vertical"
+                 android:layout_margin="10dp"
+                 android:orientation="horizontal">
+
+                <ImageView
+                     android:layout_height="35dp"
+                     android:layout_width="35dp"
+                     android:src="@drawable/ic_favorite_24px" />
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="wrap_content"
+                     android:textAppearance="?textAppearanceBodyMedium"
+                     android:layout_marginLeft="10dp"
+                     android:text="Apoyar el proyecto" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:clickable="true"
+             app:cardElevation="1dp"
+             app:strokeWidth="1dp"
+             android:layout_marginTop="10dp"
+             app:cardCornerRadius="10dp"
+             android:id="@+id/licencias">
+
+            <LinearLayout
+                 android:layout_height="match_parent"
+                 android:layout_width="match_parent"
+                 android:gravity="center_vertical"
+                 android:layout_margin="10dp"
+                 android:orientation="horizontal">
+
+                <ImageView
+                     android:layout_height="35dp"
+                     android:layout_width="35dp"
+                     android:src="@drawable/ic_politicas_24px" />
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="wrap_content"
+                     android:textAppearance="?textAppearanceBodyMedium"
+                     android:layout_marginLeft="10dp"
+                     android:text="Licencias de terceros" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:textAppearance="?textAppearanceTitleLarge"
+             android:textColor="@color/colorPrimary"
+             android:layout_marginTop="20dp"
+             android:text="Gracias a:" />
+
+        <ListView
+             android:layout_height="match_parent"
+             android:layout_width="match_parent"
+             android:divider="@null"
+             android:layout_weight="1"
+             android:id="@+id/list">
+
+        </ListView>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

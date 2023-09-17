@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,6 +26,7 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import androidx.recyclerview.widget.RecyclerView;
 import com.arr.simple.adapter.ContactAdapter;
 import com.arr.simple.databinding.FragmentContactosBinding;
 import com.arr.simple.model.Contact;
@@ -49,6 +51,9 @@ public class ContactosFragment extends Fragment {
     private SharedPreferences sp;
     private String SIM;
 
+    private int paginaActual = 1;
+    private int elementosPorPagina = 20;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle arg2) {
         binding = FragmentContactosBinding.inflate(inflater, container, false);
@@ -71,8 +76,6 @@ public class ContactosFragment extends Fragment {
                             callAsterisck(revertido);
                         });
         binding.recyclerView.setAdapter(adapter);
-
-        // TODO: Solicitar permisos para leer contactos
         checkPermission();
 
         return binding.getRoot();
@@ -90,27 +93,35 @@ public class ContactosFragment extends Fragment {
         call.code(Uri.encode("#") + "31" + Uri.encode("#") + number, SIM);
     }
 
-    private void loadContacts() {
-        Executor executor = Executors.newSingleThreadExecutor();
-        Handler handeler = new Handler(Looper.getMainLooper());
-        executor.execute(
-                () -> {
-                    // Background work here
-                    List<Items> contact = obtainContact();
-                    handeler.post(
-                            () -> {
-                                // UI Thread work
-                                binding.recyclerView.setVisibility(View.VISIBLE);
-                                binding.shimmerViewContainer.stopShimmer();
-                                binding.shimmerViewContainer.setVisibility(View.GONE);
-                                list.clear();
-                                list.addAll(contact);
-                                adapter.notifyDataSetChanged();
-                            });
-                });
+    private void loadSiguiente() {
+        int offset = (paginaActual - 1) * elementosPorPagina;
+        load(offset, elementosPorPagina);
+        paginaActual++;
     }
 
-    private List<Items> obtainContact() {
+    @SuppressWarnings("deprecation")
+    private void load(int offset, int limit) {
+        new AsyncTask<Void, Void, List<Items>>() {
+            @Override
+            protected List<Items> doInBackground(Void... voids) {
+                return obtenerContactosPaginados(offset, limit);
+            }
+
+            @Override
+            protected void onPostExecute(List<Items> nuevosContactos) {
+                if (nuevosContactos != null) {
+                    binding.recyclerView.setVisibility(View.VISIBLE);
+                    binding.shimmerViewContainer.stopShimmer();
+                    binding.shimmerViewContainer.setVisibility(View.GONE);
+                    list.addAll(nuevosContactos);
+                    adapter.setContactList(list);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        }.execute();
+    }
+
+    private List<Items> obtenerContactosPaginados(int offset, int limit) {
         Set<Contact> contactSet = new HashSet<>();
         List<Contact> contactFavorite = new ArrayList<>();
         ContentResolver content = requireContext().getContentResolver();
@@ -263,7 +274,6 @@ public class ContactosFragment extends Fragment {
                         getActivity(), Manifest.permission.READ_CONTACTS)) {
                     showDialogPermission();
                 } else {
-                    loadContacts();
                     requestPermissionLauncher.launch(Manifest.permission.READ_CONTACTS);
                 }
             }
@@ -291,10 +301,7 @@ public class ContactosFragment extends Fragment {
                         @Override
                         public void onActivityResult(Boolean result) {
                             if (result) {
-                                // PERMISSION GRANTED
-                                loadContacts();
-                            } else {
-                                // PERMISSION NOT GRANTED
+                                loadSiguiente();
                             }
                         }
                     });

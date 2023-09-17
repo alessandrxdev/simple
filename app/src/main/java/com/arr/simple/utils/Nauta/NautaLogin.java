@@ -10,6 +10,7 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
@@ -20,7 +21,7 @@ import com.arr.simple.MainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import cu.suitetecsa.sdk.nauta.domain.model.NautaUser;
-import cu.suitetecsa.sdk.nauta.framekork.NautaApi;
+import cu.suitetecsa.sdk.nauta.framework.NautaApi;
 import cu.suitetecsa.sdk.nauta.framework.model.NautaConnectInformation;
 import java.net.InetAddress;
 import java.util.HashMap;
@@ -69,7 +70,7 @@ public class NautaLogin {
                 .execute(
                         () -> {
                             try {
-                                api.setCredentials(new Pair<>(usuario, password));
+                                api.setCredentials(usuario, password);
                                 api.connect();
                                 ((Activity) mContext)
                                         .runOnUiThread(
@@ -78,6 +79,15 @@ public class NautaLogin {
                                                 });
                             } catch (Exception e) {
                                 e.printStackTrace();
+                                ((Activity) mContext)
+                                        .runOnUiThread(
+                                                () -> {
+                                                    Toast.makeText(
+                                                                    mContext,
+                                                                    "Error" + e,
+                                                                    Toast.LENGTH_LONG)
+                                                            .show();
+                                                });
                             }
                         });
     }
@@ -87,7 +97,7 @@ public class NautaLogin {
                 .execute(
                         () -> {
                             try {
-                                api.setCredentials(new Pair<>(usuario, password));
+                                api.setCredentials(usuario, password);
                                 NautaConnectInformation info = api.getConnectInformation();
                                 statusAccount = info.getAccountInfo().getAccountStatus();
                                 creditAccount = info.getAccountInfo().getCredit();
@@ -130,7 +140,7 @@ public class NautaLogin {
             protected NautaUser doInBackground(Void... params) {
                 try {
                     InetAddress.getAllByName("www.portal.nauta.cu");
-                    api.setCredentials(new Pair<>(usuario, password));
+                    api.setCredentials(usuario, password);
                     NautaUser user = api.login(captcha);
                     return user;
                 } catch (Exception e) {

@@ -11,15 +11,24 @@
         app:title="@string/title_preference_theme" />
 
     <com.arr.preference.M3SwitchPreference
-        app:key="update_app"
-        app:icon="@drawable/ic_update_balances"
-        app:summary="Mostrar cuando exista una nueva versión de la aplicación en Apklis"
-        app:title="Actualización" />
-
-    <com.arr.preference.M3SwitchPreference
         app:key="traffic"
         app:icon="@drawable/ic_traffic_network_24px"
         app:summary="Mostrar burbuja flotante con la velocidad de su tráfico en la red"
         app:title="Tráfico" />
+
+    <com.arr.preference.M3ListPreference
+        app:defaultValue="colorPrimary"
+        app:entries="@array/entries_color"
+        app:entryValues="@array/entry_color"
+        app:icon="@drawable/ic_color_24px"
+        app:key="floating_color"
+        app:summary="Seleccione el color de la burbuja flotante"
+        app:title="Color" />
+
+    <com.arr.preference.M3SwitchPreference
+        app:key="update_app"
+        app:icon="@drawable/ic_update_balances"
+        app:summary="Mostrar cuando exista una nueva versión de la aplicación en Apklis"
+        app:title="Actualización" />
 
 </PreferenceScreen>

@@ -28,6 +28,7 @@ import com.arr.bugsend.BugSend;
 import com.arr.imagepicker.PhotoPicker;
 import com.arr.simple.databinding.ActivityMainBinding;
 import com.arr.simple.databinding.NavRailHeaderBinding;
+import com.arr.simple.services.TrafficFloatingWindow;
 import com.arr.simple.utils.Greeting.GreetingUtils;
 import com.arr.simple.utils.Scanner.CustomScanner;
 import com.bumptech.glide.Glide;
@@ -114,6 +115,9 @@ public class MainActivity extends AppCompatActivity {
                     if (id == R.id.nav_settings) {
                         navController.navigate(id, null);
                     }
+                    if (id == R.id.nav_about) {
+                        navController.navigate(id, null);
+                    }
                     return false;
                 });
 
@@ -172,7 +176,8 @@ public class MainActivity extends AppCompatActivity {
                             || id == R.id.nav_correo
                             || id == R.id.nav_servicios
                             || id == R.id.nav_info_nauta
-                            || id == R.id.nav_conectado) {
+                            || id == R.id.nav_conectado
+                            || id == R.id.nav_about) {
                         binding.appBarMain.contentToolbar.setVisibility(View.GONE);
                         getWindow().setNavigationBarColor(SurfaceColors.SURFACE_0.getColor(this));
                         binding.appBarMain.bottomNavigation.setVisibility(View.GONE);
@@ -282,5 +287,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        SharedPreferences spFloating = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isActive = spFloating.getBoolean("traffic", false);
+        if (isActive) {
+            Intent intent = new Intent(this, TrafficFloatingWindow.class);
+            startService(intent);
+        }
     }
 }

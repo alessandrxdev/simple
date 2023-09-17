@@ -107,4 +107,19 @@
         <item>Darse de baja</item>
     </string-array>
 
+    <string-array name="entries_color">
+        <item>Según el sistema</item>
+        <item>Ebony</item>
+        <item>Mud</item>
+        <item>Black Coral</item>
+        <item>Deep Taupe</item>
+    </string-array>
+
+    <string-array name="entry_color">
+        <item>colorPrimary</item>
+        <item>md_green_secondary</item>
+        <item>md_mud_secondary</item>
+        <item>md_black_coral_secondary</item>
+        <item>md_deep_taupe_secondary</item>
+    </string-array>
 </resources>

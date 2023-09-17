@@ -36,4 +36,11 @@
     <color name="ucrop_color_widget_background">@color/colorBackground</color>
     <color name="ucrop_color_widget_text">@color/colorOnBackground</color>
 
+    <!-- Color floating windows -->
+    <color name="md_green_secondary">#E655624C</color>
+    <color name="md_mud_secondary">#E66B5D3F</color>
+    <color name="md_black_coral_secondary">#E6625B71</color>
+    <color name="md_deep_taupe_secondary">#E674565F</color>
+
+
 </resources>

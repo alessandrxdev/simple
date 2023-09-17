@@ -63,7 +63,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.journeyapps:zxing-android-embedded:4.3.0"){ isTransitive = false }
     implementation("com.google.zxing:core:3.5.2")
-    implementation("com.github.suitetecsa:suitetecsa-sdk-kotlin:0.2-alpha01")
+    implementation("com.github.suitetecsa:suitetecsa-sdk-kotlin:0.1.9")
     implementation(project(":preference"))
     implementation(project(":bugsend"))
     implementation(project(":fingerprint"))
