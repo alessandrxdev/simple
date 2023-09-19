@@ -19,8 +19,6 @@ rootProject.name = "Application"
 
 include(":app")
 include(":preference")
-include(":bugsend")
 include(":fingerprint")
 include(":photopicker")
 include(":ussd")
-include(":nautamail")

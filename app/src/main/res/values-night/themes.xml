@@ -28,6 +28,9 @@
         <item name="colorOnSurfaceInverse">@color/colorOnSurfaceInverse</item>
         <item name="colorSurfaceInverse">@color/colorSurfaceInverse</item>
         <item name="colorPrimaryInverse">@color/colorPrimaryInverse</item>
+
+        <!-- AutoFill -->
+        <item name="android:autofilledHighlight" tool:targetApi="o">@android:color/transparent</item>
     </style>
 
     <style name="AppTheme" parent="Base.AppTheme" />

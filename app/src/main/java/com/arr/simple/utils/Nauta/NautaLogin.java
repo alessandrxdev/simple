@@ -2,9 +2,11 @@ package com.arr.simple.utils.Nauta;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -19,6 +21,7 @@ import com.arr.simple.App;
 import com.arr.simple.R;
 import com.arr.simple.MainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import cu.suitetecsa.sdk.nauta.domain.model.NautaUser;
 import cu.suitetecsa.sdk.nauta.framework.NautaApi;
@@ -82,11 +85,8 @@ public class NautaLogin {
                                 ((Activity) mContext)
                                         .runOnUiThread(
                                                 () -> {
-                                                    Toast.makeText(
-                                                                    mContext,
-                                                                    "Error" + e,
-                                                                    Toast.LENGTH_LONG)
-                                                            .show();
+                                                    showSnackBarAction(
+                                                            "Ah habido un error " + e, "Erros" + e, true);
                                                 });
                             }
                         });
@@ -367,5 +367,30 @@ public class NautaLogin {
             snack.setAnchorView(nav);
         }
         snack.show();
+    }
+
+    private void showSnackBarAction(String message, String error, boolean isAnchor) {
+        CoordinatorLayout coordinator = ((MainActivity) mContext).getCoordnator();
+        BottomNavigationView nav = ((MainActivity) mContext).getBottomNavigation();
+        Snackbar snack = Snackbar.make(coordinator, message, Snackbar.LENGTH_SHORT);
+        if (isAnchor) {
+            snack.setAnchorView(nav);
+        }
+        snack.setAction(
+                "Enviar",
+                (click) -> {
+                    sendCrashReport(error);
+                });
+        snack.show();
+    }
+
+    private void sendCrashReport(String report) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"soporteapplify@gmail.com"});
+        intent.putExtra(Intent.EXTRA_SUBJECT, "NAUTA");
+        intent.putExtra(Intent.EXTRA_TEXT, report);
+        intent.setType("text/plain");
+        intent.setData(Uri.parse("mailto:"));
+        mContext.startActivity(Intent.createChooser(intent, "Enviar reporte"));
     }
 }

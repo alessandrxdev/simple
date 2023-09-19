@@ -39,9 +39,8 @@ Es ligera, útil y moderna, además de estar en constante desarrollo es una de l
 - [@roclahy](https://twitter.com/roclahy) por el apoyo incondicional.
 
 ### License
-=======
-
-    Copyright (C) 2023  Applify
+ 
+ ```Copyright (C) 2023  Applify
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

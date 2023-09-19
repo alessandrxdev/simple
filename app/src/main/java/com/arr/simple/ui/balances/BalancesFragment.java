@@ -210,10 +210,12 @@ public class BalancesFragment extends Fragment {
     private void executeUssdRequest(Handler handler, int index) {
         if (index >= ussdCodes.length) {
             // Se han realizado todas las consultas
-            showSnackBar("Consulta completada!", true);
-            binding.swipeRefresh.setRefreshing(false);
-            update();
-            updateHora();
+            //    showSnackBar("Consulta completada!", true);
+            if (isVisible()) {
+                binding.swipeRefresh.setRefreshing(false);
+                update();
+                updateHora();
+            }
             boolean isCheck = spBalance.getBoolean("vence", true);
             if (!isCheck) {
                 String datos = response.getVenceData();
@@ -348,5 +350,13 @@ public class BalancesFragment extends Fragment {
         NotificationManagerCompat notificationManager =
                 NotificationManagerCompat.from(getContext());
         notificationManager.notify(0, builder.build());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (binding.swipeRefresh.isRefreshing()) {
+            binding.swipeRefresh.setRefreshing(false);
+        }
     }
 }

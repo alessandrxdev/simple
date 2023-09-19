@@ -40,6 +40,8 @@ public class LoginFragment extends Fragment {
                         login.connect(usuario, password);
                     }
                 });
+        
+        
 
         binding.buttonInfo.setOnClickListener(
                 view -> {
@@ -54,6 +56,9 @@ public class LoginFragment extends Fragment {
                     }
                 });
 
+        
+        
+        
         return binding.getRoot();
     }
 

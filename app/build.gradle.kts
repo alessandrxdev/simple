@@ -14,7 +14,7 @@ android {
         minSdk = 23
         targetSdk = 33
         versionCode = 11
-        versionName = "4.0.0"
+        versionName = "4.0.0-beta6"
         
         vectorDrawables { 
             useSupportLibrary = true
@@ -28,7 +28,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -64,10 +64,10 @@ dependencies {
     implementation("com.journeyapps:zxing-android-embedded:4.3.0"){ isTransitive = false }
     implementation("com.google.zxing:core:3.5.2")
     implementation("com.github.suitetecsa:suitetecsa-sdk-kotlin:0.1.9")
+    implementation("com.github.applifycu:bugsend:1.0.1")
+    implementation("com.github.applifycu:nautaclear:1.0.0")
     implementation(project(":preference"))
-    implementation(project(":bugsend"))
     implementation(project(":fingerprint"))
     implementation(project(":photopicker"))
     implementation(project(":ussd"))
-    implementation(project(":nautamail"))
 }

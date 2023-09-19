@@ -79,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
                 .setIcon(R.drawable.ic_bug_report_24px)
                 .setMessage(getString(R.string.message_bug))
                 .setEmail("soporteapplify@gmail.com")
-                .setAsunto("REPORTE-SIMPLE")
-                .setExtraInfo(versionName)
+                .setSubject("REPORTE-SIMPLE")
+                .setExtraText(versionName)
                 .show();
 
         // TODO:StatusBarColor
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         // TODO: navigationBarColor
         getWindow().setNavigationBarColor(SurfaceColors.SURFACE_2.getColor(this));
 
-        // load name and saludo
+        // load name and greeat
         binding.appBarMain.textSaludo.setText(GreetingUtils.hello());
         if (getNombre().isEmpty()) {
             binding.appBarMain.textName.setText("Usuario");

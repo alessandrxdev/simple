@@ -30,6 +30,7 @@
 
         <!-- StatusBar -->
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:autofilledHighlight" tool:targetApi="o">@android:color/transparent</item>
     </style>
 
     <style name="AppTheme" parent="Base.AppTheme" />

@@ -1,0 +1,69 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical">
+
+    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_gravity="center_horizontal" />
+
+    <ImageView
+        android:layout_height="30dp"
+        android:layout_width="30dp"
+        android:src="@drawable/ic_favorite_24px"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:textAppearance="?textAppearanceTitleLarge"
+        android:layout_margin="5dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Donar" />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:textAppearance="?textAppearanceBodySmall"
+        android:layout_margin="5dp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/message_donate" />
+
+    <Button
+        style="?attr/materialButtonOutlinedStyle"
+        android:id="@+id/button_cup"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Transferencia en CUP"
+        android:layout_margin="4dp" />
+
+    <Button
+        style="?attr/materialButtonOutlinedStyle"
+        android:id="@+id/button_cripto"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Transferencia en TON"
+        android:layout_margin="4dp" />
+
+    <Button
+        style="?attr/materialButtonOutlinedStyle"
+        android:id="@+id/button_sqp"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Transferencia en SQP"
+        android:layout_margin="4dp" />
+
+    <Button
+        style="?attr/materialButtonOutlinedStyle"
+        android:id="@+id/button_saldo"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="Transferencia en saldo"
+        android:layout_margin="4dp" />
+
+</LinearLayout>
