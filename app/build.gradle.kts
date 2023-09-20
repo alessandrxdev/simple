@@ -58,7 +58,7 @@ dependencies {
     implementation("com.github.androidmads:QRGenerator:1.0.1")
     implementation("com.tbuonomo:dotsindicator:5.0")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
-    implementation("androidx.annotation:annotation:1.6.0")
+    implementation("androidx.annotation:annotation:1.7.0")
     implementation("com.facebook.shimmer:shimmer:0.5.0")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.journeyapps:zxing-android-embedded:4.3.0"){ isTransitive = false }
