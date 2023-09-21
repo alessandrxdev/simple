@@ -4,21 +4,21 @@
     <com.arr.preference.BSEditTextPreference
         app:key="name"
         app:icon="@drawable/ic_user_24px"
-        app:title="Nombre"
-        app:dialogHint="Su nombre"
-        app:summary="Este no es un nombre de usuario ni un PIN, solo será usado para dar una mejor experiencia al usuario" />
+        app:title="@string/title_name_preference"
+        app:dialogHint="@string/hint_name_preference"
+        app:summary="@string/summary_name_preference" />
 
     <com.arr.preference.BSEditTextPreference
         app:key="number"
         app:icon="@drawable/ic_llamadas_unfill_24px"
-        app:title="Número"
-        app:dialogHint="Número móvil"
-        app:summary="Su número de teléfono" />
+        app:title="@string/title_numero_preference"
+        app:dialogHint="@string/hint_numero_preference"
+        app:summary="@string/summary_numero_preference" />
 
     <com.arr.preference.M3Preference
         app:key="nauta"
         app:icon="@drawable/ic_nauta_email_24px"
-        app:title="Nauta"
-        app:summary="Cuenta de navegación nacional e internacional" />
+        app:title="@string/title_nauta_preference"
+        app:summary="@string/summary_nauta_preference" />
 
 </PreferenceScreen>

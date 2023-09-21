@@ -136,4 +136,17 @@
     <string name="url_telegram">https://t.me/applifycuba</string>
     <string name="url_github">https://github.com/applifycu/simple</string>
     <string name="message_donate">Agradecemos su interés por apoyar nuestro proyecto. Esto nos ayuda a que la aplicación siga perfeccionándose. Aunque SIMple es gratuita, su desarrollo conlleva un gasto monetario por parte de su desarrollador, ya que en determinados momentos tiene que buscar información para poder agregar nuevas funciones, así como actualizar la aplicación. Cualquier ayuda es bienvenida, pero tenga en cuenta que esto no significa que se agregarán nuevas funciones.</string>
+    <string name="message_not_photo">Aquí no hay nada que mostrar</string>
+    <string name="permission_read_external_storage">Necesitamos que usted conceda los permisos necesarios para acceder a sus archivos y así usted pueda cargar su foto de perfil.</string>
+    <string name="title_permission_read_external_storage">Archivos</string>
+    <string name="title_name_preference">Nombre</string>
+    <string name="summary_name_preference">Este no es un nombre de usuario ni un PIN, solo será usado para dar una mejor experiencia al usuario</string>
+    <string name="hint_name_preference">Su nombre</string>
+    <string name="title_numero_preference">Numero</string>
+    <string name="summary_numero_preference">Su número móvil</string>
+    <string name="hint_numero_preference">Número móvil</string>
+    <string name="title_nauta_preference">Nauta</string>
+    <string name="summary_nauta_preference">Guardar cuenta de navegación nacional e internacional</string>
+        
+        
 </resources>

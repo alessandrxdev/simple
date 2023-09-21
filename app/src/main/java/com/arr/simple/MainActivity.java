@@ -4,10 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -25,7 +27,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.preference.PreferenceManager;
 
 import com.arr.bugsend.BugSend;
-import com.arr.imagepicker.PhotoPicker;
+import com.arr.didi.Didi;
 import com.arr.simple.databinding.ActivityMainBinding;
 import com.arr.simple.databinding.NavRailHeaderBinding;
 import com.arr.simple.services.TrafficFloatingWindow;
@@ -49,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private NavRailHeaderBinding header;
     private String code = "";
-    private PhotoPicker picker;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -58,9 +59,6 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.appBarMain.toolbar);
-
-        // TODO: PhotoPicker
-        picker = new PhotoPicker(this);
 
         // TODO: Quitar el foco de los TextInputEditText al entrar a una Activity o Fragment
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
@@ -191,10 +189,10 @@ public class MainActivity extends AppCompatActivity {
                             || id == R.id.nav_compras
                             || id == R.id.nav_llamadas
                             || id == R.id.nav_nauta) {
-                        loadProfile();
                         binding.appBarMain.contentToolbar.setVisibility(View.VISIBLE);
                         getWindow().setNavigationBarColor(SurfaceColors.SURFACE_2.getColor(this));
                         binding.appBarMain.bottomNavigation.setVisibility(View.VISIBLE);
+                        binding.appBarMain.toolbar.setNavigationIcon(loadProfile());
                     }
                 });
     }
@@ -202,6 +200,19 @@ public class MainActivity extends AppCompatActivity {
     private void openGoogleMap() {
         startActivity(
                 new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.view_telepuntos))));
+    }
+
+    private Drawable loadProfile() {
+        Bitmap image =
+                new Didi(this).load().setDirectoryName("Profile").setRounded(true).getBitmap();
+        if (image != null) {
+            int width = 100;
+            int height = 100;
+            Bitmap profile = Bitmap.createScaledBitmap(image, width, height, true);
+            return new BitmapDrawable(getResources(), profile);
+        } else {
+            return getDrawable(R.drawable.ic_account_circle_24px);
+        }
     }
 
     @Override
@@ -220,35 +231,6 @@ public class MainActivity extends AppCompatActivity {
     public String getNombre() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         return sp.getString("name", "");
-    }
-
-    // TODO: Cargar foto de perfil en el toggle
-    public void loadProfile() {
-        Bitmap bitmap = picker.picBitmap();
-        Glide.with(this)
-                .load(bitmap)
-                .placeholder(R.drawable.ic_account_circle_24px)
-                .override(100, 100)
-                .circleCrop()
-                .into(
-                        new CustomTarget<Drawable>() {
-                            @Override
-                            public void onResourceReady(
-                                    @NonNull Drawable resource,
-                                    @Nullable Transition<? super Drawable> transition) {
-                                binding.appBarMain.toolbar.setNavigationIcon(resource);
-                            }
-
-                            @Override
-                            public void onLoadCleared(Drawable arg0) {
-                                binding.appBarMain.toolbar.setNavigationIcon(arg0);
-                            }
-
-                            @Override
-                            public void onLoadFailed(Drawable arg0) {
-                                binding.appBarMain.toolbar.setNavigationIcon(arg0);
-                            }
-                        });
     }
 
     public CoordinatorLayout getCoordnator() {

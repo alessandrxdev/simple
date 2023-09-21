@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -22,7 +23,7 @@ import androidx.preference.PreferenceManager;
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 
-import com.arr.imagepicker.PhotoPicker;
+import com.arr.didi.Didi;
 import com.arr.preference.M3Preference;
 import com.arr.preference.WaPerfilPreference;
 import com.arr.simple.R;
@@ -35,6 +36,7 @@ import com.google.android.material.transition.platform.MaterialSharedAxis;
 public class SettingsFragment extends Fragment {
 
     private FragmentSettingsBinding binding;
+    private Didi didi;
 
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,7 +60,6 @@ public class SettingsFragment extends Fragment {
 
     public static class SettingsPreference extends PreferenceFragmentCompat {
 
-        private PhotoPicker picker;
         private NavController nav;
 
         @Override
@@ -66,30 +67,34 @@ public class SettingsFragment extends Fragment {
             super.onViewCreated(view, savedInstanceState);
 
             // navigation controller
-            nav = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_content_main);
+            nav =
+                    Navigation.findNavController(
+                            requireActivity(), R.id.nav_host_fragment_content_main);
         }
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.preferences, rootKey);
 
-            // TODO: PhotoPicker
-            picker = new PhotoPicker(getActivity());
-
             // TODO: Perfil
-            Bitmap bitmap = picker.picBitmap();
             WaPerfilPreference perfil = findPreference("perfil");
-            if (bitmap != null) {
-                perfil.setIconBitmap(bitmap);
-            } else {
-                perfil.setIcon(R.drawable.ic_account_circle_24px);
-            }
             if (getNombre().isEmpty() && getNumero().isEmpty()) {
                 perfil.setTitle(getResources().getString(R.string.title_perfil_preference));
                 perfil.setSummary(getResources().getString(R.string.summary_perfil_preference));
             } else {
                 perfil.setTitle(getNombre());
                 perfil.setSummary(getNumero());
+            }
+
+            Bitmap bitmap =
+                    new Didi(requireContext())
+                            .setDirectoryName("Profile")
+                            .setRounded(true)
+                            .getBitmap();
+            if (bitmap != null) {
+                perfil.setIconBitmap(bitmap);
+            } else {
+                perfil.setIcon(R.drawable.ic_account_circle_24px);
             }
 
             // TODO: Mostrar QR con el número de móvil
@@ -160,6 +165,20 @@ public class SettingsFragment extends Fragment {
                                 R.id.nav_security,
                                 null,
                                 new NavOptions.Builder().setLaunchSingleTop(true).build());
+                        return true;
+                    });
+
+            M3Preference lenguaje = findPreference("idioma");
+            lenguaje.setOnPreferenceClickListener(
+                    v -> {
+                        Toast.makeText(getActivity(), "Próximamente...", Toast.LENGTH_LONG).show();
+                        return true;
+                    });
+
+            M3Preference info = findPreference("help");
+            info.setOnPreferenceClickListener(
+                    v -> {
+                        Toast.makeText(getActivity(), "Próximamente...", Toast.LENGTH_LONG).show();
                         return true;
                     });
         }

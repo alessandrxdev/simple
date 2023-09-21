@@ -1,3 +1,4 @@
+
 pluginManagement {
   repositories {
     google()
@@ -11,7 +12,8 @@ dependencyResolutionManagement {
   repositories {
     google()
     mavenCentral()
-    maven { setUrl ("https://jitpack.io") }
+    maven { setUrl ("https://jitpack.io") 
+    }
   }
 }
 
@@ -20,5 +22,4 @@ rootProject.name = "Application"
 include(":app")
 include(":preference")
 include(":fingerprint")
-include(":photopicker")
 include(":ussd")

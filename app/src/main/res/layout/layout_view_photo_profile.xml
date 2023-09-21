@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:padding="16dp"
+    android:id="@+id/bottom_sheet_profile">
+
+    <ImageView
+        android:layout_height="32dp"
+        android:layout_width="32dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:padding="3dp"
+        android:tint="@android:color/white"
+        android:src="@drawable/ic_close_24px"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/close" />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textAppearance="?textAppearanceTitleLarge"
+        android:layout_toRightOf="@+id/close"
+        android:layout_marginLeft="10dp"
+        android:textColor="@android:color/white"
+        android:id="@+id/title"
+        android:text="" />
+
+    <ImageView
+        android:layout_height="180dp"
+        android:layout_width="180dp"
+        android:src="@drawable/ic_account_circle_24px"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/picture" />
+
+    <View
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/picture" />
+
+</RelativeLayout>

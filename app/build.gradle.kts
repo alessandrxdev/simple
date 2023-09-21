@@ -66,8 +66,8 @@ dependencies {
     implementation("com.github.suitetecsa:suitetecsa-sdk-kotlin:0.1.9")
     implementation("com.github.applifycu:bugsend:1.0.1")
     implementation("com.github.applifycu:nautaclear:1.0.0")
+    implementation("com.github.applifycu:didi-library:1.0.0")
     implementation(project(":preference"))
     implementation(project(":fingerprint"))
-    implementation(project(":photopicker"))
     implementation(project(":ussd"))
 }

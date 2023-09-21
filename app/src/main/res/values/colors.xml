@@ -42,5 +42,6 @@
     <color name="md_black_coral_secondary">#E6625B71</color>
     <color name="md_deep_taupe_secondary">#E674565F</color>
 
+    <color name="background_photo_profile">#FFFFFF</color>
 
 </resources>

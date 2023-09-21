@@ -86,6 +86,14 @@ public class AboutFragment extends Fragment {
                     bottomSheetLicencias();
                 });
 
+        // translate
+        binding.traducir.setOnClickListener(
+                view -> {
+                    startActivity(
+                            new Intent(
+                                    Intent.ACTION_VIEW,
+                                    Uri.parse("https://explore.transifex.com/applify/simpleapp/")));
+                });
         listColab = new ArrayList<>();
         listColab.add(new Users("Rosanna Moreno", "Colaboradora"));
         listColab.add(new Users("Harold Adan", "Corrección Ortográfica"));
@@ -253,7 +261,10 @@ public class AboutFragment extends Fragment {
         listColab.add(new Users("Glide", "BSD, part MIT and Apache 2.0"));
         listColab.add(new Users("QRGenerator", "MIT license"));
         listColab.add(new Users("Pager Dots Indicator", "Apache-2.0 license"));
-        listColab.add(new Users("Shimmer for Android", "BSD License. Meta Platforms, Inc. and affiliates."));
+        listColab.add(
+                new Users(
+                        "Shimmer for Android",
+                        "BSD License. Meta Platforms, Inc. and affiliates."));
         listColab.add(new Users("ZXing Android Embedded", "Apache-2.0 license"));
         listColab.add(new Users("suitetecsa-sdk-kotlin", "MIT license"));
         AdapterAbout adapter = new AdapterAbout(getActivity(), listColab);

@@ -36,5 +36,6 @@
     <color name="ucrop_color_widget_background">@color/colorBackground</color>
     <color name="ucrop_color_widget_text">@color/colorOnBackground</color>
 
+    <color name="background_photo_profile">#000000</color>
 
 </resources>
