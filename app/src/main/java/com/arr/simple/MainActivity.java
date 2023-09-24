@@ -28,6 +28,7 @@ import androidx.preference.PreferenceManager;
 
 import com.arr.bugsend.BugSend;
 import com.arr.didi.Didi;
+import com.arr.simple.activity.BugActivity;
 import com.arr.simple.databinding.ActivityMainBinding;
 import com.arr.simple.databinding.NavRailHeaderBinding;
 import com.arr.simple.services.TrafficFloatingWindow;

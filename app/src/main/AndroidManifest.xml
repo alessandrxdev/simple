@@ -16,7 +16,6 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
@@ -81,6 +80,9 @@
             android:name="com.arr.simple.utils.Scanner.CustomScanner"
             android:screenOrientation="portrait"
             android:exported="false" />
+        <activity
+            android:name="com.arr.simple.activity.BugActivity"
+            android:label="Bug" />
     </application>
 
 </manifest>

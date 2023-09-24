@@ -13,7 +13,7 @@ android {
         applicationId = "com.arr.simple"
         minSdk = 23
         targetSdk = 33
-        versionCode = 11
+        versionCode = 12
         versionName = "4.0.0-beta6"
         
         vectorDrawables { 
@@ -64,7 +64,7 @@ dependencies {
     implementation("com.journeyapps:zxing-android-embedded:4.3.0"){ isTransitive = false }
     implementation("com.google.zxing:core:3.5.2")
     implementation("com.github.suitetecsa:suitetecsa-sdk-kotlin:0.1.9")
-    implementation("com.github.applifycu:bugsend:1.0.1")
+    implementation("com.github.applifycu:bugsend:1.0.4-alpha1")
     implementation("com.github.applifycu:nautaclear:1.0.0")
     implementation("com.github.applifycu:didi-library:1.0.0")
     implementation(project(":preference"))

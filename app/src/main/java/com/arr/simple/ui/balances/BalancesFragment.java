@@ -23,8 +23,10 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.arr.simple.MainActivity;
 import com.arr.simple.R;
+import com.arr.simple.adapter.BalancesAdapter;
 import com.arr.simple.adapter.SliderAdapter;
 import com.arr.simple.databinding.FragmentBalancesBinding;
+import com.arr.simple.model.Balances;
 import com.arr.simple.model.ItemsSlider;
 
 import com.arr.ussd.ResponseUssd;
@@ -50,9 +52,6 @@ public class BalancesFragment extends Fragment {
     private FragmentBalancesBinding binding;
     private UssdUtils ussd;
     private ResponseUssd response;
-    private SliderAdapter slider;
-    private final List<ItemsSlider> list = new ArrayList<>();
-
     private Handler handlerr;
     private final String[] ussdCodes = {
         "*222#", "*222*328#", "*222*266#", "*222*767#", "*222*869#"
@@ -86,36 +85,7 @@ public class BalancesFragment extends Fragment {
                     Handler handler = new Handler(Looper.getMainLooper());
                     executeUssdRequest(handler, 0);
                 });
-
-        // slider
-        ViewPager viewpager = binding.viewPage;
-        WormDotsIndicator dots = binding.dotsIndicator;
-        slider = new SliderAdapter(getActivity());
-        viewpager.setAdapter(slider);
-        update();
-        // TODO: Slider visibility
-        slider.setContent(list);
-        if (slider.getCount() == 0) {
-            dots.setVisibility(View.GONE);
-        } else {
-            dots.setVisibility(View.VISIBLE);
-            dots.attachTo(viewpager);
-            slider.notifyDataSetChanged();
-        }
-        handlerr = new Handler(Looper.getMainLooper());
-        Runnable runnable =
-                new Runnable() {
-                    public void run() {
-                        int currentPosition = viewpager.getCurrentItem();
-                        int nextPosition = currentPosition + 1;
-                        if (nextPosition >= slider.getCount()) {
-                            nextPosition = 0;
-                        }
-                        viewpager.setCurrentItem(nextPosition);
-                        handlerr.postDelayed(this, 6000);
-                    }
-                };
-        handlerr.postDelayed(runnable, 6000);
+        viewContentBalances();
 
         // TODO: Update hora
         String updateHora = spBalance.getString("actualizado", "");
@@ -127,36 +97,28 @@ public class BalancesFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void update() {
-        if (!response.getError().isEmpty()) {
-            new MaterialAlertDialogBuilder(getActivity())
-                    .setMessage(
-                            "Ah ocurrido un error al actualizar algunos de sus balances, por favor vuelva a intentarlo.\n\n "
-                                    + response.getError())
-                    .setPositiveButton(
-                            "Ok",
-                            (dialog, w) -> {
-                                response.getClearError(getActivity());
-                            })
-                    .show();
+    private void viewContentBalances() {
+        // bonos internacional con datos ilimitados
+        if ((response.getBonoIlimitado() != null && !response.getBonoIlimitado().isEmpty())
+                || (response.getBonosDatos() != null && !response.getBonosDatos().isEmpty())
+                || (response.getBonoSaldo() != null && !response.getBonoSaldo().isEmpty())) {
+            binding.bonos.setVisibility(View.VISIBLE);
         }
 
         if (!response.getBonoIlimitado().isEmpty()) {
-            list.add(
-                    new ItemsSlider(
-                            R.drawable.ic_data_ilimitado_24px,
-                            "Ilimitados",
-                            response.getBonoIlimitado(),
-                            response.getTirmpoIlimitado()));
+            binding.ilimitados.setVisibility(View.VISIBLE);
+            binding.ilimitados.setText(response.getBonoIlimitado());
         }
         if (!response.getBonosDatos().isEmpty()) {
-            list.add(
-                    new ItemsSlider(
-                            R.drawable.ic_datos_24px,
-                            "Paquete",
-                            response.getBonosDatos(),
-                            response.getBonosDatosVence()));
+            binding.datosPromo.setVisibility(View.VISIBLE);
+            binding.datosPromo.setText(response.getBonosDatos());
         }
+        if (!response.getBonoSaldo().isEmpty() && response.getBonoSaldo() != null) {
+            binding.saldoPromo.setVisibility(View.VISIBLE);
+            binding.saldoPromo.setText(response.getBonoSaldo());
+        }
+
+        // balances
         binding.textTarifa.setText(response.getTarifaConsumo());
         binding.textDatos.setText(response.getDataAll());
         binding.textDatosLte.setText("/ " + response.getLTE());
@@ -170,7 +132,7 @@ public class BalancesFragment extends Fragment {
         // TODO: mensajeria
         binding.textMensajeria.setText(response.getDataMensajeria());
 
-        // fechas de vencimiento
+        //
         // dias restantes datos
         String diasDatos = response.getVenceData();
         if (diasDatos != null) {
@@ -205,6 +167,19 @@ public class BalancesFragment extends Fragment {
         } else {
             updateLinearProgress(0, binding.progressDatosCu);
         }
+
+        // error
+        if (!response.getError().isEmpty()) {
+            new MaterialAlertDialogBuilder(getActivity())
+                    .setMessage(
+                            "Ah ocurrido un error al actualizar algunos de sus balances, por favor vuelva a intentarlo.")
+                    .setPositiveButton(
+                            "Ok",
+                            (dialog, w) -> {
+                                response.getClearError(getActivity());
+                            })
+                    .show();
+        }
     }
 
     private void executeUssdRequest(Handler handler, int index) {
@@ -213,7 +188,7 @@ public class BalancesFragment extends Fragment {
             //    showSnackBar("Consulta completada!", true);
             if (isVisible()) {
                 binding.swipeRefresh.setRefreshing(false);
-                update();
+                viewContentBalances();
                 updateHora();
             }
             boolean isCheck = spBalance.getBoolean("vence", true);
