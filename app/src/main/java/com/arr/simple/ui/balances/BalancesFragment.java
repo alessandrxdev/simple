@@ -2,6 +2,7 @@ package com.arr.simple.ui.balances;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.arr.simple.MainActivity;
 import com.arr.simple.R;
 import com.arr.simple.adapter.BalancesAdapter;
 import com.arr.simple.adapter.SliderAdapter;
+import com.arr.simple.broadcast.NotificationBalances;
 import com.arr.simple.databinding.FragmentBalancesBinding;
 import com.arr.simple.model.Balances;
 import com.arr.simple.model.ItemsSlider;
@@ -197,7 +199,13 @@ public class BalancesFragment extends Fragment {
                 String days = calculateDays(datos);
                 addReminding(days);
             }
-
+                        
+           // actualizar notificación
+            boolean isNotifi = spBalance.getBoolean("balance_notif", true);
+            if(!isNotifi){
+                Intent broadcast = new Intent(getActivity(), NotificationBalances.class);
+                getActivity().sendBroadcast(broadcast);
+            }
             return;
         }
         String ussdCode = ussdCodes[index];
@@ -249,7 +257,7 @@ public class BalancesFragment extends Fragment {
     }
 
     public void showSnackBar(String message, boolean dimissable) {
-        CoordinatorLayout coordinator = ((MainActivity) getActivity()).getCoordnator();
+        CoordinatorLayout coordinator = ((MainActivity) getActivity()).getCoordinator();
         BottomNavigationView nav = ((MainActivity) getActivity()).getBottomNavigation();
         Snackbar snack = Snackbar.make(coordinator, message, Snackbar.LENGTH_SHORT);
         snack.setAnchorView(nav);

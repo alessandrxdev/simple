@@ -32,12 +32,7 @@ public class BalancesWidget extends AppWidgetProvider {
 
                 RemoteViews views =
                         new RemoteViews(context.getPackageName(), R.layout.balances_widget);
-                Intent intent = new Intent(context, UpdateBalances.class);
-                intent.setAction(SYNC);
-                PendingIntent pending =
-                        PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_MUTABLE);
-                views.setOnClickPendingIntent(R.id.appwidget_sync, pending);
-
+                setupOnClick(context, views);
                 update(views);
                 appWidgetManager.updateAppWidget(appWidgetId, views);
             }
@@ -65,11 +60,19 @@ public class BalancesWidget extends AppWidgetProvider {
         }
     }
 
+    private void setupOnClick(Context context, RemoteViews remote) {
+        Intent intent = new Intent(context, UpdateBalances.class);
+        intent.setAction(SYNC);
+        PendingIntent pending =
+                PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        remote.setOnClickPendingIntent(R.id.appwidget_sync, pending);
+    }
+
     private void update(RemoteViews views) {
         // TODO: todos los datos
         views.setTextViewText(R.id.appwidget_text_paquete, response.getDataAll());
         // TODO: datos lte
-        views.setTextViewText(R.id.appwidget_text_lte, response.getLTE());
+        views.setTextViewText(R.id.appwidget_text_lte, response.getLTE().replace(" LTE",""));
         // TODO: vence datos
         views.setTextViewText(R.id.appwidget_text_vence, response.getVenceData());
         // TODO: minutos

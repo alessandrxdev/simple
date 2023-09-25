@@ -369,7 +369,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void showSnackBar(String message, boolean dimissable) {
-        CoordinatorLayout coordinator = ((MainActivity) getActivity()).getCoordnator();
+        CoordinatorLayout coordinator = ((MainActivity) getActivity()).getCoordinator();
         BottomNavigationView nav = ((MainActivity) getActivity()).getBottomNavigation();
         Snackbar snack = Snackbar.make(coordinator, message, Snackbar.LENGTH_SHORT);
         snack.setAnchorView(nav);

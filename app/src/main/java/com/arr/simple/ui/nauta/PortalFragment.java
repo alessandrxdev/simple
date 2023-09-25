@@ -48,7 +48,7 @@ public class PortalFragment extends Fragment {
     }
 
     private void showSnackBar(String message, boolean isAnchor) {
-        CoordinatorLayout coordinator = ((MainActivity) getContext()).getCoordnator();
+        CoordinatorLayout coordinator = ((MainActivity) getContext()).getCoordinator();
         BottomNavigationView nav = ((MainActivity) getContext()).getBottomNavigation();
         Snackbar snack = Snackbar.make(coordinator, message, Snackbar.LENGTH_SHORT);
         if (isAnchor) {

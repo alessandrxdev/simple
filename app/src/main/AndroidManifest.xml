@@ -54,11 +54,24 @@
             android:exported="true"
             android:enabled="true">
             <intent-filter>
-                <action android:name="com.arr.simple.ACTION_UPDATE_BALANCES" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+                
+        <receiver
+            android:name="com.arr.simple.broadcast.NotificationBalances"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_PREFERENCE_CHANGED" />
+                <data
+                    android:path="com.arr.simple"
+                    android:scheme="package" />
+            </intent-filter>
+        </receiver>
+                
         <service
             android:name="com.arr.simple.services.TrafficFloatingWindow" />
+                
         <activity
             android:name=".activity.WelcomeActivity"
             android:screenOrientation="portrait"
@@ -68,6 +81,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+                
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
@@ -81,7 +95,8 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name="com.arr.simple.activity.BugActivity"
+            android:name="com.arr.simple.log.CrashActivity"
+            android:screenOrientation="portrait"
             android:label="Bug" />
     </application>
 

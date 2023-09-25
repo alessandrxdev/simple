@@ -86,7 +86,9 @@ public class NautaLogin {
                                         .runOnUiThread(
                                                 () -> {
                                                     showSnackBarAction(
-                                                            "Ah habido un error " + e, "Erros" + e, true);
+                                                            "Ah habido un error " + e,
+                                                            "Erros" + e,
+                                                            true);
                                                 });
                             }
                         });
@@ -360,7 +362,7 @@ public class NautaLogin {
     }
 
     private void showSnackBar(String message, boolean isAnchor) {
-        CoordinatorLayout coordinator = ((MainActivity) mContext).getCoordnator();
+        CoordinatorLayout coordinator = ((MainActivity) mContext).getCoordinator();
         BottomNavigationView nav = ((MainActivity) mContext).getBottomNavigation();
         Snackbar snack = Snackbar.make(coordinator, message, Snackbar.LENGTH_SHORT);
         if (isAnchor) {
@@ -370,7 +372,7 @@ public class NautaLogin {
     }
 
     private void showSnackBarAction(String message, String error, boolean isAnchor) {
-        CoordinatorLayout coordinator = ((MainActivity) mContext).getCoordnator();
+        CoordinatorLayout coordinator = ((MainActivity) mContext).getCoordinator();
         BottomNavigationView nav = ((MainActivity) mContext).getBottomNavigation();
         Snackbar snack = Snackbar.make(coordinator, message, Snackbar.LENGTH_SHORT);
         if (isAnchor) {

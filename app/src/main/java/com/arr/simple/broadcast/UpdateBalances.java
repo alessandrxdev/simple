@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 
+import android.util.Log;
 import android.widget.Toast;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -41,6 +42,7 @@ public class UpdateBalances extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         mContext = context;
+        Log.e("Update", "onRecive called");
 
         // TODO: SharedPreferences
         spBalance = PreferenceManager.getDefaultSharedPreferences(context);
@@ -73,7 +75,13 @@ public class UpdateBalances extends BroadcastReceiver {
             if (!isChecked) {
                 createNotification(mContext, "Balances", "¡Se han actualizado sus balances!");
             }
-
+                        
+           // actualizar notificación
+            boolean isNotifi = spBalance.getBoolean("balance_notif", true);
+            if(!isNotifi){
+                Intent broadcast = new Intent(((Activity)mContext), NotificationBalances.class);
+                mContext.sendBroadcast(broadcast);
+            }
             return;
         }
         String ussdCode = ussdCodes[index];

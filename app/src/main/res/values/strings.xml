@@ -118,7 +118,7 @@
     <string name="title_tarifa">Tarifa por consumo</string>
     <string name="description_add_photo">Agregar foto de perfil</string>
     <string name="description_photo_profile">Iaagen de perfil</string>
-    <string name="description_security">Para activar el bloqueo de la aplicación debe de tener configurado en su disposotivo al menos una de las dos opciones biométricas compatibles, desbloqueo facial o por huella.</string>
+    <string name="description_security">Para activar el bloqueo de la aplicación debe de tener configurado en su dispositivo al menos una de las dos opciones biométricas compatibles, desbloqueo facial o por huella.</string>
     <string name="nauta_login">Iniciar Sesión</string>
     <string name="nauta_portal">Portal Usuario</string>
     <string name="hint_usuario_login">Usuario</string>
@@ -142,11 +142,11 @@
     <string name="title_name_preference">Nombre</string>
     <string name="summary_name_preference">Este no es un nombre de usuario ni un PIN, solo será usado para dar una mejor experiencia al usuario</string>
     <string name="hint_name_preference">Su nombre</string>
-    <string name="title_numero_preference">Numero</string>
+    <string name="title_numero_preference">Número</string>
     <string name="summary_numero_preference">Su número móvil</string>
     <string name="hint_numero_preference">Número móvil</string>
     <string name="title_nauta_preference">Nauta</string>
     <string name="summary_nauta_preference">Guardar cuenta de navegación nacional e internacional</string>
-        
-        
+    <string name="user_and_password_empty">Usuario o contraseña vacíos</string>
+
 </resources>

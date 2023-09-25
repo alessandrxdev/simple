@@ -14,7 +14,7 @@ android {
         minSdk = 23
         targetSdk = 33
         versionCode = 12
-        versionName = "4.0.0-beta6"
+        versionName = "4.0.0-beta8"
         
         vectorDrawables { 
             useSupportLibrary = true
@@ -64,9 +64,9 @@ dependencies {
     implementation("com.journeyapps:zxing-android-embedded:4.3.0"){ isTransitive = false }
     implementation("com.google.zxing:core:3.5.2")
     implementation("com.github.suitetecsa:suitetecsa-sdk-kotlin:0.1.9")
-    implementation("com.github.applifycu:bugsend:1.0.4-alpha1")
+    implementation("com.github.applifycu:bugsend:1.0.4-alpha3")
     implementation("com.github.applifycu:nautaclear:1.0.0")
-    implementation("com.github.applifycu:didi-library:1.0.0")
+    implementation("com.github.applifycu:didi-library:1.0.1")
     implementation(project(":preference"))
     implementation(project(":fingerprint"))
     implementation(project(":ussd"))

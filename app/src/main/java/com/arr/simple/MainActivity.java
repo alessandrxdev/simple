@@ -1,23 +1,23 @@
 package com.arr.simple;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -28,15 +28,13 @@ import androidx.preference.PreferenceManager;
 
 import com.arr.bugsend.BugSend;
 import com.arr.didi.Didi;
-import com.arr.simple.activity.BugActivity;
+import com.arr.simple.broadcast.NotificationBalances;
 import com.arr.simple.databinding.ActivityMainBinding;
 import com.arr.simple.databinding.NavRailHeaderBinding;
+import com.arr.simple.log.CrashActivity;
 import com.arr.simple.services.TrafficFloatingWindow;
 import com.arr.simple.utils.Greeting.GreetingUtils;
 import com.arr.simple.utils.Scanner.CustomScanner;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.CustomTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.elevation.SurfaceColors;
 import com.google.android.material.navigation.NavigationView;
@@ -64,22 +62,8 @@ public class MainActivity extends AppCompatActivity {
         // TODO: Quitar el foco de los TextInputEditText al entrar a una Activity o Fragment
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        // TODO: Crash Reporter
-        StringBuilder builder = new StringBuilder();
-        try {
-            String version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-            builder.append("VERSION: ").append(version);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        String versionName = builder.toString();
         new BugSend(this)
-                .setTitle(getString(R.string.title_bug))
-                .setIcon(R.drawable.ic_bug_report_24px)
-                .setMessage(getString(R.string.message_bug))
-                .setEmail("soporteapplify@gmail.com")
-                .setSubject("REPORTE-SIMPLE")
-                .setExtraText(versionName)
+                .setLaunchActivity(CrashActivity.class)
                 .show();
 
         // TODO:StatusBarColor
@@ -110,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     if (id == R.id.nav_telepuntos) {
                         openGoogleMap();
+                      //  startActivity(new Intent(this, Test.class));
                     }
                     if (id == R.id.nav_settings) {
                         navController.navigate(id, null);
@@ -204,8 +189,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Drawable loadProfile() {
-        Bitmap image =
-                new Didi(this).load().setDirectoryName("Profile").setRounded(true).getBitmap();
+        Bitmap image = null;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+                image  = new Didi(this).load().setDirectoryName("Profile").setRounded(true).getBitmap();
+        }else{
+                if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_DENIED) {
+                image  = new Didi(this).load().setDirectoryName("Profile").setRounded(true).getBitmap();
+                }
+        }
         if (image != null) {
             int width = 100;
             int height = 100;
@@ -234,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
         return sp.getString("name", "");
     }
 
-    public CoordinatorLayout getCoordnator() {
+    public CoordinatorLayout getCoordinator() {
         return binding.appBarMain.coordinator;
     }
 
@@ -275,6 +266,12 @@ public class MainActivity extends AppCompatActivity {
         if (isActive) {
             Intent intent = new Intent(this, TrafficFloatingWindow.class);
             startService(intent);
+        }
+                
+        boolean isNotifi = spFloating.getBoolean("balance_notif", true);
+        if(!isNotifi){
+            Intent broadcast = new Intent(this, NotificationBalances.class);
+            sendBroadcast(broadcast);
         }
     }
 }

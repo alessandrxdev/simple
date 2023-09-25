@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceFragmentCompat;
@@ -24,6 +25,7 @@ import androidx.preference.PreferenceManager;
 import com.arr.preference.M3ListPreference;
 import com.arr.preference.M3SwitchPreference;
 import com.arr.simple.R;
+import com.arr.simple.broadcast.NotificationBalances;
 import com.arr.simple.broadcast.UpdateBalances;
 
 import java.util.Calendar;
@@ -101,6 +103,34 @@ public class BalancesPreference extends Fragment {
                                     return false;
                                 }
                             }
+                        }
+                        return true;
+                    });
+                        
+        // TODO: Notificación con informacion de los datos y vencimiento
+        M3SwitchPreference notifi = findPreference("balance_notif");
+            notifi.setOnPreferenceChangeListener(
+                    (preference, newValue) -> {
+                        boolean isCheck = (Boolean) newValue;
+                        if (isCheck) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S_V2) {
+                                if (ContextCompat.checkSelfPermission(
+                                                getActivity(), Manifest.permission.POST_NOTIFICATIONS)
+                                        != PackageManager.PERMISSION_GRANTED) {
+                                    ActivityCompat.requestPermissions(
+                                            getActivity(),
+                                            new String[] {Manifest.permission.POST_NOTIFICATIONS},
+                                            60);
+                                    return false;
+                                }else{
+                                requireActivity().sendBroadcast(new Intent(getActivity(), NotificationBalances.class));
+                                return true;
+                                }
+                            }
+                        requireActivity().sendBroadcast(new Intent(getActivity(), NotificationBalances.class));                    
+                        }else{
+                       NotificationManagerCompat manager = NotificationManagerCompat.from(getActivity());
+                       manager.cancel(22);
                         }
                         return true;
                     });
