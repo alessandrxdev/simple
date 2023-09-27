@@ -95,7 +95,7 @@ public class LoginFragment extends Fragment {
                             new Data(getActivity()).save("login", map);
                         }
                         // next to info
-                        navigation.navigate(R.id.nav_info_nauta, null, options());
+                        navigation.navigate(R.id.nav_conectado, null, options());
                     }
 
                     @Override
