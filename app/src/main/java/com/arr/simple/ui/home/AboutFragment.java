@@ -14,13 +14,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import com.arr.simple.R;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
+import com.arr.simple.adapter.AboutAdapter;
+import com.arr.simple.databinding.FragmentAboutAppBinding;
 import com.arr.simple.databinding.FragmentAboutBinding;
+import com.arr.simple.model.About;
+import com.arr.simple.model.Header;
+import com.arr.simple.model.Items;
 import com.arr.ussd.Call;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.elevation.SurfaceColors;
@@ -29,13 +36,34 @@ import java.util.List;
 
 public class AboutFragment extends Fragment {
 
-    private FragmentAboutBinding binding;
-    private List<Users> listColab;
+    private FragmentAboutAppBinding binding;
+    private List<Items> list = new ArrayList<>();
+    private AboutAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle arg2) {
-        binding = FragmentAboutBinding.inflate(inflater, container, false);
+        binding = FragmentAboutAppBinding.inflate(inflater, container, false);
 
+        // adapter
+        adapter = new AboutAdapter(requireContext(), list);
+        binding.recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.recycler.setAdapter(adapter);
+
+        // list
+        list.add(new Header("Redes"));
+        list.add(new About(R.drawable.ic_twitter_24px, "Twitter", "@applify"));
+        list.add(new About(R.drawable.ic_telegram_24px, "Telegram", "@applify"));
+        list.add(new About(R.drawable.ic_github_24px, "Github", "@applify"));
+        list.add(new Header("Colaboradores"));
+        list.add(new About(R.drawable.logo_roclahay, "Rosanna", "Colaboradora"));
+        list.add(new About(R.drawable.ic_account_circle_24px, "Harold Adan", "Ortografía"));
+        list.add(new About(R.drawable.ic_account_circle_24px, "Ordiel Victor", "Colaborador"));
+        list.add(new Header("Otros"));
+        list.add(new About(R.drawable.ic_google_play_24px, "Valóranos", "Ayudanos a crecer en PlayStore"));
+        list.add(new About(R.drawable.ic_politicas_24px, "Licencias", "Licencias de terceros"));
+        list.add(new About(R.drawable.ic_favorite_24px, "Donar", "Apoyar nuestro proyecto"));
+        list.add(new About(R.drawable.ic_translate_24px, "Traducir", "Ayudar a traducir la aplicación"));
+        
         // app version
         try {
             String version =
@@ -47,7 +75,7 @@ public class AboutFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        /*
         // twitter
         binding.twitter.setOnClickListener(
                 view -> {
@@ -94,20 +122,13 @@ public class AboutFragment extends Fragment {
                                     Intent.ACTION_VIEW,
                                     Uri.parse("https://explore.transifex.com/applify/simpleapp/")));
                 });
-        listColab = new ArrayList<>();
+        */
+
+        /*
         listColab.add(new Users("Rosanna Moreno", "Colaboradora"));
         listColab.add(new Users("Harold Adan", "Corrección Ortográfica"));
         listColab.add(new Users("Beta tester", "A los usuarios que testean la app"));
-        AdapterAbout adapter = new AdapterAbout(getActivity(), listColab);
-        binding.list.setAdapter(adapter);
-        binding.list.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(
-                            AdapterView<?> arg0, View arg1, int position, long arg3) {
-                        onClick(position);
-                    }
-                });
+        */
 
         return binding.getRoot();
     }
@@ -146,7 +167,7 @@ public class AboutFragment extends Fragment {
             if (view == null) {
                 LayoutInflater inflater =
                         (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = inflater.inflate(R.layout.list_item_layout, parent, false);
+                view = inflater.inflate(R.layout.layout_about_list_items, parent, false);
             }
             Users item = list.get(position);
             TextView text = (TextView) view.findViewById(R.id.text_list);
@@ -154,14 +175,20 @@ public class AboutFragment extends Fragment {
 
             TextView descrip = (TextView) view.findViewById(R.id.text_descrip);
             descrip.setText(item.getDescription());
+
+            ImageView icon = (ImageView) view.findViewById(R.id.image_icon);
+            icon.setImageResource(item.getIcon());
+
             return view;
         }
     }
 
     private static class Users {
         private String name, descrip;
+        private int icon;
 
-        public Users(String name, String descrip) {
+        public Users(int icon, String name, String descrip) {
+            this.icon = icon;
             this.name = name;
             this.descrip = descrip;
         }
@@ -173,8 +200,12 @@ public class AboutFragment extends Fragment {
         public String getDescription() {
             return descrip;
         }
-    }
 
+        public int getIcon() {
+            return icon;
+        }
+    }
+    /*
     private void bottomSheetDonate() {
         BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
         dialog.setContentView(R.layout.layout_bottom_sheet_donate);
@@ -271,4 +302,5 @@ public class AboutFragment extends Fragment {
         list.setAdapter(adapter);
         dialog.show();
     }
+    */
 }

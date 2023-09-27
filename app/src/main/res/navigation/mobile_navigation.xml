@@ -6,6 +6,7 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_home">
 
+    <!-- BottomNavigationView -->
     <fragment
         android:id="@+id/nav_home"
         android:name="com.arr.simple.ui.home.HomeFragment"
@@ -19,6 +20,50 @@
             app:exitAnim="@animator/nav_default_enter_anim" />
     </fragment>
 
+    <fragment
+        android:id="@+id/nav_balance"
+        android:name="com.arr.simple.ui.balances.BalancesFragment"
+        android:label="@string/title_balances"
+        tools:layout="@layout/fragment_balances" />
+
+    <fragment
+        android:id="@+id/nav_compras"
+        android:name="com.arr.simple.ui.compras.ComprasFragment"
+        android:label="@string/title_compras"
+        tools:layout="@layout/fragment_compras" />
+
+    <fragment
+        android:id="@+id/nav_llamadas"
+        android:name="com.arr.simple.ui.llamadas.LlamadasFragment"
+        android:label="@string/title_llamadas"
+        tools:layout="@layout/fragment_compras" />
+
+    <fragment
+        android:id="@+id/nav_nauta"
+        android:name="com.arr.simple.ui.nauta.NautaFragment"
+        android:label="@string/title_nauta"
+        tools:layout="@layout/fragment_nauta" />
+
+    <!-- Nauta -->
+    <fragment
+        android:id="@+id/nav_info_nauta"
+        android:name="com.arr.simple.ui.nauta.portal.InfoFragment"
+        android:label="@string/portal_title"
+        tools:layout="@layout/fragment_info_portal" />
+
+    <fragment
+        android:id="@+id/nav_conectado"
+        android:name="com.arr.simple.ui.nauta.login.ConectedFragment"
+        android:label="Conectado..."
+        tools:layout="@layout/fragment_conected_login" />
+
+    <fragment
+        android:id="@+id/nav_correo"
+        android:name="com.arr.simple.ui.nauta.correo.ClearFragments"
+        android:label="Correos"
+        tools:layout="@layout/fragment_mail" />
+
+    <!-- Settings -->
     <fragment
         android:id="@+id/nav_settings"
         android:name="com.arr.simple.ui.settings.SettingsFragment"
@@ -36,23 +81,6 @@
         android:label="Balances"
         tools:layout="@layout/fragment_settings" />
 
-    <fragment
-        android:id="@+id/nav_balance"
-        android:name="com.arr.simple.ui.balances.BalancesFragment"
-        android:label="@string/title_balances"
-        tools:layout="@layout/fragment_balances" />
-
-    <fragment
-        android:id="@+id/nav_compras"
-        android:name="com.arr.simple.ui.compras.ComprasFragment"
-        android:label="@string/title_compras"
-        tools:layout="@layout/fragment_compras" />
-
-    <fragment
-        android:id="@+id/nav_nauta"
-        android:name="com.arr.simple.ui.nauta.NautaFragment"
-        android:label="Nauta"
-        tools:layout="@layout/fragment_compras" />
 
     <fragment
         android:id="@+id/nav_security"
@@ -66,11 +94,6 @@
         android:label="SIM"
         tools:layout="@layout/fragment_settings" />
 
-    <fragment
-        android:id="@+id/nav_llamadas"
-        android:name="com.arr.simple.ui.llamadas.LlamadasFragment"
-        android:label="Llamadas"
-        tools:layout="@layout/fragment_compras" />
 
     <fragment
         android:id="@+id/nav_perfil"
@@ -78,11 +101,6 @@
         android:label="Tú"
         tools:layout="@layout/fragment_perfil" />
 
-    <fragment
-        android:id="@+id/nav_correo"
-        android:name="com.arr.simple.ui.nauta.correo.ClearMailFragment"
-        android:label="Correos"
-        tools:layout="@layout/fragment_mail" />
 
     <fragment
         android:id="@+id/nav_servicios"
@@ -90,17 +108,6 @@
         android:label="Servicios"
         tools:layout="@layout/fragment_compras" />
 
-    <fragment
-        android:id="@+id/nav_info_nauta"
-        android:name="com.arr.simple.ui.nauta.InfoFragment"
-        android:label="Portal Usuario"
-        tools:layout="@layout/fragment_info_portal" />
-
-    <fragment
-        android:id="@+id/nav_conectado"
-        android:name="com.arr.simple.ui.nauta.ConectadoFragment"
-        android:label="OnLine"
-        tools:layout="@layout/fragment_conectado" />
 
     <fragment
         android:id="@+id/nav_about"

@@ -60,7 +60,18 @@ public class BalancesPreference extends Fragment {
             M3ListPreference update = findPreference("update_balances");
             update.setOnPreferenceChangeListener(
                     (preference, newValue) -> {
-                        update(newValue);
+                        if (newValue.equals("0")) {
+                            stopAlarm();
+                        } else if (newValue.equals("1")) {
+                            long time = 60 * 60 * 1000; // actualiza cada 1 hora
+                            setAlarm(time);
+                        } else if (newValue.equals("2")) {
+                            long time = 12 * 60 * 60 * 1000; // actualiza cada 12 hora
+                            setAlarm(time);
+                        } else if (newValue.equals("3")) {
+                            long time = 60 * 60 * 60 * 1000; // actualiza cada 24 hora
+                            setAlarm(time);
+                        }
                         return true;
                     });
 
@@ -106,74 +117,69 @@ public class BalancesPreference extends Fragment {
                         }
                         return true;
                     });
-                        
-        // TODO: Notificación con informacion de los datos y vencimiento
-        M3SwitchPreference notifi = findPreference("balance_notif");
+
+            // TODO: Notificación con informacion de los datos y vencimiento
+            M3SwitchPreference notifi = findPreference("balance_notif");
             notifi.setOnPreferenceChangeListener(
                     (preference, newValue) -> {
                         boolean isCheck = (Boolean) newValue;
                         if (isCheck) {
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S_V2) {
                                 if (ContextCompat.checkSelfPermission(
-                                                getActivity(), Manifest.permission.POST_NOTIFICATIONS)
+                                                getActivity(),
+                                                Manifest.permission.POST_NOTIFICATIONS)
                                         != PackageManager.PERMISSION_GRANTED) {
                                     ActivityCompat.requestPermissions(
                                             getActivity(),
                                             new String[] {Manifest.permission.POST_NOTIFICATIONS},
                                             60);
                                     return false;
-                                }else{
-                                requireActivity().sendBroadcast(new Intent(getActivity(), NotificationBalances.class));
-                                return true;
+                                } else {
+                                    requireActivity()
+                                            .sendBroadcast(
+                                                    new Intent(
+                                                            getActivity(),
+                                                            NotificationBalances.class));
+                                    return true;
                                 }
                             }
-                        requireActivity().sendBroadcast(new Intent(getActivity(), NotificationBalances.class));                    
-                        }else{
-                       NotificationManagerCompat manager = NotificationManagerCompat.from(getActivity());
-                       manager.cancel(22);
+                            requireActivity()
+                                    .sendBroadcast(
+                                            new Intent(getActivity(), NotificationBalances.class));
+                        } else {
+                            NotificationManagerCompat manager =
+                                    NotificationManagerCompat.from(getActivity());
+                            manager.cancel(22);
                         }
                         return true;
                     });
         }
 
-        private void update(Object newValue) {
+        // iniciar alarma
+        private void setAlarm(long time) {
             AlarmManager manager =
                     (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-            if (newValue.equals("0")) {
-                int flag = 0;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    flag |= PendingIntent.FLAG_IMMUTABLE;
-                }
-                PendingIntent pending =
-                        PendingIntent.getBroadcast(
-                                getContext(),
-                                0,
-                                new Intent(getActivity(), UpdateBalances.class),
-                                flag);
-                manager.cancel(pending);
-            } else if (newValue.equals("1")) {
-                Intent intent = new Intent(getActivity(), UpdateBalances.class);
-                intent.setAction("com.arr.simple.ACTION_UPDATE_BALANCES");
-                int flag = 0;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    flag |= PendingIntent.FLAG_IMMUTABLE;
-                }
-                PendingIntent pending = PendingIntent.getBroadcast(getContext(), 0, intent, flag);
-                long time = 60 * 60 * 1000;
-                manager.setRepeating(
-                        AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + time, time, pending);
-            } else if (newValue.equals("2")) {
-                Intent intent = new Intent(getActivity(), UpdateBalances.class);
-                intent.setAction("com.arr.simple.ACTION_UPDATE_BALANCES");
-                int flag = 0;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                    flag |= PendingIntent.FLAG_IMMUTABLE;
-                }
-                PendingIntent pending = PendingIntent.getBroadcast(getContext(), 0, intent, flag);
-                long time = 60 * 60 * 60 * 1000;
-                manager.setRepeating(
-                        AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + time, time, pending);
+            Intent intent = new Intent(getActivity(), UpdateBalances.class);
+            int flag = 0;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                flag |= PendingIntent.FLAG_IMMUTABLE;
             }
+            PendingIntent pending = PendingIntent.getBroadcast(getContext(), 0, intent, flag);
+            manager.setRepeating(
+                    AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + time, time, pending);
+        }
+
+        private void stopAlarm() {
+            AlarmManager manager =
+                    (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+            int flag = 0;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                flag |= PendingIntent.FLAG_IMMUTABLE;
+            }
+            PendingIntent pending =
+                    PendingIntent.getBroadcast(
+                            getContext(), 0, new Intent(getActivity(), UpdateBalances.class), flag);
+            manager.cancel(pending);
         }
     }
 }

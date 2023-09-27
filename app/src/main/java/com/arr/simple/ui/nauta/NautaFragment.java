@@ -4,23 +4,27 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import com.arr.simple.R;
 import androidx.viewpager2.widget.ViewPager2;
 import com.arr.simple.adapter.TabAdapter;
-import com.arr.simple.databinding.FragmentComprasBinding;
+import com.arr.simple.databinding.FragmentNautaBinding;
+import com.arr.simple.ui.nauta.login.LoginFragment;
+import com.arr.simple.ui.nauta.portal.PortalFragment;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class NautaFragment extends Fragment {
 
-    private FragmentComprasBinding binding;
+    private FragmentNautaBinding binding;
 
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            @NonNull ViewGroup parent,
-            Bundle savedInstanceState) {
-        binding = FragmentComprasBinding.inflate(inflater, parent, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle arg2) {
+        binding = FragmentNautaBinding.inflate(inflater, parent, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle arg1) {
+        super.onViewCreated(view, arg1);
 
         TabAdapter adapter = new TabAdapter(getChildFragmentManager(), getLifecycle());
         adapter.addFragment(new LoginFragment());
@@ -35,15 +39,22 @@ public class NautaFragment extends Fragment {
                         (tab, position) -> {
                             switch (position) {
                                 case 0:
-                                    tab.setText(getString(R.string.nauta_login));
+                                    tab.setText("Planes");
                                     break;
                                 case 1:
-                                    tab.setText(getString(R.string.nauta_portal));
+                                    tab.setText("Paquetes");
+                                    break;
+                                case 2:
+                                    tab.setText("Amigo");
                                     break;
                             }
                         });
         mediator.attach();
+    }
 
-        return binding.getRoot();
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

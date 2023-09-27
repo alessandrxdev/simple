@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:id="@+id/coordinator">
+
+    <com.airbnb.lottie.LottieAnimationView
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent"
+         app:lottie_rawRes="@raw/animation_wifi_check"
+         android:layout_above="@+id/info"
+         android:layout_margin="16dp"
+         android:layout_alignParentTop="true"
+         android:id="@+id/animationView"
+         app:lottie_autoPlay="true"
+         app:lottie_loop="false" />
+
+    <com.google.android.material.card.MaterialCardView
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent"
+         android:layout_centerVertical="true"
+         android:layout_margin="16dp"
+         android:layout_centerHorizontal="true"
+         android:id="@+id/info">
+
+        <LinearLayout
+             android:layout_height="match_parent"
+             android:layout_width="match_parent"
+             android:gravity="center"
+             android:layout_margin="10dp"
+             android:orientation="vertical">
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:textAppearance="?textAppearanceHeadlineMedium"
+                 android:textColor="@color/colorError"
+                 android:id="@+id/text_time"
+                 android:text="00:00:00" />
+
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:textAppearance="?textAppearanceBodySmall"
+                 android:id="@+id/text_account"
+                 android:text="usuario@nauta.com.cu" />
+
+            <LinearLayout
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 android:gravity="center_vertical"
+                 android:layout_margin="10dp">
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:gravity="center_horizontal"
+                     android:textAppearance="?textAppearanceBodySmall"
+                     android:layout_weight="1.0"
+                     android:id="@+id/text_saldo"
+                     android:text="0.00 CUP" />
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:gravity="center_horizontal"
+                     android:textAppearance="?textAppearanceBodySmall"
+                     android:layout_weight="1.0"
+                     android:id="@+id/text_status"
+                     android:text="activa" />
+
+            </LinearLayout>
+
+            <Button
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:layout_margin="16dp"
+                 style="@style/Widget.Material3.Button.ElevatedButton"
+                 android:id="@+id/button_disconect"
+                 android:text="Desconectar" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

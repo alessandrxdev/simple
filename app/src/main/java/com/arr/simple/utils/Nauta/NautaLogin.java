@@ -292,23 +292,7 @@ public class NautaLogin {
             @Override
             protected void onPostExecute(Long millisecods) {
                 if (millisecods != null) {
-                    new CountDownTimer(millisecods, 1000) {
-                        public void onTick(long millisUntilFinished) {
-                            int h = (int) (millisUntilFinished / 3600000);
-                            int m = (int) (millisUntilFinished - h * 3600000) / 60000;
-                            int s = (int) (millisUntilFinished - h * 3600000 - m * 60000) / 1000;
-                            String hh = h < 10 ? "0" + h : String.valueOf(h);
-                            String mm = m < 10 ? "0" + m : String.valueOf(m);
-                            String ss = s < 10 ? "0" + s : String.valueOf(s);
-                            formattedTime = String.format("%s:%s:%s", hh, mm, ss);
-                            text.setText(formattedTime);
-                        }
-
-                        public void onFinish() {
-                            formattedTime = "00:00:00";
-                            text.setText(formattedTime);
-                        }
-                    }.start();
+                    
                 }
             }
         }.execute();
@@ -358,6 +342,7 @@ public class NautaLogin {
         NavController nav =
                 Navigation.findNavController(
                         ((Activity) mContext), R.id.nav_host_fragment_content_main);
+        
         nav.navigate(id, null, new NavOptions.Builder().setLaunchSingleTop(true).build());
     }
 
