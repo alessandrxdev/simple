@@ -194,7 +194,7 @@ public class BalancesFragment extends Fragment {
                 updateHora();
             }
             boolean isCheck = spBalance.getBoolean("vence", true);
-            if (!isCheck) {
+            if (isCheck) {
                 String datos = response.getVenceData();
                 String days = calculateDays(datos);
                 addReminding(days);
@@ -202,7 +202,7 @@ public class BalancesFragment extends Fragment {
                         
            // actualizar notificación
             boolean isNotifi = spBalance.getBoolean("balance_notif", true);
-            if(!isNotifi){
+            if(isNotifi){
                 Intent broadcast = new Intent(getActivity(), NotificationBalances.class);
                 getActivity().sendBroadcast(broadcast);
             }
@@ -241,7 +241,7 @@ public class BalancesFragment extends Fragment {
 
     private void updateLinearProgress(int dias, LinearProgressIndicator progress) {
         int rest = (int) ((dias / (float) 30) * 100);
-        progress.setMax(100);
+        progress.setMax(100);l
         progress.setProgress(rest);
     }
 

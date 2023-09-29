@@ -269,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
         }
                 
         boolean isNotifi = spFloating.getBoolean("balance_notif", true);
-        if(!isNotifi){
+        if(isNotifi){
             Intent broadcast = new Intent(this, NotificationBalances.class);
             sendBroadcast(broadcast);
         }

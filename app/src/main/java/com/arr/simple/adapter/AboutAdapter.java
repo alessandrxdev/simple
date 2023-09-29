@@ -16,10 +16,13 @@ public class AboutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private Context mContext;
     private List<Items> list;
+    private final OnItemClickListener onItemClickListener;
 
-    public AboutAdapter(Context context, List<Items> list) {
+    public AboutAdapter(
+            Context context, List<Items> list, OnItemClickListener onItemClickListener) {
         this.mContext = context;
         this.list = list;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
@@ -47,7 +50,7 @@ public class AboutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             about.binding.imageIcon.setImageResource(gridModel.getIcon());
             about.binding.textList.setText(gridModel.getName());
             about.binding.textDescrip.setText(gridModel.getDescription());
-
+            about.binding.card.setOnClickListener(v -> onItemClickListener.onItemClick(position));
         } else if (holder instanceof vHeader) {
             Header headerModel = (Header) list.get(position);
             vHeader header = (vHeader) holder;
@@ -58,6 +61,10 @@ public class AboutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
     }
 
     static class vAbout extends RecyclerView.ViewHolder {
