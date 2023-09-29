@@ -119,11 +119,14 @@ public class PerfilFragment extends Fragment {
     }
 
     private void loadImage() {
+       /*
         didi.load();
         didi.setDirectoryName("Profile");
         didi.setError(R.drawable.ic_account_circle_24px);
         didi.setRounded(true);
         didi.setImage(binding.imageProfile);
+*/
+        new Didi(getContext()).load().setDirectoryName("Profile").setRounded(true).setImage(binding.imageProfile);
     }
 
     private void add_photo() {

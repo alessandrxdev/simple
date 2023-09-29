@@ -1,5 +1,6 @@
 package com.arr.simple.broadcast;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -7,12 +8,15 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.preference.PreferenceManager;
@@ -20,6 +24,7 @@ import androidx.preference.PreferenceManager;
 import com.arr.simple.R;
 
 import com.arr.ussd.utils.UssdUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,7 +33,7 @@ import java.util.Locale;
 public class UpdateBalances extends BroadcastReceiver {
 
     private final String[] ussdCodes = {
-        "*222#", "*222*328#", "*222*266#", "*222*767#", "*222*869#"
+            "*222#", "*222*328#", "*222*266#", "*222*767#", "*222*869#"
     };
     private final String[] ussdKeys = {"saldo", "datos", "bonos", "sms", "min"};
     private SharedPreferences spBalance;
@@ -50,7 +55,9 @@ public class UpdateBalances extends BroadcastReceiver {
         SIM = spBalance.getString("sim", "0");
 
         // ussd
-        ussd = new UssdUtils(context);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            ussd = new UssdUtils(context);
+        }
         Handler handler = new Handler(Looper.getMainLooper());
         executeUssdRequest(handler, 0);
 
@@ -75,21 +82,26 @@ public class UpdateBalances extends BroadcastReceiver {
             if (!isChecked) {
                 createNotification(mContext, "Balances", "¡Se han actualizado sus balances!");
             }
-                        
-           // actualizar notificación
+
+            // actualizar notificación
             boolean isNotifi = spBalance.getBoolean("balance_notif", true);
-            if(!isNotifi){
-                Intent broadcast = new Intent(((Activity)mContext), NotificationBalances.class);
+            if (!isNotifi) {
+                Intent broadcast = new Intent(((Activity) mContext), NotificationBalances.class);
                 mContext.sendBroadcast(broadcast);
             }
             return;
         }
         String ussdCode = ussdCodes[index];
         String ussdKey = ussdKeys[index];
-        ussd.execute(Integer.parseInt(SIM), ussdCode, ussdKey);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            ussd.execute(Integer.parseInt(SIM), ussdCode, ussdKey);
+        }
         handler.postDelayed(
                 () -> {
-                    String response = ussd.response(ussdKey);
+                    String response = null;
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                        response = ussd.response(ussdKey);
+                    }
                     if (!response.isEmpty()) {
                         executeUssdRequest(handler, index + 1);
                     } else {
@@ -130,6 +142,16 @@ public class UpdateBalances extends BroadcastReceiver {
 
         // Mostrar la notificación
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         notificationManager.notify(0, builder.build());
     }
 }

@@ -45,25 +45,35 @@ public class AboutFragment extends Fragment {
         binding = FragmentAboutAppBinding.inflate(inflater, container, false);
 
         // adapter
-        adapter = new AboutAdapter(requireContext(), list);
+        adapter =
+                new AboutAdapter(
+                        requireContext(),
+                        list,
+                        position -> {
+                            onClick(position);
+                        });
         binding.recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.recycler.setAdapter(adapter);
 
         // list
-        list.add(new Header("Redes"));
-        list.add(new About(R.drawable.ic_twitter_24px, "Twitter", "@applify"));
-        list.add(new About(R.drawable.ic_telegram_24px, "Telegram", "@applify"));
-        list.add(new About(R.drawable.ic_github_24px, "Github", "@applify"));
-        list.add(new Header("Colaboradores"));
-        list.add(new About(R.drawable.logo_roclahay, "Rosanna", "Colaboradora"));
+        list.add(new Header("Gracias a"));
+        list.add(new About(R.drawable.logo_roclahay, "Rosanna", "Colaboración y Moderación"));
         list.add(new About(R.drawable.ic_account_circle_24px, "Harold Adan", "Ortografía"));
         list.add(new About(R.drawable.ic_account_circle_24px, "Ordiel Victor", "Colaborador"));
         list.add(new Header("Otros"));
-        list.add(new About(R.drawable.ic_google_play_24px, "Valóranos", "Ayudanos a crecer en PlayStore"));
+        list.add(
+                new About(
+                        R.drawable.ic_google_play_24px,
+                        "Valóranos",
+                        "Ayudanos a crecer en PlayStore"));
         list.add(new About(R.drawable.ic_politicas_24px, "Licencias", "Licencias de terceros"));
         list.add(new About(R.drawable.ic_favorite_24px, "Donar", "Apoyar nuestro proyecto"));
-        list.add(new About(R.drawable.ic_translate_24px, "Traducir", "Ayudar a traducir la aplicación"));
-        
+        list.add(
+                new About(
+                        R.drawable.ic_translate_24px,
+                        "Traducir",
+                        "Ayudar a traducir la aplicación"));
+
         // app version
         try {
             String version =
@@ -75,7 +85,7 @@ public class AboutFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        /*
+
         // twitter
         binding.twitter.setOnClickListener(
                 view -> {
@@ -102,44 +112,39 @@ public class AboutFragment extends Fragment {
                                     Uri.parse(getString(R.string.url_telegram))));
                 });
 
-        // donar
-        binding.donate.setOnClickListener(
-                view -> {
-                    bottomSheetDonate();
-                });
-
-        // licencias
-        binding.licencias.setOnClickListener(
-                view -> {
-                    bottomSheetLicencias();
-                });
-
-        // translate
-        binding.traducir.setOnClickListener(
-                view -> {
-                    startActivity(
-                            new Intent(
-                                    Intent.ACTION_VIEW,
-                                    Uri.parse("https://explore.transifex.com/applify/simpleapp/")));
-                });
-        */
-
-        /*
-        listColab.add(new Users("Rosanna Moreno", "Colaboradora"));
-        listColab.add(new Users("Harold Adan", "Corrección Ortográfica"));
-        listColab.add(new Users("Beta tester", "A los usuarios que testean la app"));
-        */
-
         return binding.getRoot();
     }
 
     private void onClick(int position) {
         switch (position) {
-            case 0:
+            case 1:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://lnk.bio/roclahy")));
                 break;
-            case 1:
+            case 2:
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://t.me/haroldadan")));
+                break;
+            case 3:
+                startActivity(
+                        new Intent(
+                                Intent.ACTION_VIEW, Uri.parse("https://github.com/OrdielVictor")));
+                break;
+            case 5:
+                startActivity(
+                        new Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse(
+                                        "https://play.google.com/store/apps/details?id=com.arr.simple")));
+                break;
+            case 6:
+                bottomSheetLicencias();
+                break;
+            case 7:
+                break;
+            case 8:
+                startActivity(
+                        new Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("https://explore.transifex.com/applify/simpleapp/")));
                 break;
         }
     }
@@ -150,12 +155,12 @@ public class AboutFragment extends Fragment {
         binding = null;
     }
 
-    private static class AdapterAbout extends ArrayAdapter<Users> {
+    private static class AdapterAbout extends ArrayAdapter<Data> {
 
         private Context context;
-        private List<Users> list;
+        private List<Data> list;
 
-        public AdapterAbout(Context context, List<Users> list) {
+        public AdapterAbout(Context context, List<Data> list) {
             super(context, 0, list);
             this.context = context;
             this.list = list;
@@ -167,28 +172,24 @@ public class AboutFragment extends Fragment {
             if (view == null) {
                 LayoutInflater inflater =
                         (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = inflater.inflate(R.layout.layout_about_list_items, parent, false);
+                view = inflater.inflate(R.layout.layout_items_list_view, parent, false);
             }
-            Users item = list.get(position);
-            TextView text = (TextView) view.findViewById(R.id.text_list);
+            Data item = list.get(position);
+            TextView text = (TextView) view.findViewById(R.id.text_title);
             text.setText(item.getName());
 
-            TextView descrip = (TextView) view.findViewById(R.id.text_descrip);
+            TextView descrip = (TextView) view.findViewById(R.id.text_subtitle);
             descrip.setText(item.getDescription());
-
-            ImageView icon = (ImageView) view.findViewById(R.id.image_icon);
-            icon.setImageResource(item.getIcon());
 
             return view;
         }
     }
 
-    private static class Users {
-        private String name, descrip;
-        private int icon;
+    private static class Data {
 
-        public Users(int icon, String name, String descrip) {
-            this.icon = icon;
+        private String name, descrip;
+
+        public Data(String name, String descrip) {
             this.name = name;
             this.descrip = descrip;
         }
@@ -200,84 +201,80 @@ public class AboutFragment extends Fragment {
         public String getDescription() {
             return descrip;
         }
-
-        public int getIcon() {
-            return icon;
-        }
     }
     /*
-    private void bottomSheetDonate() {
-        BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
-        dialog.setContentView(R.layout.layout_bottom_sheet_donate);
-        dialog.getWindow()
-                .setNavigationBarColor(SurfaceColors.SURFACE_1.getColor(requireContext()));
+        private void bottomSheetDonate() {
+            BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
+            dialog.setContentView(R.layout.layout_bottom_sheet_donate);
+            dialog.getWindow()
+                    .setNavigationBarColor(SurfaceColors.SURFACE_1.getColor(requireContext()));
 
-        // cup
-        Button cup = (Button) dialog.findViewById(R.id.button_cup);
-        cup.setOnClickListener(
-                view -> {
-                    ClipboardManager clipboardManager =
-                            (ClipboardManager)
-                                    getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clipData = ClipData.newPlainText("", "9205 1299 7946 3446");
-                    PersistableBundle extras = new PersistableBundle();
-                    extras.putBoolean(ClipDescription.EXTRA_IS_SENSITIVE, true);
-                    clipData.getDescription().setExtras(extras);
-                    clipboardManager.setPrimaryClip(clipData);
+            // cup
+            Button cup = (Button) dialog.findViewById(R.id.button_cup);
+            cup.setOnClickListener(
+                    view -> {
+                        ClipboardManager clipboardManager =
+                                (ClipboardManager)
+                                        getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                        ClipData clipData = ClipData.newPlainText("", "9205 1299 7946 3446");
+                        PersistableBundle extras = new PersistableBundle();
+                        extras.putBoolean(ClipDescription.EXTRA_IS_SENSITIVE, true);
+                        clipData.getDescription().setExtras(extras);
+                        clipboardManager.setPrimaryClip(clipData);
 
-                    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-                        Toast.makeText(
-                                        getActivity(),
-                                        "Tarjeta copiada al portapapeles",
-                                        Toast.LENGTH_LONG)
-                                .show();
-                    }
-                });
+                        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
+                            Toast.makeText(
+                                            getActivity(),
+                                            "Tarjeta copiada al portapapeles",
+                                            Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    });
 
-        // cripto
-        Button usdt = (Button) dialog.findViewById(R.id.button_cripto);
-        usdt.setOnClickListener(
-                view -> {
-                    ClipboardManager clipboardManager =
-                            (ClipboardManager)
-                                    getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clipData =
-                            ClipData.newPlainText(
-                                    "", "UQDXmYkjKxZJtZPgTbJvm8CCHei9R4r54Jzo9AChBUd5WNKB");
-                    PersistableBundle extras = new PersistableBundle();
-                    extras.putBoolean(ClipDescription.EXTRA_IS_SENSITIVE, true);
-                    clipData.getDescription().setExtras(extras);
-                    clipboardManager.setPrimaryClip(clipData);
+            // cripto
+            Button usdt = (Button) dialog.findViewById(R.id.button_cripto);
+            usdt.setOnClickListener(
+                    view -> {
+                        ClipboardManager clipboardManager =
+                                (ClipboardManager)
+                                        getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                        ClipData clipData =
+                                ClipData.newPlainText(
+                                        "", "UQDXmYkjKxZJtZPgTbJvm8CCHei9R4r54Jzo9AChBUd5WNKB");
+                        PersistableBundle extras = new PersistableBundle();
+                        extras.putBoolean(ClipDescription.EXTRA_IS_SENSITIVE, true);
+                        clipData.getDescription().setExtras(extras);
+                        clipboardManager.setPrimaryClip(clipData);
 
-                    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
-                        Toast.makeText(
-                                        getActivity(),
-                                        "Dirección de billetera copiada al portapapeles",
-                                        Toast.LENGTH_LONG)
-                                .show();
-                    }
-                });
+                        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
+                            Toast.makeText(
+                                            getActivity(),
+                                            "Dirección de billetera copiada al portapapeles",
+                                            Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    });
 
-        // sqp
-        Button sqp = (Button) dialog.findViewById(R.id.button_sqp);
-        sqp.setOnClickListener(
-                view -> {
-                    startActivity(
-                            new Intent(
-                                    Intent.ACTION_VIEW,
-                                    Uri.parse("https://qvapay.com/payme/alessandro")));
-                });
+            // sqp
+            Button sqp = (Button) dialog.findViewById(R.id.button_sqp);
+            sqp.setOnClickListener(
+                    view -> {
+                        startActivity(
+                                new Intent(
+                                        Intent.ACTION_VIEW,
+                                        Uri.parse("https://qvapay.com/payme/alessandro")));
+                    });
 
-        // saldo
-        Button saldo = (Button) dialog.findViewById(R.id.button_saldo);
-        saldo.setOnClickListener(
-                view -> {
-                    new Call(getActivity()).code("*234*1*54250705" + Uri.encode("#"), "0");
-                });
+            // saldo
+            Button saldo = (Button) dialog.findViewById(R.id.button_saldo);
+            saldo.setOnClickListener(
+                    view -> {
+                        new Call(getActivity()).code("*234*1*54250705" + Uri.encode("#"), "0");
+                    });
 
-        dialog.show();
-    }
-
+            dialog.show();
+        }
+    */
     private void bottomSheetLicencias() {
         BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
         dialog.setContentView(R.layout.layout_bottom_sheet_licencias);
@@ -286,21 +283,59 @@ public class AboutFragment extends Fragment {
 
         // list view
         ListView list = (ListView) dialog.findViewById(R.id.list_view);
-        List<Users> listColab = new ArrayList<>();
-        listColab.add(new Users("Material Components for Android", "Apache 2.0 license"));
-        listColab.add(new Users("Material Design icons by Google", "Apache 2.0 license"));
-        listColab.add(new Users("Glide", "BSD, part MIT and Apache 2.0"));
-        listColab.add(new Users("QRGenerator", "MIT license"));
-        listColab.add(new Users("Pager Dots Indicator", "Apache-2.0 license"));
+        List<Data> listColab = new ArrayList<>();
+        listColab.add(new Data("Material Components for Android", "Apache 2.0 license"));
+        listColab.add(new Data("Material Design icons by Google", "Apache 2.0 license"));
+        listColab.add(new Data("Glide", "BSD, part MIT and Apache 2.0"));
+        listColab.add(new Data("QRGenerator", "MIT license"));
+        listColab.add(new Data("Pager Dots Indicator", "Apache-2.0 license"));
         listColab.add(
-                new Users(
+                new Data(
                         "Shimmer for Android",
                         "BSD License. Meta Platforms, Inc. and affiliates."));
-        listColab.add(new Users("ZXing Android Embedded", "Apache-2.0 license"));
-        listColab.add(new Users("suitetecsa-sdk-kotlin", "MIT license"));
+        listColab.add(new Data("ZXing Android Embedded", "Apache-2.0 license"));
+        listColab.add(new Data("suitetecsa-sdk-kotlin", "MIT license"));
+        listColab.add(new Data("lottie", "Apache License 2.0"));
         AdapterAbout adapter = new AdapterAbout(getActivity(), listColab);
         list.setAdapter(adapter);
+        list.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(
+                            AdapterView<?> arg0, View arg1, int position, long arg3) {
+                        onClickLicense(position);
+                        Toast.makeText(getActivity(), "" + position, Toast.LENGTH_LONG).show();
+                    }
+                });
         dialog.show();
     }
-    */
+
+    private void onClickLicense(int position) {
+        switch (position) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                linkTo("https://github.com/suitetecsa/sdk-kotlin");
+                break;
+            case 8:
+                linkTo("https://lottiefiles.com/es/");
+                break;
+        }
+    }
+
+    private void linkTo(String link) {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link)));
+    }
 }
