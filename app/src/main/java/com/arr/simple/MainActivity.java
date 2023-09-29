@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     private NavController navController;
     private DrawerLayout drawer;
     private ActivityMainBinding binding;
-    private NavRailHeaderBinding header;
     private String code = "";
 
     @SuppressLint("SetTextI18n")
@@ -94,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     if (id == R.id.nav_telepuntos) {
                         openGoogleMap();
-                      //  startActivity(new Intent(this, Test.class));
+                        //  startActivity(new Intent(this, Test.class));
                     }
                     if (id == R.id.nav_settings) {
                         navController.navigate(id, null);
@@ -116,7 +115,8 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO: Acceder a escanear QR con numero de móvil
         View view = railView.getHeaderView();
-        header = NavRailHeaderBinding.bind(view);
+        assert view != null;
+        com.arr.simple.databinding.NavRailHeaderBinding header = NavRailHeaderBinding.bind(view);
         header.scanner.setOnClickListener(
                 v -> {
                     ScanOptions scanner = new ScanOptions();
@@ -133,11 +133,11 @@ public class MainActivity extends AppCompatActivity {
         // TODO: menu should be considered as top level destinations.
         mAppBarConfiguration =
                 new AppBarConfiguration.Builder(
-                                R.id.nav_home,
-                                R.id.nav_balance,
-                                R.id.nav_compras,
-                                R.id.nav_llamadas,
-                                R.id.nav_nauta)
+                        R.id.nav_home,
+                        R.id.nav_balance,
+                        R.id.nav_compras,
+                        R.id.nav_llamadas,
+                        R.id.nav_nauta)
                         .setOpenableLayout(drawer)
                         .build();
 
@@ -188,14 +188,15 @@ public class MainActivity extends AppCompatActivity {
                 new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.view_telepuntos))));
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private Drawable loadProfile() {
         Bitmap image = null;
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
-                image  = new Didi(this).load().setDirectoryName("Profile").setRounded(true).getBitmap();
-        }else{
-                if(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_DENIED) {
-                image  = new Didi(this).load().setDirectoryName("Profile").setRounded(true).getBitmap();
-                }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            image = new Didi(this).load().setDirectoryName("Profile").setRounded(true).getBitmap();
+        } else {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_DENIED) {
+                image = new Didi(this).load().setDirectoryName("Profile").setRounded(true).getBitmap();
+            }
         }
         if (image != null) {
             int width = 100;
@@ -251,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
                     new ScanContract(),
                     result -> {
                         if (result.getContents() != null) {
-                            code = result.getContents().toString();
+                            code = result.getContents();
                             if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
                                 binding.drawerLayout.closeDrawer(GravityCompat.START);
                             }
@@ -267,11 +268,13 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, TrafficFloatingWindow.class);
             startService(intent);
         }
-                
-        boolean isNotifi = spFloating.getBoolean("balance_notif", true);
-        if(isNotifi){
-            Intent broadcast = new Intent(this, NotificationBalances.class);
-            sendBroadcast(broadcast);
+        
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            boolean isNotifi = spFloating.getBoolean("balance_notif", true);
+            if (isNotifi) {
+                Intent broadcast = new Intent(this, NotificationBalances.class);
+                sendBroadcast(broadcast);
+            }
         }
     }
 }

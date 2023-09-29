@@ -1,9 +1,12 @@
 package com.arr.simple.ui.balances;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,36 +19,28 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
-import androidx.viewpager.widget.ViewPager;
 
 import com.arr.simple.MainActivity;
 import com.arr.simple.R;
-import com.arr.simple.adapter.BalancesAdapter;
-import com.arr.simple.adapter.SliderAdapter;
 import com.arr.simple.broadcast.NotificationBalances;
 import com.arr.simple.databinding.FragmentBalancesBinding;
-import com.arr.simple.model.Balances;
-import com.arr.simple.model.ItemsSlider;
-
 import com.arr.ussd.ResponseUssd;
 import com.arr.ussd.utils.UssdUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.snackbar.Snackbar;
-import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 @RequiresApi(28)
@@ -54,15 +49,15 @@ public class BalancesFragment extends Fragment {
     private FragmentBalancesBinding binding;
     private UssdUtils ussd;
     private ResponseUssd response;
-    private Handler handlerr;
     private final String[] ussdCodes = {
-        "*222#", "*222*328#", "*222*266#", "*222*767#", "*222*869#"
+            "*222#", "*222*328#", "*222*266#", "*222*767#", "*222*869#"
     };
     private final String[] ussdKeys = {"saldo", "datos", "bonos", "sms", "min"};
     private SharedPreferences spBalance;
     private SharedPreferences.Editor editor;
     private String SIM;
 
+    @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(
@@ -91,7 +86,7 @@ public class BalancesFragment extends Fragment {
 
         // TODO: Update hora
         String updateHora = spBalance.getString("actualizado", "");
-        if (updateHora != null && !updateHora.isEmpty()) {
+        if (!updateHora.isEmpty()) {
             binding.textHoraVencimiento.setText(updateHora);
         } else {
             binding.textHoraVencimiento.setText("sin actualizar");
@@ -172,14 +167,12 @@ public class BalancesFragment extends Fragment {
 
         // error
         if (!response.getError().isEmpty()) {
-            new MaterialAlertDialogBuilder(getActivity())
+            new MaterialAlertDialogBuilder(requireActivity())
                     .setMessage(
                             "Ah ocurrido un error al actualizar algunos de sus balances, por favor vuelva a intentarlo.")
                     .setPositiveButton(
                             "Ok",
-                            (dialog, w) -> {
-                                response.getClearError(getActivity());
-                            })
+                            (dialog, w) -> response.getClearError(getActivity()))
                     .show();
         }
     }
@@ -198,6 +191,7 @@ public class BalancesFragment extends Fragment {
                 String datos = response.getVenceData();
                 String days = calculateDays(datos);
                 addReminding(days);
+<<<<<<< HEAD
             }
                         
            // actualizar notificación
@@ -205,6 +199,15 @@ public class BalancesFragment extends Fragment {
             if(isNotifi){
                 Intent broadcast = new Intent(getActivity(), NotificationBalances.class);
                 getActivity().sendBroadcast(broadcast);
+=======
+            }
+
+            // actualizar notificación
+            boolean isNotifi = spBalance.getBoolean("balance_notif", true);
+            if (isNotifi) {
+                Intent broadcast = new Intent(getActivity(), NotificationBalances.class);
+                requireActivity().sendBroadcast(broadcast);
+>>>>>>> 6a93105cb2592af8ac351d1031a0db9d72e47d3c
             }
             return;
         }
@@ -228,11 +231,6 @@ public class BalancesFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
-    private int diasRestantes(int dias) {
-        return (int) (Math.random() * dias);
-    }
-
     private void updateProgress(int diasRestantes) {
         int progress = (int) ((diasRestantes / (float) 30) * 100);
         binding.progressDatos.setMax(100);
@@ -250,15 +248,15 @@ public class BalancesFragment extends Fragment {
         Date dat = calendar.getTime();
         SimpleDateFormat datFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
         String hActual = datFormat.format(dat);
-        editor.putString("actualizado", "Última actualización: " + hActual.toString());
+        editor.putString("actualizado", "Última actualización: " + hActual);
         editor.apply();
         String hor = spBalance.getString("actualizado", "");
         binding.textHoraVencimiento.setText(hor);
     }
 
     public void showSnackBar(String message, boolean dimissable) {
-        CoordinatorLayout coordinator = ((MainActivity) getActivity()).getCoordinator();
-        BottomNavigationView nav = ((MainActivity) getActivity()).getBottomNavigation();
+        CoordinatorLayout coordinator = ((MainActivity) requireActivity()).getCoordinator();
+        BottomNavigationView nav = ((MainActivity) requireActivity()).getBottomNavigation();
         Snackbar snack = Snackbar.make(coordinator, message, Snackbar.LENGTH_SHORT);
         snack.setAnchorView(nav);
         if (dimissable) {
@@ -282,7 +280,7 @@ public class BalancesFragment extends Fragment {
         Date fechaExacta = calendar.getTime();
 
         // Crea un formato para mostrar la fecha
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
 
         // Convierte la fecha en una cadena formateada
         String fechaFormateada = formatoFecha.format(fechaExacta);
@@ -332,6 +330,16 @@ public class BalancesFragment extends Fragment {
         // Mostrar la notificación
         NotificationManagerCompat notificationManager =
                 NotificationManagerCompat.from(getContext());
+        if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.POST_NOTIFICATIONS)) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         notificationManager.notify(0, builder.build());
     }
 
