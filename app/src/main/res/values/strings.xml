@@ -151,4 +151,6 @@
     <string name="description_view_password">Mostrar contraseña</string>
     <string name="portal_title">Portal Nauta</string>
     <string name="text_empty">Hay campos vacíos</string>
+    <string name="balances">Paquetes</string>
+    <string name="paquetes_proximos_a_vencer">Paquetes proximos a vencer</string>
 </resources>

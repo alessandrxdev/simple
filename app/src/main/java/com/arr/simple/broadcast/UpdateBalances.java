@@ -16,6 +16,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -44,6 +45,7 @@ public class UpdateBalances extends BroadcastReceiver {
     private Context mContext;
     private String SIM;
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     public void onReceive(Context context, Intent intent) {
         mContext = context;
@@ -74,6 +76,7 @@ public class UpdateBalances extends BroadcastReceiver {
         }*/
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     private void executeUssdRequest(Handler handler, int index) {
         if (index >= ussdCodes.length) {
             // Se han realizado todas las consultas
@@ -96,19 +99,19 @@ public class UpdateBalances extends BroadcastReceiver {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             ussd.execute(Integer.parseInt(SIM), ussdCode, ussdKey);
         }
-        handler.postDelayed(
+        /*
+        handler.po stDelayed(
                 () -> {
-                    String response = null;
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
-                        response = ussd.response(ussdKey);
-                    }
-                    if (!response.isEmpty()) {
+                    String response = ussd.response(ussdKey);
+                    if (!response.isBlank()) {
                         executeUssdRequest(handler, index + 1);
                     } else {
                         executeUssdRequest(handler, index);
                     }
                 },
                 5000);
+
+         */
     }
 
     private void updateHora() {

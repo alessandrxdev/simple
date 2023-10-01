@@ -268,12 +268,14 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, TrafficFloatingWindow.class);
             startService(intent);
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      /*
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             boolean isNotifi = spFloating.getBoolean("balance_notif", true);
             if (isNotifi) {
                 Intent broadcast = new Intent(this, NotificationBalances.class);
                 sendBroadcast(broadcast);
             }
-        }
+
+       */
     }
 }

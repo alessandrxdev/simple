@@ -143,5 +143,7 @@
     <string name="hint_numero_preference">Número móvil</string>
     <string name="title_nauta_preference">Nauta</string>
     <string name="summary_nauta_preference">Guardar cuenta de navegación nacional e internacional</string>
+    <string name="balances">Paquetes</string>
+    <string name="paquetes_proximos_a_vencer">Paquetes proximos a vencer</string>
 
 </resources>

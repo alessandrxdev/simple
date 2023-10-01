@@ -114,7 +114,7 @@ public class PerfilFragment extends Fragment {
         didi.saveImageTo(uri)
                 .setRounded(true)
                 .setSize(100, 100)
-                .setDirectoryName("Profile")
+
                 .setImage(binding.imageProfile);
     }
 
@@ -126,7 +126,7 @@ public class PerfilFragment extends Fragment {
         didi.setRounded(true);
         didi.setImage(binding.imageProfile);
 */
-        new Didi(getContext()).load().setDirectoryName("Profile").setRounded(true).setImage(binding.imageProfile);
+        new Didi(getContext()).load().setError(R.drawable.ic_account_circle_24px).setDirectoryName("Profile").setRounded(true).setImage(binding.imageProfile);
     }
 
     private void add_photo() {
