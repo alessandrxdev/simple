@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
     style="@style/Widget.Application.AppWidget.Container"
     android:theme="@style/AppTheme.AppWidgetContainer">
@@ -12,26 +12,26 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:contentDescription="@string/appwidget_text"
-        android:layout_margin="8dp"
-        android:textSize="16sp"
+        android:layout_margin="5dp"
+        android:textSize="15sp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:id="@+id/appwidget_title"
-        android:text="Balances"
+        android:text="@string/title_balances"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:clickable="true"
         android:padding="10dp"
         android:layout_margin="8dp"
-        android:clickable="true"
         style="@style/Widget.Application.AppWidget.InnerView"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:id="@+id/appwidget_sync">
 
         <ImageView
-            android:id="@+id/appwidget_sync"
             android:layout_height="20dp"
             android:layout_width="20dp"
             android:src="@drawable/ic_sync_24px"
@@ -45,7 +45,8 @@
         android:layout_below="@+id/appwidget_title"
         android:padding="2dp"
         android:orientation="vertical"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:id="@+id/content">
 
         <TextView
             android:layout_height="wrap_content"
@@ -54,7 +55,7 @@
             android:drawablePadding="10dp"
             android:drawableLeft="@drawable/ic_voz_20px"
             android:layout_margin="4dp"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:drawableTint="@color/colorPrimary"
             android:id="@+id/appwidget_text_minutos"
             android:text="00.00.00"
@@ -67,7 +68,7 @@
             android:drawablePadding="10dp"
             android:drawableLeft="@drawable/ic_sms_20px"
             android:layout_margin="4dp"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:drawableTint="@color/colorPrimary"
             android:id="@+id/appwidget_text_sms"
             android:text="0 SMS"
@@ -88,7 +89,7 @@
             android:drawablePadding="10dp"
             android:drawableLeft="@drawable/ic_all_data_20px"
             android:layout_margin="4dp"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:drawableTint="@color/colorPrimary"
             android:id="@+id/appwidget_text_paquete"
             android:text="0 MB"
@@ -101,7 +102,7 @@
             android:drawablePadding="10dp"
             android:drawableLeft="@drawable/ic_data_lte_20px"
             android:layout_margin="4dp"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:drawableTint="@color/colorPrimary"
             android:id="@+id/appwidget_text_lte"
             android:text="0 MB LTE"
@@ -114,12 +115,22 @@
             android:drawablePadding="10dp"
             android:drawableLeft="@drawable/ic_calendar_20px"
             android:layout_margin="4dp"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:drawableTint="@color/colorPrimary"
             android:id="@+id/appwidget_text_vence"
             android:text="0 días"
             android:textStyle="normal" />
 
     </LinearLayout>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/content"
+        android:gravity="center_horizontal"
+        android:text="sin actualizar"
+        android:layout_margin="4dp"
+        android:textSize="11dp"
+        android:id="@+id/time_update" />
 
 </RelativeLayout>

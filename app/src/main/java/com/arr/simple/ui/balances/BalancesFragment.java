@@ -166,6 +166,7 @@ public class BalancesFragment extends Fragment {
         }
 
         // error
+        /*
         if (!response.getError().isEmpty()) {
             new MaterialAlertDialogBuilder(requireActivity())
                     .setMessage(
@@ -175,6 +176,7 @@ public class BalancesFragment extends Fragment {
                             (dialog, w) -> response.getClearError(getActivity()))
                     .show();
         }
+        */
     }
 
     private void executeUssdRequest(Handler handler, int index) {
@@ -191,24 +193,15 @@ public class BalancesFragment extends Fragment {
                 String datos = response.getVenceData();
                 String days = calculateDays(datos);
                 addReminding(days);
-<<<<<<< HEAD
+                
             }
-                        
-           // actualizar notificación
-            boolean isNotifi = spBalance.getBoolean("balance_notif", true);
-            if(isNotifi){
-                Intent broadcast = new Intent(getActivity(), NotificationBalances.class);
-                getActivity().sendBroadcast(broadcast);
-=======
-            }
-
             // actualizar notificación
             boolean isNotifi = spBalance.getBoolean("balance_notif", true);
             if (isNotifi) {
                 Intent broadcast = new Intent(getActivity(), NotificationBalances.class);
                 requireActivity().sendBroadcast(broadcast);
->>>>>>> 6a93105cb2592af8ac351d1031a0db9d72e47d3c
             }
+            
             return;
         }
         String ussdCode = ussdCodes[index];
@@ -239,7 +232,7 @@ public class BalancesFragment extends Fragment {
 
     private void updateLinearProgress(int dias, LinearProgressIndicator progress) {
         int rest = (int) ((dias / (float) 30) * 100);
-        progress.setMax(100);l
+        progress.setMax(100);
         progress.setProgress(rest);
     }
 

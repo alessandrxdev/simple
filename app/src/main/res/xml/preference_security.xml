@@ -8,6 +8,12 @@
         app:title="@string/title_confirma" />
 
     <com.arr.preference.M3SwitchPreference
+        app:key="autocomplete"
+        app:icon="@drawable/ic_autocomplete_24px"
+        app:summary="@string/summary_autocomplete"
+        app:title="@string/title_autocomplete" />
+    
+    <com.arr.preference.M3SwitchPreference
         app:key="bloqueo"
         app:icon="@drawable/ic_security_24px"
         app:summary="@string/summary_security"

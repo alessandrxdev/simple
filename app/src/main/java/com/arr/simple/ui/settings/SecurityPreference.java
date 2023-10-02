@@ -47,7 +47,16 @@ public class SecurityPreference extends Fragment {
                         boolean isCheck = (Boolean) newValue;
                         return true;
                     });
-
+            
+            // Rellenado
+            M3SwitchPreference complete = findPreference("autocomplete");
+            complete.setOnPreferenceChangeListener(
+                    (preference, newValue) -> {
+                        boolean isCheck = (Boolean) newValue;
+                        return true;
+                    });
+            
+            // bloqueo
             M3SwitchPreference bloqueo = findPreference("bloqueo");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 // Si la versión de Android es 6.0 o posterior, verifica si el dispositivo tiene un

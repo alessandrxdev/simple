@@ -61,7 +61,7 @@
     <string name="hint_nombre">Nombre</string>
     <string name="hint_numero_welcome">Número</string>
     <string name="title_bienvenido">¡Bienvenido!</string>
-    <string name="subtitle_bienvenido">Antes de comenzar necesitamos complete los siguientes datos para poder brindarle una mejor experiencia con SIMple.</string>
+    <string name="subtitle_bienvenido">Antes de comenzar necesitamos complete los siguientes datos para poder brindarle una mejor experiencia. Sus datos serán almacenados en el dispositivo y nunca serán compartidos.</string>
     <string name="text_snackbarinserte_su_numero_y_su_nombre">¡Inserte su número y nombre!</string>
     <string name="summary_notification_balance">Mostrar el estado de sus balances en las notificaciones</string>
     <string name="title_notification_balance">Notificación</string>
@@ -151,4 +151,10 @@
     <string name="description_view_password">Mostrar contraseña</string>
     <string name="portal_title">Portal Nauta</string>
     <string name="text_empty">Hay campos vacíos</string>
+    <string name="summary_autocomplete">Rellenar automáticamente campos que requieran su usuario y contraseña</string>
+    <string name="title_autocomplete">Rellenado</string>
+    
+    <!--Perfil-->
+    <string name="perfil_title">Perfil</string>
+    
 </resources>

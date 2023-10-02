@@ -101,6 +101,11 @@
         android:label="Tú"
         tools:layout="@layout/fragment_perfil" />
 
+    <fragment
+        android:id="@+id/nav_mails"
+        android:name="com.arr.simple.ui.perfil.AccountsFragment"
+        android:label="Cuentas"
+        tools:layout="@layout/fragment_account" />
 
     <fragment
         android:id="@+id/nav_servicios"
@@ -115,5 +120,11 @@
         android:label="Acerca de"
         tools:layout="@layout/fragment_about" />
 
+    <!-- Perfil -->
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.arr.simple.ui.perfil.ProfileFragment"
+        android:label="@string/perfil_title"
+        tools:layout="@layout/fragment_profile" />
 
 </navigation>

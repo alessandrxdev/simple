@@ -1,6 +1,7 @@
 package com.arr.simple.ui.nauta.login;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -19,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
+import androidx.preference.PreferenceManager;
 import com.arr.simple.App;
 import com.arr.simple.MainActivity;
 import com.arr.simple.R;
@@ -46,6 +48,17 @@ public class LoginFragment extends Fragment {
         // LoginNauta class
         nauta = new LoginNauta(requireActivity());
 
+        // rellenado
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity());
+        boolean isActive = sp.getBoolean("autocomplete", false);
+        if(isActive){
+            binding.editUser.setText(sp.getString("internet", ""));
+            binding.editPassword.setText(sp.getString("passInternet",""));
+        }else{
+            binding.editUser.getText().clear();
+            binding.editPassword.getText().clear();
+        }
+        
         // VPN Activo
         if (isVpnActive()) {
             Toast.makeText(getActivity(), "Desactive su VPN para poder acceder ", Toast.LENGTH_LONG)

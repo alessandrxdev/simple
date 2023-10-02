@@ -1,6 +1,7 @@
 package com.arr.simple.ui.nauta.portal;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.Network;
@@ -21,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
+import androidx.preference.PreferenceManager;
 import com.arr.simple.App;
 import com.arr.simple.MainActivity;
 import com.arr.simple.R;
@@ -52,6 +54,17 @@ public class PortalFragment extends Fragment {
         // LoginNauta class
         nauta = new LoginNauta(requireActivity());
 
+        // rellenado
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity());
+        boolean isActive = sp.getBoolean("autocomplete", false);
+        if(isActive){
+            binding.editUser.setText(sp.getString("internet", ""));
+            binding.editPassword.setText(sp.getString("passInternet",""));
+        }else{
+            binding.editUser.getText().clear();
+            binding.editPassword.getText().clear();
+        }
+        
         // load captcha
         if (isVpnActive()) {
             binding.imageCaptcha.setImageDrawable(
@@ -137,7 +150,7 @@ public class PortalFragment extends Fragment {
 
                     @Override
                     public void handlerException(Exception e) {
-                        Toast.makeText(getActivity(), "" + e, Toast.LENGTH_LONG).show();
+                        Toast.makeText(requireContext(), "" + e, Toast.LENGTH_LONG).show();
                         image.setImageDrawable(getActivity().getDrawable(R.drawable.ic_about_24px));
                     }
                 });

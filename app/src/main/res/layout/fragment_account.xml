@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/coordinator">
+
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            app:lottie_rawRes="@raw/mail_animation"
+            android:layout_above="@+id/content"
+            android:layout_margin="16dp"
+            android:layout_alignParentTop="true"
+            android:id="@+id/animationView"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false" />
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_centerVertical="true"
+            android:layout_margin="16dp"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/content">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:boxCornerRadiusTopEnd="30dp"
+                android:hint="Cuenta de internet"
+                app:boxCornerRadiusBottomStart="30dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:boxCornerRadiusBottomEnd="30dp"
+                style="?attr/textInputFilledStyle"
+                app:boxCornerRadiusTopStart="30dp"
+                app:errorEnabled="true"
+                app:boxStrokeWidth="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:contentDescription="@string/description_nombre_del_usuario"
+                    android:inputType="textEmailAddress"
+                    android:id="@+id/edit_internet" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:boxCornerRadiusTopEnd="30dp"
+                android:hint="Contraseña"
+                app:passwordToggleEnabled="true"
+                app:boxCornerRadiusBottomStart="30dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:boxCornerRadiusBottomEnd="30dp"
+                style="?attr/textInputFilledStyle"
+                app:boxCornerRadiusTopStart="30dp"
+                app:errorEnabled="true"
+                app:boxStrokeWidth="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:contentDescription="@string/description_nombre_del_usuario"
+                    android:inputType="textPassword"
+                    android:id="@+id/edit_passord_internet" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:boxCornerRadiusTopEnd="30dp"
+                android:hint="Correo nauta"
+                app:boxCornerRadiusBottomStart="30dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:boxCornerRadiusBottomEnd="30dp"
+                style="?attr/textInputFilledStyle"
+                app:boxCornerRadiusTopStart="30dp"
+                app:errorEnabled="true"
+                app:boxStrokeWidth="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:contentDescription="@string/description_nombre_del_usuario"
+                    android:inputType="textEmailAddress"
+                    android:id="@+id/edit_correo" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:boxCornerRadiusTopEnd="30dp"
+                android:hint="Contraseña"
+                app:passwordToggleEnabled="true"
+                app:boxCornerRadiusBottomStart="30dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:boxCornerRadiusBottomEnd="30dp"
+                style="?attr/textInputFilledStyle"
+                app:boxCornerRadiusTopStart="30dp"
+                app:errorEnabled="true"
+                app:boxStrokeWidth="0dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:contentDescription="@string/description_nombre_del_usuario"
+                    android:inputType="textPassword"
+                    android:id="@+id/edit_passord_correo" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

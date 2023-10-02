@@ -50,7 +50,7 @@
                 android:resource="@xml/balances_widget_info" />
         </receiver>
         <receiver
-            android:name=".broadcast.UpdateBalances"
+            android:name=".broadcast.BalancesBroadcast"
             android:exported="true"
             android:enabled="true">
             <intent-filter>

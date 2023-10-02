@@ -35,6 +35,7 @@ import com.arr.simple.log.CrashActivity;
 import com.arr.simple.services.TrafficFloatingWindow;
 import com.arr.simple.utils.Greeting.GreetingUtils;
 import com.arr.simple.utils.Scanner.CustomScanner;
+import com.arr.simple.utils.profile.ImageUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.elevation.SurfaceColors;
 import com.google.android.material.navigation.NavigationView;
@@ -61,9 +62,7 @@ public class MainActivity extends AppCompatActivity {
         // TODO: Quitar el foco de los TextInputEditText al entrar a una Activity o Fragment
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        new BugSend(this)
-                .setLaunchActivity(CrashActivity.class)
-                .show();
+        new BugSend(this).setLaunchActivity(CrashActivity.class).show();
 
         // TODO:StatusBarColor
         getWindow().setStatusBarColor(SurfaceColors.SURFACE_0.getColor(this));
@@ -133,11 +132,11 @@ public class MainActivity extends AppCompatActivity {
         // TODO: menu should be considered as top level destinations.
         mAppBarConfiguration =
                 new AppBarConfiguration.Builder(
-                        R.id.nav_home,
-                        R.id.nav_balance,
-                        R.id.nav_compras,
-                        R.id.nav_llamadas,
-                        R.id.nav_nauta)
+                                R.id.nav_home,
+                                R.id.nav_balance,
+                                R.id.nav_compras,
+                                R.id.nav_llamadas,
+                                R.id.nav_nauta)
                         .setOpenableLayout(drawer)
                         .build();
 
@@ -161,7 +160,8 @@ public class MainActivity extends AppCompatActivity {
                             || id == R.id.nav_servicios
                             || id == R.id.nav_info_nauta
                             || id == R.id.nav_conectado
-                            || id == R.id.nav_about) {
+                            || id == R.id.nav_about
+                            || id == R.id.nav_mails) {
                         binding.appBarMain.contentToolbar.setVisibility(View.GONE);
                         getWindow().setNavigationBarColor(SurfaceColors.SURFACE_0.getColor(this));
                         binding.appBarMain.bottomNavigation.setVisibility(View.GONE);
@@ -192,10 +192,11 @@ public class MainActivity extends AppCompatActivity {
     private Drawable loadProfile() {
         Bitmap image = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            image = new Didi(this).load().setDirectoryName("Profile").setRounded(true).getBitmap();
+            image = new ImageUtils(this).setRounded(true).getSavedImage();
         } else {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_DENIED) {
-                image = new Didi(this).load().setDirectoryName("Profile").setRounded(true).getBitmap();
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_DENIED) {
+                image = new ImageUtils(this).setRounded(true).getSavedImage();
             }
         }
         if (image != null) {
@@ -268,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, TrafficFloatingWindow.class);
             startService(intent);
         }
-        
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             boolean isNotifi = spFloating.getBoolean("balance_notif", true);
             if (isNotifi) {

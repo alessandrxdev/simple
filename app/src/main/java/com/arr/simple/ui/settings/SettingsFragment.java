@@ -29,6 +29,7 @@ import com.arr.preference.WaPerfilPreference;
 import com.arr.simple.R;
 import com.arr.simple.databinding.FragmentSettingsBinding;
 
+import com.arr.simple.utils.profile.ImageUtils;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.elevation.SurfaceColors;
 import com.google.android.material.transition.platform.MaterialSharedAxis;
@@ -86,11 +87,7 @@ public class SettingsFragment extends Fragment {
                 perfil.setSummary(getNumero());
             }
 
-            Bitmap bitmap =
-                    new Didi(requireContext())
-                            .setDirectoryName("Profile")
-                            .setRounded(true)
-                            .getBitmap();
+            Bitmap bitmap = new ImageUtils(requireActivity()).setRounded(true).getSavedImage();
             if (bitmap != null) {
                 perfil.setIconBitmap(bitmap);
             } else {
@@ -115,7 +112,7 @@ public class SettingsFragment extends Fragment {
             perfil.setOnPreferenceClickListener(
                     (preference) -> {
                         nav.navigate(
-                                R.id.nav_perfil,
+                                R.id.nav_profile,
                                 null,
                                 new NavOptions.Builder().setLaunchSingleTop(true).build());
                         return true;

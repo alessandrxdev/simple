@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 import com.arr.simple.adapter.TabAdapter;
+import com.arr.simple.R;
 import com.arr.simple.databinding.FragmentNautaBinding;
 import com.arr.simple.ui.nauta.login.LoginFragment;
 import com.arr.simple.ui.nauta.portal.PortalFragment;
@@ -39,13 +40,10 @@ public class NautaFragment extends Fragment {
                         (tab, position) -> {
                             switch (position) {
                                 case 0:
-                                    tab.setText("Planes");
+                                    tab.setText(getString(R.string.nauta_login));
                                     break;
                                 case 1:
-                                    tab.setText("Paquetes");
-                                    break;
-                                case 2:
-                                    tab.setText("Amigo");
+                                    tab.setText(getString(R.string.nauta_portal));
                                     break;
                             }
                         });

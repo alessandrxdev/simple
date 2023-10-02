@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import android.util.Log;
+import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
@@ -23,6 +25,7 @@ import androidx.preference.PreferenceManager;
 
 import com.arr.simple.R;
 
+import com.arr.ussd.ResponseUssd;
 import com.arr.ussd.utils.UssdUtils;
 
 import java.text.SimpleDateFormat;
@@ -33,12 +36,13 @@ import java.util.Locale;
 public class UpdateBalances extends BroadcastReceiver {
 
     private final String[] ussdCodes = {
-            "*222#", "*222*328#", "*222*266#", "*222*767#", "*222*869#"
+        "*222#", "*222*328#", "*222*266#", "*222*767#", "*222*869#"
     };
     private final String[] ussdKeys = {"saldo", "datos", "bonos", "sms", "min"};
     private SharedPreferences spBalance;
     private SharedPreferences.Editor editor;
     private UssdUtils ussd;
+    private ResponseUssd response;
     private static final String CHANNEL_ID = "Balances";
     private static final String CHANNEL = "Update balances";
     private Context mContext;
@@ -46,7 +50,7 @@ public class UpdateBalances extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        mContext = context;
+        this.mContext = context;
         Log.e("Update", "onRecive called");
 
         // TODO: SharedPreferences
@@ -57,21 +61,35 @@ public class UpdateBalances extends BroadcastReceiver {
         // ussd
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             ussd = new UssdUtils(context);
+            response = new ResponseUssd(ussd);
         }
         Handler handler = new Handler(Looper.getMainLooper());
         executeUssdRequest(handler, 0);
 
-        /*
-        String spTime = spBalance.getString("update_balances", "0");
-        int time = Integer.parseInt(spTime);
+        // actualizar widget
+        Handler mHandler = new Handler(Looper.getMainLooper());
+        mHandler.post(
+                () -> {
+                    AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+                    int[] appWidgetIds =
+                            intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
+                    for (int appWidgetId : appWidgetIds) {
+                        // Actualizar la vista del saldo del paquete
+                        RemoteViews views =
+                                new RemoteViews(context.getPackageName(), R.layout.balances_widget);
+                        views.setTextViewText(R.id.appwidget_text_paquete, response.getDataAll());
+                        appWidgetManager.updateAppWidget(appWidgetId, views);
+                    }
+                });
+    }
 
-        if (time == 1) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            executeUssdRequest(handler, 0);
-        } else if (time == 2) {
-            Handler handler = new Handler(Looper.getMainLooper());
-            executeUssdRequest(handler, 0);
-        }*/
+    private void updateNotificationBalances() {
+        // actualizar notificación
+        boolean isNotifi = spBalance.getBoolean("balance_notif", true);
+        if (!isNotifi) {
+            Intent broadcast = new Intent(mContext, NotificationBalances.class);
+            mContext.sendBroadcast(broadcast);
+        }
     }
 
     private void executeUssdRequest(Handler handler, int index) {
@@ -83,12 +101,7 @@ public class UpdateBalances extends BroadcastReceiver {
                 createNotification(mContext, "Balances", "¡Se han actualizado sus balances!");
             }
 
-            // actualizar notificación
-            boolean isNotifi = spBalance.getBoolean("balance_notif", true);
-            if (!isNotifi) {
-                Intent broadcast = new Intent(((Activity) mContext), NotificationBalances.class);
-                mContext.sendBroadcast(broadcast);
-            }
+            updateNotificationBalances();
             return;
         }
         String ussdCode = ussdCodes[index];
@@ -142,7 +155,8 @@ public class UpdateBalances extends BroadcastReceiver {
 
         // Mostrar la notificación
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
