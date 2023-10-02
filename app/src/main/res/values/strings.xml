@@ -151,10 +151,15 @@
     <string name="description_view_password">Mostrar contraseña</string>
     <string name="portal_title">Portal Nauta</string>
     <string name="text_empty">Hay campos vacíos</string>
+<<<<<<< HEAD
     <string name="summary_autocomplete">Rellenar automáticamente campos que requieran su usuario y contraseña</string>
     <string name="title_autocomplete">Rellenado</string>
     
     <!--Perfil-->
     <string name="perfil_title">Perfil</string>
     
+=======
+    <string name="balances">Paquetes</string>
+    <string name="paquetes_proximos_a_vencer">Paquetes proximos a vencer</string>
+>>>>>>> 46ba879976366f0f3ccee8c77ffebe88a9b18b6f
 </resources>

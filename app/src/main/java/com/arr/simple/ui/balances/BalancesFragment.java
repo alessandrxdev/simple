@@ -281,17 +281,17 @@ public class BalancesFragment extends Fragment {
     }
 
     private void addReminding(String fechaString) {
+        @SuppressLint("SimpleDateFormat")
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Calendar fechaActual = Calendar.getInstance();
         try {
             Date fechaObjeto = dateFormat.parse("01-10-2023");
             Calendar fechaObjetoCal = Calendar.getInstance();
+            assert fechaObjeto != null;
             fechaObjetoCal.setTime(fechaObjeto);
             fechaObjetoCal.add(Calendar.DAY_OF_YEAR, -5);
             if (fechaActual.compareTo(fechaObjetoCal) >= 0) {
                 createNotification("SIMple", "Tiene paquetes próximos a vencer");
-            } else {
-                // No se requiere notificación
             }
         } catch (ParseException e) {
             e.printStackTrace();
@@ -302,18 +302,18 @@ public class BalancesFragment extends Fragment {
         // Crear un canal de notificación para Android 8.0 y versiones posteriores
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationManager notificationManager =
-                    getContext().getSystemService(NotificationManager.class);
+                    requireActivity().getSystemService(NotificationManager.class);
             NotificationChannel channel =
                     new NotificationChannel(
-                            "Paquetes",
-                            "Paquetes próximos a vencer",
+                            getString(R.string.balances),
+                            getString(R.string.paquetes_proximos_a_vencer),
                             NotificationManager.IMPORTANCE_HIGH);
             notificationManager.createNotificationChannel(channel);
         }
 
         // Crear la notificación utilizando NotificationCompat.Builder
         NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(getContext(), "Paquetes")
+                new NotificationCompat.Builder(requireActivity(), "Paquetes")
                         .setSmallIcon(R.drawable.ic_calendar_20px)
                         .setContentTitle(title)
                         .setContentText(message)
@@ -322,7 +322,7 @@ public class BalancesFragment extends Fragment {
 
         // Mostrar la notificación
         NotificationManagerCompat notificationManager =
-                NotificationManagerCompat.from(getContext());
+                NotificationManagerCompat.from(requireActivity());
         if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.POST_NOTIFICATIONS)) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
