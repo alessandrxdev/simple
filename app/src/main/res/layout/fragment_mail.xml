@@ -86,6 +86,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="4.0dip"
+                        android:onClick="button1"
                         android:text="@string/button_delete_mail"
                         android:contentDescription="Eliminar correos electrónicos del servidor"
                         style="?materialButtonOutlinedStyle" />
