@@ -51,7 +51,7 @@ public class ImageUtils {
                 Log.e(TAG, "No tienes permisos de escritura");
                 return false;
             } else {
-                return saveImage(imageUri);
+                return saveImageWithPermissions(imageUri);
             }
         }
     }
