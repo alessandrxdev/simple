@@ -4,43 +4,40 @@ import android.Manifest;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.Settings;
-import android.util.Log;
 import android.widget.RemoteViews;
-import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
+
 import com.arr.simple.R;
 import com.arr.simple.broadcast.BalancesBroadcast;
-import com.arr.simple.broadcast.UpdateBalances;
 import com.arr.ussd.ResponseUssd;
 import com.arr.ussd.utils.UssdUtils;
 
+@RequiresApi(29)
 public class BalancesWidget extends AppWidgetProvider {
 
     private ResponseUssd response;
-    private UssdUtils ussd;
-    private Handler handler;
-    private Runnable runnable;
-    private int timeUpdate = 5000;
 
     private PendingIntent pending;
     private SharedPreferences spBalance;
+
+    private Context mContext;
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             for (int appWidgetId : appWidgetIds) {
-                ussd = new UssdUtils(context);
+                mContext = context;
+                UssdUtils ussd = new UssdUtils(context);
                 response = new ResponseUssd(ussd);
                 spBalance = PreferenceManager.getDefaultSharedPreferences(context);
 
@@ -59,11 +56,13 @@ public class BalancesWidget extends AppWidgetProvider {
     }
 
     private void setupOnClick(Context context, RemoteViews remote) {
-        if(permissions() != PackageManager.PERMISSION_GRANTED){
+        if (permissions() != PackageManager.PERMISSION_GRANTED) {
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
             intent.setData(Uri.fromParts("package", context.getPackageName(), null));
-            remote.setOnClickPendingIntent(R.id.appwidget_sync, PendingIntent.getActivities(context, 0, intent, PendingIntent.FLAG_IMMUTABLE));
-        }else{
+            remote.setOnClickPendingIntent(R.id.appwidget_sync, PendingIntent.getActivities(context, 0, new Intent[]{intent}, PendingIntent.FLAG_IMMUTABLE));
+        } else {
+            Intent intent = new Intent(context, BalancesBroadcast.class);
+            pending = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
             remote.setOnClickPendingIntent(R.id.appwidget_sync, pending);
         }
     }
@@ -85,11 +84,10 @@ public class BalancesWidget extends AppWidgetProvider {
                 R.id.time_update,
                 spBalance
                         .getString("actualizado", "sin actualizar")
-                        .replace("Última actualización: ", "")
-                        .toString());
+                        .replace("Última actualización: ", ""));
     }
-    
-    private int permissions(){
-        return ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE);
+
+    private int permissions() {
+        return ContextCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE);
     }
 }

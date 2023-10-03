@@ -49,8 +49,7 @@ public class SecurityPreference extends Fragment {
                         boolean isCheck = (Boolean) newValue;
                         return true;
                     });
-<<<<<<< HEAD
-            
+
             // Rellenado
             M3SwitchPreference complete = findPreference("autocomplete");
             complete.setOnPreferenceChangeListener(
@@ -60,11 +59,7 @@ public class SecurityPreference extends Fragment {
                     });
             
             // bloqueo
-=======
-
-
             // TODO: confirmar si tiene fingerprint activo
->>>>>>> 46ba879976366f0f3ccee8c77ffebe88a9b18b6f
             M3SwitchPreference bloqueo = findPreference("bloqueo");
             FingerprintManager manager =
                     (FingerprintManager)

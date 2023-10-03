@@ -27,8 +27,6 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.preference.PreferenceManager;
 
 import com.arr.bugsend.BugSend;
-import com.arr.didi.Didi;
-import com.arr.simple.broadcast.NotificationBalances;
 import com.arr.simple.databinding.ActivityMainBinding;
 import com.arr.simple.databinding.NavRailHeaderBinding;
 import com.arr.simple.log.CrashActivity;
@@ -132,11 +130,11 @@ public class MainActivity extends AppCompatActivity {
         // TODO: menu should be considered as top level destinations.
         mAppBarConfiguration =
                 new AppBarConfiguration.Builder(
-                                R.id.nav_home,
-                                R.id.nav_balance,
-                                R.id.nav_compras,
-                                R.id.nav_llamadas,
-                                R.id.nav_nauta)
+                        R.id.nav_home,
+                        R.id.nav_balance,
+                        R.id.nav_compras,
+                        R.id.nav_llamadas,
+                        R.id.nav_nauta)
                         .setOpenableLayout(drawer)
                         .build();
 
@@ -269,10 +267,9 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, TrafficFloatingWindow.class);
             startService(intent);
         }
-<<<<<<< HEAD
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-=======
       /*
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
 >>>>>>> 46ba879976366f0f3ccee8c77ffebe88a9b18b6f
@@ -283,5 +280,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
        */
+        }
     }
+
 }
