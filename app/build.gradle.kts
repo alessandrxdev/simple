@@ -48,7 +48,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel:2.6.2")
-    implementation("androidx.navigation:navigation-ui:2.7.3")
+    implementation("androidx.navigation:navigation-ui:2.7.4")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.navigation:navigation-fragment:2.7.3")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
