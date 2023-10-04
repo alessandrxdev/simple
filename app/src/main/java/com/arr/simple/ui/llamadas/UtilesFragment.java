@@ -59,17 +59,17 @@ public class UtilesFragment extends Fragment {
 
         // list
         list.add(new Header("Emergencia"));
-        list.add(new Grid("103", "Antidrogas"));
-        list.add(new Grid("104", "Ambulancia"));
-        list.add(new Grid("105", "Bomberos"));
-        list.add(new Grid("106", "Policía"));
-        list.add(new Grid("107", "Resc. Salvamento Marítimo"));
+        list.add(new Grid("103", "Antidrogas",0));
+        list.add(new Grid("104", "Ambulancia",0));
+        list.add(new Grid("105", "Bomberos",0));
+        list.add(new Grid("106", "Policía",0));
+        list.add(new Grid("107", "Resc. Salvamento Marítimo",0));
         list.add(new Header("Útiles"));
-        list.add(new Grid("Operadora", "Atención al cliente"));
-        list.add(new Grid("Nauta", "Operadora Nauta Hogar"));
-        list.add(new Grid("Reportes", "Reporte de telefonía fija"));
-        list.add(new Grid("Emp. Eléctrica", "Atención al cliente"));
-        list.add(new Grid("Telefonía Móvil", "Quejas y Reclamos"));
+        list.add(new Grid("Operadora", "Atención al cliente",0));
+        list.add(new Grid("Nauta", "Operadora Nauta Hogar",0));
+        list.add(new Grid("Reportes", "Reporte de telefonía fija",0));
+        list.add(new Grid("Emp. Eléctrica", "Atención al cliente",0));
+        list.add(new Grid("Telefonía Móvil", "Quejas y Reclamos",0));
 
         return binding.getRoot();
     }

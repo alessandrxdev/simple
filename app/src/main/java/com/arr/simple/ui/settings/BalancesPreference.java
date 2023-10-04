@@ -25,6 +25,7 @@ import androidx.preference.PreferenceManager;
 import com.arr.preference.M3ListPreference;
 import com.arr.preference.M3SwitchPreference;
 import com.arr.simple.R;
+import com.arr.simple.broadcast.BalancesBroadcast;
 import com.arr.simple.broadcast.NotificationBalances;
 import com.arr.simple.broadcast.UpdateBalances;
 
@@ -159,7 +160,7 @@ public class BalancesPreference extends Fragment {
         private void setAlarm(long time) {
             AlarmManager manager =
                     (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-            Intent intent = new Intent(getActivity(), UpdateBalances.class);
+            Intent intent = new Intent(getActivity(), BalancesBroadcast.class);
             int flag = 0;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 flag |= PendingIntent.FLAG_IMMUTABLE;
@@ -178,7 +179,7 @@ public class BalancesPreference extends Fragment {
             }
             PendingIntent pending =
                     PendingIntent.getBroadcast(
-                            getContext(), 0, new Intent(getActivity(), UpdateBalances.class), flag);
+                            getContext(), 0, new Intent(getActivity(), BalancesBroadcast.class), flag);
             manager.cancel(pending);
         }
     }

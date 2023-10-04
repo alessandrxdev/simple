@@ -58,20 +58,21 @@ public class SecurityPreference extends Fragment {
                         return true;
                     });
             
-            // bloqueo
             // TODO: confirmar si tiene fingerprint activo
             M3SwitchPreference bloqueo = findPreference("bloqueo");
             FingerprintManager manager =
                     (FingerprintManager)
                             requireActivity().getSystemService(Context.FINGERPRINT_SERVICE);
-            if (manager.isHardwareDetected()) {
-                if (!manager.hasEnrolledFingerprints()) {
+            if(manager != null){
+                if(manager.isHardwareDetected()){
+                    if (!manager.hasEnrolledFingerprints()) {
                     if (bloqueo != null) bloqueo.setEnabled(false);
-                } else {
-                    if (bloqueo != null) bloqueo.setEnabled(true);
+                    }else{
+                       if (bloqueo != null) bloqueo.setEnabled(true);
+                    }
+                }else{
+                   if (bloqueo != null) bloqueo.setEnabled(false);
                 }
-            } else {
-                if (bloqueo != null) bloqueo.setEnabled(false);
             }
         }
     }

@@ -65,13 +65,13 @@ public class AmigoFragment extends Fragment {
 
         // TODO: lista de items
         list.add(new Header("Consulta"));
-        list.add(new Grid("Estado", "Plan Amigo"));
-        list.add(new Grid("Lista", "Lista de números"));
+        list.add(new Grid("Estado", "Plan Amigo",0));
+        list.add(new Grid("Lista", "Lista de números",0));
         list.add(new Header("Opciones"));
-        list.add(new Grid("Activar", "Activar servicio"));
-        list.add(new Grid("Desactivar", "Desactivar servicio"));
-        list.add(new Grid("Agregar", "Agregar número"));
-        list.add(new Grid("Eliminar", "Eliminar número"));
+        list.add(new Grid("Activar", "Activar servicio",0));
+        list.add(new Grid("Desactivar", "Desactivar servicio",0));
+        list.add(new Grid("Agregar", "Agregar número",0));
+        list.add(new Grid("Eliminar", "Eliminar número",0));
     }
 
     // TODO: Manejar los onclick

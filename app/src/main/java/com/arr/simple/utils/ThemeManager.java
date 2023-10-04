@@ -27,12 +27,12 @@ public class ThemeManager {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 break;
             default:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
                     AppCompatDelegate.setDefaultNightMode(
                             AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                 } else {
                     AppCompatDelegate.setDefaultNightMode(
-                            AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY);
+                            AppCompatDelegate.MODE_NIGHT_AUTO);
                 }
         }
     }

@@ -1,210 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:id="@+id/swipe_refresh">
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:id="@+id/swipe_refresh">
 
     <androidx.core.widget.NestedScrollView
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:contentDescription="@string/title_balances"
-        android:fillViewport="true"
-        android:paddingBottom="80dp"
-        android:layout_marginTop="10dp">
+         android:layout_height="match_parent"
+         android:layout_width="match_parent"
+         android:contentDescription="@string/title_balances"
+         android:fillViewport="true"
+         android:paddingBottom="80dp"
+         android:layout_marginTop="10dp">
 
         <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:gravity="center_horizontal"
+             android:orientation="vertical"
+             android:layout_marginLeft="16dp"
+             android:layout_marginRight="16dp">
 
             <RelativeLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:padding="6dp">
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 android:padding="6dp">
 
                 <com.google.android.material.progressindicator.CircularProgressIndicator
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    app:indicatorSize="180dp"
-                    android:layout_centerVertical="true"
-                    app:trackColor="@color/colorSecondaryContainer"
-                    android:layout_centerHorizontal="true"
-                    app:trackCornerRadius="10dp"
-                    app:indicatorInset="10dp"
-                    app:trackThickness="10dp"
-                    android:id="@+id/progress_datos"
-                    app:indicatorColor="@color/colorPrimary" />
+                     android:layout_height="wrap_content"
+                     android:layout_width="wrap_content"
+                     app:indicatorSize="180dp"
+                     android:layout_centerVertical="true"
+                     app:trackColor="@color/colorSecondaryContainer"
+                     android:layout_centerHorizontal="true"
+                     app:trackCornerRadius="10dp"
+                     app:indicatorInset="10dp"
+                     app:trackThickness="10dp"
+                     android:id="@+id/progress_datos"
+                     app:indicatorColor="@color/colorPrimary" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:gravity="center"
-                    android:layout_centerVertical="true"
-                    android:padding="4dp"
-                    android:orientation="vertical"
-                    android:layout_centerHorizontal="true">
+                     android:layout_height="wrap_content"
+                     android:layout_width="wrap_content"
+                     android:gravity="center"
+                     android:layout_centerVertical="true"
+                     android:padding="4dp"
+                     android:orientation="vertical"
+                     android:layout_centerHorizontal="true">
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:background="@drawable/background_text"
-                        android:textAppearance="?textAppearanceLabelSmall"
-                        android:padding="5dp"
-                        android:id="@+id/text_tarifa"
-                        android:text="tarifa" />
+                         android:layout_height="wrap_content"
+                         android:layout_width="wrap_content"
+                         android:background="@drawable/background_text"
+                         android:textAppearance="?textAppearanceLabelSmall"
+                         android:padding="5dp"
+                         android:id="@+id/text_tarifa"
+                         android:text="tarifa" />
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:textAppearance="?textAppearanceTitleLarge"
-                        android:layout_marginTop="5dp"
-                        android:id="@+id/text_datos"
-                        android:text="20 GB" />
+                         android:layout_height="wrap_content"
+                         android:layout_width="wrap_content"
+                         android:textAppearance="?textAppearanceTitleLarge"
+                         android:layout_marginTop="5dp"
+                         android:id="@+id/text_datos"
+                         android:text="20 GB" />
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:textAppearance="?textAppearanceBodyMedium"
-                        android:id="@+id/text_datos_lte"
-                        android:text="/ 10 GB LTE" />
+                         android:layout_height="wrap_content"
+                         android:layout_width="wrap_content"
+                         android:textAppearance="?textAppearanceBodyMedium"
+                         android:id="@+id/text_datos_lte"
+                         android:text="/ 10 GB LTE" />
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:textAppearance="?textAppearanceLabelSmall"
-                        android:layout_marginTop="10dp"
-                        android:id="@+id/text_vence_datos"
-                        android:text="20 dias" />
+                         android:layout_height="wrap_content"
+                         android:layout_width="wrap_content"
+                         android:textAppearance="?textAppearanceLabelSmall"
+                         android:layout_marginTop="10dp"
+                         android:id="@+id/text_vence_datos"
+                         android:text="20 dias" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
             </RelativeLayout>
 
+            <LinearLayout
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 android:orientation="horizontal"
+                 android:layout_marginLeft="20dp"
+                 android:layout_marginRight="20dp">
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:gravity="left"
+                     android:textAppearance="?textAppearanceBodyMedium"
+                     android:layout_weight="1.0"
+                     android:id="@+id/text_saldo"
+                     android:text="0.00 CUP" />
+
+                <TextView
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:gravity="right"
+                     android:textAppearance="?textAppearanceBodyMedium"
+                     android:layout_weight="1.0"
+                     android:id="@+id/text_vence_saldo"
+                     android:text="00/00/00" />
+
+            </LinearLayout>
+
             <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textAppearance="?textAppearanceLabelSmall"
-                android:layout_margin="6dp"
-                android:id="@+id/text_hora_vencimiento"
-                android:text="" />
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:gravity="center_horizontal"
+                 android:textAppearance="?textAppearanceLabelSmall"
+                 android:layout_margin="6dp"
+                 android:id="@+id/text_hora_vencimiento"
+                 android:text="" />
 
             <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:orientation="horizontal">
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_margin="6dp"
-                    app:cardElevation="2dp"
-                    android:layout_weight="1">
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:layout_margin="6dp"
+                     app:cardElevation="2dp"
+                     android:layout_weight="1">
 
                     <LinearLayout
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:padding="10dp"
-                        android:orientation="vertical">
+                         android:layout_height="wrap_content"
+                         android:layout_width="match_parent"
+                         android:padding="10dp"
+                         android:orientation="vertical">
 
                         <LinearLayout
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                             android:layout_height="wrap_content"
+                             android:layout_width="match_parent"
+                             android:gravity="center_vertical"
+                             android:orientation="horizontal">
 
                             <ImageView
-                                android:layout_height="25dp"
-                                android:layout_width="25dp"
-                                android:src="@drawable/ic_llamadas_unfill_24px"
-                                android:background="@drawable/background_circle_icon"
-                                android:padding="4dp" />
+                                 android:layout_height="25dp"
+                                 android:layout_width="25dp"
+                                 android:src="@drawable/ic_llamadas_unfill_24px"
+                                 android:background="@drawable/background_circle_icon"
+                                 android:padding="4dp" />
 
                             <TextView
-                                android:layout_height="wrap_content"
-                                android:layout_width="wrap_content"
-                                android:textAppearance="?textAppearanceBodyMedium"
-                                android:padding="4dp"
-                                android:text="VOZ" />
+                                 android:layout_height="wrap_content"
+                                 android:layout_width="wrap_content"
+                                 android:textAppearance="?textAppearanceBodyMedium"
+                                 android:padding="4dp"
+                                 android:text="VOZ" />
 
                         </LinearLayout>
 
                         <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:textAppearance="?textAppearanceBodyMedium"
-                            android:layout_marginTop="10dp"
-                            android:id="@+id/text_minutos"
-                            android:text="00:00:00 / 20 días" />
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             android:textAppearance="?textAppearanceBodyMedium"
+                             android:layout_marginTop="10dp"
+                             android:id="@+id/text_minutos"
+                             android:text="00:00:00 / 20 días" />
 
                         <com.google.android.material.progressindicator.LinearProgressIndicator
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:indeterminate="false"
-                            app:trackCornerRadius="10dp"
-                            android:layout_marginTop="10dp"
-                            android:progress="30"
-                            android:id="@+id/progressLinearVoz" />
+                             android:layout_height="wrap_content"
+                             android:layout_width="match_parent"
+                             android:indeterminate="false"
+                             app:trackCornerRadius="10dp"
+                             android:layout_marginTop="10dp"
+                             android:progress="30"
+                             android:id="@+id/progressLinearVoz" />
 
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_margin="6dp"
-                    app:cardElevation="2dp"
-                    android:layout_weight="1">
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:layout_margin="6dp"
+                     app:cardElevation="2dp"
+                     android:layout_weight="1">
 
                     <LinearLayout
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:padding="10dp"
-                        android:orientation="vertical">
+                         android:layout_height="wrap_content"
+                         android:layout_width="match_parent"
+                         android:padding="10dp"
+                         android:orientation="vertical">
 
                         <LinearLayout
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                             android:layout_height="wrap_content"
+                             android:layout_width="match_parent"
+                             android:gravity="center_vertical"
+                             android:orientation="horizontal">
 
                             <ImageView
-                                android:layout_height="25dp"
-                                android:layout_width="25dp"
-                                android:src="@drawable/ic_message_24px"
-                                android:background="@drawable/background_circle_icon"
-                                android:padding="4dp" />
+                                 android:layout_height="25dp"
+                                 android:layout_width="25dp"
+                                 android:src="@drawable/ic_message_24px"
+                                 android:background="@drawable/background_circle_icon"
+                                 android:padding="4dp" />
 
                             <TextView
-                                android:layout_height="wrap_content"
-                                android:layout_width="wrap_content"
-                                android:textAppearance="?textAppearanceBodyMedium"
-                                android:padding="4dp"
-                                android:text="SMS" />
+                                 android:layout_height="wrap_content"
+                                 android:layout_width="wrap_content"
+                                 android:textAppearance="?textAppearanceBodyMedium"
+                                 android:padding="4dp"
+                                 android:text="SMS" />
 
                         </LinearLayout>
 
                         <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:textAppearance="?textAppearanceBodyMedium"
-                            android:layout_marginTop="10dp"
-                            android:id="@+id/mensajes"
-                            android:text="20 SMS / 20 días" />
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             android:textAppearance="?textAppearanceBodyMedium"
+                             android:layout_marginTop="10dp"
+                             android:id="@+id/mensajes"
+                             android:text="20 SMS / 20 días" />
 
                         <com.google.android.material.progressindicator.LinearProgressIndicator
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:indeterminate="false"
-                            app:trackCornerRadius="10dp"
-                            android:layout_marginTop="10dp"
-                            android:progress="20"
-                            android:id="@+id/smsLinearProgress" />
+                             android:layout_height="wrap_content"
+                             android:layout_width="match_parent"
+                             android:indeterminate="false"
+                             app:trackCornerRadius="10dp"
+                             android:layout_marginTop="10dp"
+                             android:progress="20"
+                             android:id="@+id/smsLinearProgress" />
 
                     </LinearLayout>
 
@@ -213,174 +241,174 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:orientation="horizontal">
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 android:orientation="horizontal">
 
                 <com.google.android.material.card.MaterialCardView
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_margin="6dp"
-                    app:cardElevation="2dp"
-                    android:layout_weight="1"
-                    android:id="@+id/card_mensajeria">
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:layout_margin="6dp"
+                     app:cardElevation="2dp"
+                     android:layout_weight="1"
+                     android:id="@+id/card_mensajeria">
 
                     <LinearLayout
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:padding="10dp"
-                        android:orientation="vertical">
+                         android:layout_height="wrap_content"
+                         android:layout_width="match_parent"
+                         android:padding="10dp"
+                         android:orientation="vertical">
 
                         <LinearLayout
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                             android:layout_height="wrap_content"
+                             android:layout_width="match_parent"
+                             android:gravity="center_vertical"
+                             android:orientation="horizontal">
 
                             <ImageView
-                                android:layout_height="25dp"
-                                android:layout_width="25dp"
-                                android:src="@drawable/ic_entumovil_24px"
-                                android:background="@drawable/background_circle_icon"
-                                android:padding="4dp" />
+                                 android:layout_height="25dp"
+                                 android:layout_width="25dp"
+                                 android:src="@drawable/ic_entumovil_24px"
+                                 android:background="@drawable/background_circle_icon"
+                                 android:padding="4dp" />
 
                             <TextView
-                                android:layout_height="wrap_content"
-                                android:layout_width="wrap_content"
-                                android:textAppearance="?textAppearanceBodyMedium"
-                                android:padding="4dp"
-                                android:text="Mensajeria" />
+                                 android:layout_height="wrap_content"
+                                 android:layout_width="wrap_content"
+                                 android:textAppearance="?textAppearanceBodyMedium"
+                                 android:padding="4dp"
+                                 android:text="Mensajeria" />
 
                         </LinearLayout>
 
                         <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:textAppearance="?textAppearanceBodyMedium"
-                            android:layout_marginTop="10dp"
-                            android:id="@+id/text_mensajeria"
-                            android:text="0 MB / 0 días" />
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             android:textAppearance="?textAppearanceBodyMedium"
+                             android:layout_marginTop="10dp"
+                             android:id="@+id/text_mensajeria"
+                             android:text="0 MB / 0 días" />
 
                         <com.google.android.material.progressindicator.LinearProgressIndicator
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:indeterminate="false"
-                            app:trackCornerRadius="10dp"
-                            android:layout_marginTop="10dp"
-                            android:progress="1" />
+                             android:layout_height="wrap_content"
+                             android:layout_width="match_parent"
+                             android:indeterminate="false"
+                             app:trackCornerRadius="10dp"
+                             android:layout_marginTop="10dp"
+                             android:progress="1" />
 
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_margin="6dp"
-                    app:cardElevation="2dp"
-                    android:layout_weight="1">
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:layout_margin="6dp"
+                     app:cardElevation="2dp"
+                     android:layout_weight="1">
 
                     <LinearLayout
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:padding="10dp"
-                        android:orientation="vertical">
+                         android:layout_height="wrap_content"
+                         android:layout_width="match_parent"
+                         android:padding="10dp"
+                         android:orientation="vertical">
 
                         <LinearLayout
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                             android:layout_height="wrap_content"
+                             android:layout_width="match_parent"
+                             android:gravity="center_vertical"
+                             android:orientation="horizontal">
 
                             <ImageView
-                                android:layout_height="25dp"
-                                android:layout_width="25dp"
-                                android:src="@drawable/ic_nacional_24px"
-                                android:background="@drawable/background_circle_icon"
-                                android:padding="4dp" />
+                                 android:layout_height="25dp"
+                                 android:layout_width="25dp"
+                                 android:src="@drawable/ic_nacional_24px"
+                                 android:background="@drawable/background_circle_icon"
+                                 android:padding="4dp" />
 
                             <TextView
-                                android:layout_height="wrap_content"
-                                android:layout_width="wrap_content"
-                                android:textAppearance="?textAppearanceBodyMedium"
-                                android:padding="4dp"
-                                android:text="Nacional" />
+                                 android:layout_height="wrap_content"
+                                 android:layout_width="wrap_content"
+                                 android:textAppearance="?textAppearanceBodyMedium"
+                                 android:padding="4dp"
+                                 android:text="Nacional" />
 
                         </LinearLayout>
 
                         <TextView
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:textAppearance="?textAppearanceBodyMedium"
-                            android:layout_marginTop="10dp"
-                            android:id="@+id/text_datos_cu"
-                            android:text="" />
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             android:textAppearance="?textAppearanceBodyMedium"
+                             android:layout_marginTop="10dp"
+                             android:id="@+id/text_datos_cu"
+                             android:text="" />
 
                         <com.google.android.material.progressindicator.LinearProgressIndicator
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:indeterminate="false"
-                            app:trackCornerRadius="10dp"
-                            android:layout_marginTop="10dp"
-                            android:progress="100"
-                            android:id="@+id/progressDatosCu" />
+                             android:layout_height="wrap_content"
+                             android:layout_width="match_parent"
+                             android:indeterminate="false"
+                             app:trackCornerRadius="10dp"
+                             android:layout_marginTop="10dp"
+                             android:progress="100"
+                             android:id="@+id/progressDatosCu" />
 
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
-                        
+
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/bonos"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_margin="6dp"
-                app:cardElevation="2dp">
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 android:visibility="gone"
+                 android:layout_margin="6dp"
+                 app:cardElevation="2dp"
+                 android:id="@+id/bonos">
 
                 <LinearLayout
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:padding="10dp"
-                    android:orientation="vertical">
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:padding="10dp"
+                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:textAppearance="?textAppearanceBodyMedium"
-                        android:text="Promociones" />
+                         android:layout_height="wrap_content"
+                         android:layout_width="wrap_content"
+                         android:textAppearance="?textAppearanceBodyMedium"
+                         android:text="Promociones" />
 
                     <TextView
-                        android:id="@+id/ilimitados"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_margin="4dp"
-                        android:visibility="gone"
-                        android:textAppearance="?textAppearanceBodySmall"
-                        android:text="Ilimitados / 30 días" />
+                         android:layout_height="wrap_content"
+                         android:layout_width="wrap_content"
+                         android:visibility="gone"
+                         android:textAppearance="?textAppearanceBodySmall"
+                         android:layout_margin="4dp"
+                         android:id="@+id/ilimitados"
+                         android:text="Ilimitados / 30 días" />
 
                     <TextView
-                        android:id="@+id/datos_promo"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:visibility="gone"
-                        android:layout_margin="4dp"
-                        android:textAppearance="?textAppearanceBodySmall"
-                        android:text="24.64 GB / vence en 30 días" />
+                         android:layout_height="wrap_content"
+                         android:layout_width="wrap_content"
+                         android:visibility="gone"
+                         android:textAppearance="?textAppearanceBodySmall"
+                         android:layout_margin="4dp"
+                         android:id="@+id/datos_promo"
+                         android:text="24.64 GB / vence en 30 días" />
 
                     <TextView
-                        android:id="@+id/saldo_promo"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:layout_margin="4dp"
-                        android:visibility="gone"
-                        android:textAppearance="?textAppearanceBodySmall"
-                        android:text="831.72 / vence en 30 días" />
+                         android:layout_height="wrap_content"
+                         android:layout_width="wrap_content"
+                         android:visibility="gone"
+                         android:textAppearance="?textAppearanceBodySmall"
+                         android:layout_margin="4dp"
+                         android:id="@+id/saldo_promo"
+                         android:text="831.72 / vence en 30 días" />
 
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
 
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 

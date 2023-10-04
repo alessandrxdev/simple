@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import com.arr.simple.R;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
@@ -69,19 +70,19 @@ public class PlanesFragment extends Fragment {
 
         // TODO: list de items
         list.add(new Header("Consulta"));
-        list.add(new Grid("SMS", "Consultar"));
-        list.add(new Grid("VOZ", "Consultar"));
+        list.add(new Grid("SMS", "Consultar", 0));
+        list.add(new Grid("VOZ", "Consultar", 0));
         list.add(new Header("Minutos"));
-        list.add(new Grid("5", "45.50 CUP / 30 días"));
-        list.add(new Grid("10", "72.50 CUP / 30 días"));
-        list.add(new Grid("15", "105 CUP / 30 días"));
-        list.add(new Grid("25", "162.50 CUP / 30 días"));
-        list.add(new Grid("40", "250 CUP / 30 días"));
+        list.add(new Grid("5", "45.50 CUP / 30 días", R.drawable.ic_voz_20px));
+        list.add(new Grid("10", "72.50 CUP / 30 días",R.drawable.ic_voz_20px));
+        list.add(new Grid("15", "105 CUP / 30 días", R.drawable.ic_voz_20px));
+        list.add(new Grid("25", "162.50 CUP / 30 días",R.drawable.ic_voz_20px));
+        list.add(new Grid("40", "250 CUP / 30 días", R.drawable.ic_voz_20px));
         list.add(new Header("Mensajes"));
-        list.add(new Grid("20", "15 CUP / 30 días"));
-        list.add(new Grid("50", "30 CUP / 30 días"));
-        list.add(new Grid("90", "50 CUP / 30 días"));
-        list.add(new Grid("120", "60 CUP / 30 días"));
+        list.add(new Grid("20", "15 CUP / 30 días",R.drawable.ic_sms_20px));
+        list.add(new Grid("50", "30 CUP / 30 días", R.drawable.ic_sms_20px));
+        list.add(new Grid("90", "50 CUP / 30 días", R.drawable.ic_sms_20px));
+        list.add(new Grid("120", "60 CUP / 30 días", R.drawable.ic_sms_20px));
     }
 
     // TODO: Manejar los onclick

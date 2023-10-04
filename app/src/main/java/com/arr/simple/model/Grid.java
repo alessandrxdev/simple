@@ -2,13 +2,13 @@ package com.arr.simple.model;
 
 public class Grid implements Items {
 
-    //  private int mIcon;
+    private int mIcon;
     private String mTitle, mSubtitle;
 
-    public Grid(String title, String subtitle) {
+    public Grid(String title, String subtitle, int icon) {
         this.mTitle = title;
         this.mSubtitle = subtitle;
-        //  this.mIcon = icon;
+        this.mIcon = icon;
     }
 
     public String getTitle() {
@@ -19,11 +19,10 @@ public class Grid implements Items {
         return mSubtitle;
     }
 
-    /*
     public int getIcon() {
         return mIcon;
     }
-    */
+    
 
     @Override
     public int getViewType() {

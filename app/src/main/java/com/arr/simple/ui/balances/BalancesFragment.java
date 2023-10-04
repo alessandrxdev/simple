@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,6 +117,8 @@ public class BalancesFragment extends Fragment {
         }
 
         // balances
+        binding.textSaldo.setText(response.getSaldo());
+        binding.textVenceSaldo.setText(response.getVencimientoSaldo());
         binding.textTarifa.setText(response.getTarifaConsumo());
         binding.textDatos.setText(response.getDataAll());
         binding.textDatosLte.setText("/ " + response.getLTE());
@@ -164,25 +167,10 @@ public class BalancesFragment extends Fragment {
         } else {
             updateLinearProgress(0, binding.progressDatosCu);
         }
-
-        // error
-        /*
-        if (!response.getError().isEmpty()) {
-            new MaterialAlertDialogBuilder(requireActivity())
-                    .setMessage(
-                            "Ah ocurrido un error al actualizar algunos de sus balances, por favor vuelva a intentarlo.")
-                    .setPositiveButton(
-                            "Ok",
-                            (dialog, w) -> response.getClearError(getActivity()))
-                    .show();
-        }
-        */
     }
 
     private void executeUssdRequest(Handler handler, int index) {
         if (index >= ussdCodes.length) {
-            // Se han realizado todas las consultas
-            //    showSnackBar("Consulta completada!", true);
             if (isVisible()) {
                 binding.swipeRefresh.setRefreshing(false);
                 viewContentBalances();
@@ -198,7 +186,7 @@ public class BalancesFragment extends Fragment {
             // actualizar notificación
             boolean isNotifi = spBalance.getBoolean("balance_notif", true);
             if (isNotifi) {
-                Intent broadcast = new Intent(getActivity(), NotificationBalances.class);
+                Intent broadcast = new Intent(requireActivity(), NotificationBalances.class);
                 requireActivity().sendBroadcast(broadcast);
             }
             
@@ -241,7 +229,7 @@ public class BalancesFragment extends Fragment {
         Date dat = calendar.getTime();
         SimpleDateFormat datFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
         String hActual = datFormat.format(dat);
-        editor.putString("actualizado", "Última actualización: " + hActual);
+        editor.putString("actualizado", getActivity().getString(R.string.update) + hActual);
         editor.apply();
         String hor = spBalance.getString("actualizado", "");
         binding.textHoraVencimiento.setText(hor);
@@ -262,21 +250,12 @@ public class BalancesFragment extends Fragment {
 
     public String calculateDays(String string) {
         Calendar calendar = Calendar.getInstance();
-
-        // Obtén el número de días del string
         int dias = Integer.parseInt(string.split(" ")[0]);
-
-        // Suma los días a la fecha actual
         calendar.add(Calendar.DAY_OF_MONTH, dias);
-
-        // Obtén la fecha exacta
         Date fechaExacta = calendar.getTime();
-
-        // Crea un formato para mostrar la fecha
         @SuppressLint("SimpleDateFormat") SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
-
-        // Convierte la fecha en una cadena formateada
         String fechaFormateada = formatoFecha.format(fechaExacta);
+        Log.e("FECHA", fechaFormateada);
         return fechaFormateada;
     }
 
@@ -285,13 +264,13 @@ public class BalancesFragment extends Fragment {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Calendar fechaActual = Calendar.getInstance();
         try {
-            Date fechaObjeto = dateFormat.parse("01-10-2023");
+            Date fechaObjeto = dateFormat.parse(fechaString);
             Calendar fechaObjetoCal = Calendar.getInstance();
             assert fechaObjeto != null;
             fechaObjetoCal.setTime(fechaObjeto);
             fechaObjetoCal.add(Calendar.DAY_OF_YEAR, -5);
             if (fechaActual.compareTo(fechaObjetoCal) >= 0) {
-                createNotification("SIMple", "Tiene paquetes próximos a vencer");
+                createNotification(getActivity().getString(R.string.app_name), getActivity().getString(R.string.vencimiento_message));
             }
         } catch (ParseException e) {
             e.printStackTrace();
