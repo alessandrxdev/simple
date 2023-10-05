@@ -11,7 +11,8 @@ public class CrashActivity extends AppCompatActivity {
         
         private ActivityCrashBinding binding;
         private BugSend bugSend;
-        
+        private boolean delete = false;
+    
         @Override
         protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
@@ -32,10 +33,14 @@ public class CrashActivity extends AppCompatActivity {
         // bug send 
         bugSend = new BugSend(this);
         binding.logText.setText(versionName + "\n" + bugSend.readError());
-                
+        
         binding.closeButton.setOnClickListener(view->{
-          System.exit(0);
-          bugSend.deleteStackTrace();
+                if(delete) {
+                	bugSend.deleteStackTrace();
+                    System.exit(0);
+                }else{
+                    delete = true;
+                }
         });
                 
         binding.reportButton.setOnClickListener(view->{

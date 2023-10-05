@@ -38,8 +38,9 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        
         <receiver
-            android:name=".widget.BalancesWidget"
+            android:name=".widget.WidgetBalances"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

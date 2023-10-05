@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import androidx.annotation.RequiresApi;
@@ -53,7 +54,10 @@ public class BalancesBroadcast extends BroadcastReceiver {
         response = new ResponseUssd(ussd);
         Handler handler = new Handler(Looper.getMainLooper());
         executeUssdRequest(context, intent, handler, 0);
-
+        handler.postDelayed(()->{
+            updateWidget(context, intent);
+        }, 5000);
+        
         // TODO: SharedPreferences
         spBalance = PreferenceManager.getDefaultSharedPreferences(context);
         editor = spBalance.edit();
@@ -61,8 +65,11 @@ public class BalancesBroadcast extends BroadcastReceiver {
     }
 
     private void updateWidget(Context mContext, Intent mIntent) {
+        Handler mHandler = new Handler(Looper.getMainLooper());
+        mHandler.post(
+                () -> {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(mContext);
-        int[] appWidgetIds = mIntent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
+        int[] appWidgetIds = mIntent.getIntArrayExtra(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         if (appWidgetIds != null) {
             for (int appWidgetId : appWidgetIds) {
                 // Actualizar la vista del saldo del paquete
@@ -74,18 +81,24 @@ public class BalancesBroadcast extends BroadcastReceiver {
                 views.setTextViewText(R.id.appwidget_text_vence, response.getVenceData());
                 views.setTextViewText(R.id.appwidget_text_minutos, response.getMinutos());
                 views.setTextViewText(R.id.appwidget_text_sms, response.getMensajes());
-                views.setTextViewText(R.id.time_update,spBalance.getString("actualizado", "sin actualizar").replace("Actualizado: ", "").toString());
+                                        
+                // actualizado 
+                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
+                String time = sp.getString("actualizado", "sin actualizar").replace("Actualizado:\n", "");
+                views.setTextViewText(R.id.time_update, time);
+                        
                 appWidgetManager.updateAppWidget(appWidgetId, views);
+                }
             }
-        }
+        });
     }
 
     private void executeUssdRequest(Context context, Intent intent, Handler handler, int index) {
         if (index >= ussdCodes.length) {
-            // update widget
-            updateWidget(context, intent);
+            // actualizar tiempo
             updateTime(context);
-
+            updateWidget(context, intent);
+            
             // mostrar u ocultar notificación de balances actualizados
             boolean isShow = spBalance.getBoolean("not_update_balances", false);
             if (isShow) {

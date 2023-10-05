@@ -18,7 +18,7 @@
     <string name="title_preference_apariencia">Apariencia</string>
     <string name="summary_preference_apariencia">Ajustes de la ui, temas, actualizaciones de la aplicación</string>
     <string name="title_preference_theme">Tema</string>
-    <string name="theme_system">Según el Sistema</string>
+    <string name="theme_system">Según el sistema</string>
     <string name="theme_light">Claro</string>
     <string name="theme_dark">Oscuro</string>
     <string name="title_preference_home">Inicio</string>
