@@ -28,7 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-@RequiresApi(29)
+@RequiresApi(28)
 public class BalancesBroadcast extends BroadcastReceiver {
 
     private UssdUtils ussd;
@@ -45,7 +45,8 @@ public class BalancesBroadcast extends BroadcastReceiver {
 
     private static final String CHANNEL_ID = "Balances";
     private static final String CHANNEL = "Update balances";
-    
+
+    @RequiresApi(28)
     @Override
     public void onReceive(Context context, Intent intent) {
         
