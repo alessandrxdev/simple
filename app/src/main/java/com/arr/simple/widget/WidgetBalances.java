@@ -80,6 +80,7 @@ public class WidgetBalances extends AppWidgetProvider {
                         
                         //update to 5 seconds
                         handler.postDelayed(this, 5000);
+                        appWidgetManager.updateAppWidget(appWidgetId, views);
                 }
             };
             handler.post(runnable);
