@@ -2,6 +2,7 @@ package com.arr.simple.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -52,7 +53,11 @@ public class ViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             VGrid grid = (VGrid) holder;
             grid.binding.title.setText(gridModel.getTitle());
             grid.binding.subtitle.setText(gridModel.getSubtitle());
-            //  grid.binding.icon.setImageResource(gridModel.getIcon());
+            if(gridModel.getIcon() == 0){
+                grid.binding.icon.setVisibility(View.GONE);
+            }else{
+                grid.binding.icon.setImageResource(gridModel.getIcon());
+            }
 
             // TODO: onClick item position
             grid.binding.card.setOnClickListener(v -> onItemClickListener.onItemClick(position));

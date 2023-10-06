@@ -1,6 +1,12 @@
 package com.arr.simple.ui.compras;
 
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -67,18 +73,19 @@ public class PaquetesFragment extends Fragment {
                 });
         binding.recyclerView.setLayoutManager(manager);
 
+        
         // TODO: list
         list.add(new Header("Combinados"));
-        list.add(new Grid("1.4 GB", "110 CUP / 30 días"));
-        list.add(new Grid("3.5 GB", "250 CUP / 30 días"));
-        list.add(new Grid("8 GB", "500 CUP / 30 días"));
+        list.add(new Grid("1.4 GB", "Plan Básico", R.drawable.ic_all_data_20px));
+        list.add(new Grid("3.5 GB", "Plan Medio", R.drawable.ic_all_data_20px));
+        list.add(new Grid("8 GB", "Plan Extra", R.drawable.ic_all_data_20px));
         list.add(new Header("LTE"));
-        list.add(new Grid("1 GB", "100 CUP / 30 días"));
-        list.add(new Grid("2.5 GB", "200 CUP / 30 días"));
-        list.add(new Grid("16 GB", "950 CUP / 30 días"));
+        list.add(new Grid("1 GB", "100 CUP / 30 días", R.drawable.ic_data_lte_20px));
+        list.add(new Grid("2.5 GB", "200 CUP / 30 días", R.drawable.ic_data_lte_20px));
+        list.add(new Grid("16 GB", "950 CUP / 30 días", R.drawable.ic_data_lte_20px));
         list.add(new Header("Bolsas"));
-        list.add(new Grid("600 MB", "25 CUP / 30 días"));
-        list.add(new Grid("200 MB", "25 CUP / 24 horas"));
+        list.add(new Grid("600 MB", "25 CUP / 30 días", R.drawable.ic_sms_20px));
+        list.add(new Grid("200 MB", "25 CUP / 24 horas", R.drawable.ic_diaria_24px));
     }
 
     private void onClick(int position) {
@@ -268,5 +275,17 @@ public class PaquetesFragment extends Fragment {
                         })
                 .setNegativeButtom(null)
                 .show();
+    }
+    private Drawable setDrawable(String text){
+        Bitmap bitmap = Bitmap.createBitmap(500, 500, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        Paint paint = new Paint();
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(100);
+        canvas.drawText(text, 100, 200, paint);
+        BitmapDrawable drawab = new BitmapDrawable(requireActivity().getResources(), bitmap);
+        
+        return drawab;
+        
     }
 }

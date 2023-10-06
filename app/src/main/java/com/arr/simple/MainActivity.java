@@ -89,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
                         navController.navigate(id, null);
                     }
                     if (id == R.id.nav_telepuntos) {
-                        openGoogleMap();
-                        //  startActivity(new Intent(this, Test.class));
+                      openGoogleMap();
+                       // startActivity(new Intent(this, Test.class));
                     }
                     if (id == R.id.nav_settings) {
                         navController.navigate(id, null);

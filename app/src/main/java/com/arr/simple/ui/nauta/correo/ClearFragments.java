@@ -73,6 +73,7 @@ public class ClearFragments extends Fragment {
                             showToast("Eliminando, espere...");
                         }
                     });
+            
         }
 
         return binding.getRoot();
@@ -83,7 +84,7 @@ public class ClearFragments extends Fragment {
         super.onDestroyView();
         binding = null;
     }
-
+    
     private void sincronizar(String correo, String password) {
         mail.obtainsEmail(
                 correo,

@@ -18,7 +18,7 @@
     <string name="title_preference_apariencia">Apariencia</string>
     <string name="summary_preference_apariencia">Ajustes de la ui, temas, actualizaciones de la aplicación</string>
     <string name="title_preference_theme">Tema</string>
-    <string name="theme_system">Según el Sistema</string>
+    <string name="theme_system">Según el sistema</string>
     <string name="theme_light">Claro</string>
     <string name="theme_dark">Oscuro</string>
     <string name="title_preference_home">Inicio</string>
@@ -86,7 +86,9 @@
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">Widget con informacion de sus Balances (Android 8+)</string>
     <string name="diaria_vencimiento">24 horas a partir de su uso</string>
-    <string name="diaria_lte" translatable="false">200 MB solo para la red lte</string>
+    <string
+        name="diaria_lte"
+        translatable="false">200 MB solo para la red lte</string>
     <string name="precio_diaria">25.00 CUP</string>
     <string name="diaria_title">Diaria</string>
     <string name="mensajeria_vencimiento">30 días a partir de su uso</string>
@@ -127,7 +129,9 @@
     <string name="button_sync">Sincronizar</string>
     <string name="hint_correo_nauta">Correo</string>
     <string name="button_info_login">Información de conexión</string>
-    <string name="view_telepuntos" translatable="false">https://www.google.com/maps/search/ETECSA/</string>
+    <string
+        name="view_telepuntos"
+        translatable="false">https://www.google.com/maps/search/ETECSA/</string>
     <string name="is_not_dual_sim">Su dispositivo no puede usar esta función porque no es compatible con dual SIM</string>
     <string name="url_twitter">https://twitter.com/applifycu</string>
     <string name="url_telegram">https://t.me/applifycu</string>
@@ -154,10 +158,13 @@
     <string name="summary_autocomplete">Rellenar automáticamente campos que requieran su usuario y contraseña</string>
     <string name="title_autocomplete">Rellenado</string>
 
-    <!--Perfil-->
+    <!-- Perfil -->
     <string name="perfil_title">Perfil</string>
 
 
     <string name="balances">Paquetes</string>
     <string name="paquetes_proximos_a_vencer">Paquetes proximos a vencer</string>
+    <string name="update_balances">¡Se han actualizado sus balances!</string>
+    <string name="update">Actualizado:\n</string>
+    <string name="vencimiento_message">Sus datos están próximos a vencer</string>
 </resources>

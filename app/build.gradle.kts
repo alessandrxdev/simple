@@ -13,8 +13,8 @@ android {
         applicationId = "com.arr.simple"
         minSdk = 23
         targetSdk = 33
-        versionCode = 40
-        versionName = "4.0.0"
+        versionCode = 41
+        versionName = "4.0.1"
         
         vectorDrawables { 
             useSupportLibrary = true
@@ -69,7 +69,6 @@ dependencies {
     implementation("com.github.applifycu:nautaclear:1.0.0")
     implementation("com.github.applifycu:didi-library:1.0.2-alpha3")
     
-    implementation("com.github.Drjacky:ImagePicker:2.3.22")
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation(project(":preference"))
     implementation(project(":fingerprint"))

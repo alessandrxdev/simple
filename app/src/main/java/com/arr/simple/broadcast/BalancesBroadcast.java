@@ -12,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import androidx.annotation.RequiresApi;
@@ -44,16 +45,19 @@ public class BalancesBroadcast extends BroadcastReceiver {
 
     private static final String CHANNEL_ID = "Balances";
     private static final String CHANNEL = "Update balances";
-
+    
     @Override
     public void onReceive(Context context, Intent intent) {
-
+        
         // import ussdUtils
         ussd = new UssdUtils(context);
         response = new ResponseUssd(ussd);
         Handler handler = new Handler(Looper.getMainLooper());
         executeUssdRequest(context, intent, handler, 0);
-
+        handler.postDelayed(()->{
+            updateWidget(context, intent);
+        }, 5000);
+        
         // TODO: SharedPreferences
         spBalance = PreferenceManager.getDefaultSharedPreferences(context);
         editor = spBalance.edit();
@@ -61,48 +65,50 @@ public class BalancesBroadcast extends BroadcastReceiver {
     }
 
     private void updateWidget(Context mContext, Intent mIntent) {
+        Handler mHandler = new Handler(Looper.getMainLooper());
+        mHandler.post(
+                () -> {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(mContext);
-        int[] appWidgetIds = mIntent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
+        int[] appWidgetIds = mIntent.getIntArrayExtra(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         if (appWidgetIds != null) {
             for (int appWidgetId : appWidgetIds) {
                 // Actualizar la vista del saldo del paquete
-                RemoteViews views =
-                        new RemoteViews(mContext.getPackageName(), R.layout.balances_widget);
+                RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.balances_widget);
 
                 // actualiza vistas
                 views.setTextViewText(R.id.appwidget_text_paquete, response.getDataAll());
-                views.setTextViewText(
-                        R.id.appwidget_text_lte, response.getLTE().replace(" LTE", ""));
+                views.setTextViewText(R.id.appwidget_text_lte, response.getLTE().replace(" LTE", ""));
                 views.setTextViewText(R.id.appwidget_text_vence, response.getVenceData());
                 views.setTextViewText(R.id.appwidget_text_minutos, response.getMinutos());
                 views.setTextViewText(R.id.appwidget_text_sms, response.getMensajes());
-                views.setTextViewText(
-                        R.id.time_update,
-                        spBalance
-                                .getString("actualizado", "sin actualizar")
-                                .replace("Última actualización: ", "").toString());
+                                        
+                // actualizado 
+                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
+                String time = sp.getString("actualizado", "sin actualizar").replace("Actualizado:\n", "");
+                views.setTextViewText(R.id.time_update, time);
+                        
                 appWidgetManager.updateAppWidget(appWidgetId, views);
+                }
             }
-        }
+        });
     }
 
     private void executeUssdRequest(Context context, Intent intent, Handler handler, int index) {
         if (index >= ussdCodes.length) {
-            // update widget
+            // actualizar tiempo
+            updateTime(context);
             updateWidget(context, intent);
-            updateTime();
-
+            
             // mostrar u ocultar notificación de balances actualizados
-            if (!spBalance.getBoolean("not_update_balances", false)) {
-                notificationUpdate(
-                        context,
-                        context.getString(R.string.title_balances),
-                        "¡Se ha actualizado sus balances!");
+            boolean isShow = spBalance.getBoolean("not_update_balances", false);
+            if (isShow) {
+                notificationUpdate(context, context.getString(R.string.title_balances), context.getString(R.string.update_balances));
             }
 
             // actualizar notificacipn de balances
-            if (!spBalance.getBoolean("balance_notif", false)) {
-                Intent broadcast = new Intent(context, NotificationBalances.class);
+            boolean viewBalances = spBalance.getBoolean("balance_notif", false);
+            if(viewBalances){
+               Intent broadcast = new Intent(context, NotificationBalances.class);
                 context.sendBroadcast(broadcast);
             }
             return;
@@ -154,12 +160,12 @@ public class BalancesBroadcast extends BroadcastReceiver {
     }
 
     // actualizar la hora de actualización de balances
-    private void updateTime() {
+    private void updateTime(Context mContext) {
         Calendar calendar = Calendar.getInstance();
         Date dat = calendar.getTime();
         SimpleDateFormat datFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
         String hActual = datFormat.format(dat);
-        editor.putString("actualizado", "Última actualización: " + hActual.toString());
+        editor.putString("actualizado",mContext.getString(R.string.update) + hActual.toString());
         editor.apply();
     }
 }

@@ -1,10 +1,6 @@
 package com.arr.simple.ui.perfil;
 
 import android.Manifest;
-<<<<<<< HEAD
-import android.annotation.SuppressLint;
-=======
->>>>>>> 7dae2940632a3016ff98ccbae3a6cc57bea2f161
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -20,10 +16,6 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-<<<<<<< HEAD
-import androidx.annotation.Nullable;
-=======
->>>>>>> 7dae2940632a3016ff98ccbae3a6cc57bea2f161
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -39,11 +31,6 @@ import com.arr.simple.databinding.FragmentProfileBinding;
 import com.arr.simple.utils.profile.ImageUtils;
 import com.bumptech.glide.Glide;
 
-<<<<<<< HEAD
-import java.util.Objects;
-
-=======
->>>>>>> 7dae2940632a3016ff98ccbae3a6cc57bea2f161
 
 public class ProfileFragment extends Fragment {
 
@@ -52,7 +39,7 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public View onCreateView(
-            @NonNull LayoutInflater inflater, @Nullable ViewGroup parent, Bundle arg2) {
+            @NonNull LayoutInflater inflater, @NonNull ViewGroup parent, Bundle arg2) {
         binding = FragmentProfileBinding.inflate(inflater, parent, false);
         requireActivity()
                 .getSupportFragmentManager()
@@ -74,8 +61,10 @@ public class ProfileFragment extends Fragment {
                     != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(
                         requireActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 20);
-
-
+                Bitmap bitmap = utils.getSavedImage();
+                if (bitmap != null) {
+                    Glide.with(requireContext()).load(bitmap).into(binding.profileImage);
+                }
             } else {
                 Bitmap bitmap = utils.getSavedImage();
                 if (bitmap != null) {
@@ -103,26 +92,18 @@ public class ProfileFragment extends Fragment {
         binding = null;
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
     private Drawable errorImage() {
         return requireActivity().getDrawable(R.drawable.ic_account_circle_24px);
     }
 
-<<<<<<< HEAD
-    private void guardar(Uri uri) {
-=======
     private boolean guardar(Uri uri) {
->>>>>>> 7dae2940632a3016ff98ccbae3a6cc57bea2f161
         if (isVersionCodeTiramisu()) {
             if (utils.saveImage(uri)) {
                 Glide.with(requireContext())
                         .load(uri)
                         .circleCrop()
                         .into(binding.profileImage);
-<<<<<<< HEAD
-=======
                 return true;
->>>>>>> 7dae2940632a3016ff98ccbae3a6cc57bea2f161
             }
         } else {
             // comprobar permisos
@@ -131,10 +112,7 @@ public class ProfileFragment extends Fragment {
                 ActivityCompat.requestPermissions(
                         requireActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 33);
 
-<<<<<<< HEAD
-=======
                 return true;
->>>>>>> 7dae2940632a3016ff98ccbae3a6cc57bea2f161
             } else {
                 if (utils.saveImage(uri)) {
                     Glide.with(requireContext())
@@ -146,10 +124,7 @@ public class ProfileFragment extends Fragment {
             }
 
         }
-<<<<<<< HEAD
-=======
         return false;
->>>>>>> 7dae2940632a3016ff98ccbae3a6cc57bea2f161
     }
 
     // show toast
@@ -161,22 +136,18 @@ public class ProfileFragment extends Fragment {
     ActivityResultLauncher<String> launchPicture =
             registerForActivityResult(
                     new ActivityResultContracts.GetContent(),
-<<<<<<< HEAD
-                    uri -> {
-                        if (uri != null) {
-                            guardar(uri);
-=======
                     new ActivityResultCallback<Uri>() {
                         @Override
                         public void onActivityResult(Uri uri) {
                             if (uri != null) {
                                 guardar(uri);
                             }
->>>>>>> 7dae2940632a3016ff98ccbae3a6cc57bea2f161
                         }
                     });
 
     public static class PerfilPreference extends PreferenceFragmentCompat {
+
+        private NavController nav;
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -184,24 +155,22 @@ public class ProfileFragment extends Fragment {
 
             // navigate to accounts nauta
             M3Preference nauta = findPreference("nauta");
-            if (nauta != null) {
-                nauta.setOnPreferenceClickListener(
-                        v -> {
-                            controller().navigate(R.id.nav_mails, null, options());
-                            return true;
-                        });
-            }
+            nauta.setOnPreferenceClickListener(
+                    v -> {
+                        controller().navigate(R.id.nav_mails, null, options());
+                        return true;
+                    });
 
             // change name user
             BSEditTextPreference name = findPreference("name");
-            if (name != null) {
-                name.setOnPreferenceChangeListener(
-                        (preference, value) -> false);
-            }
+            name.setOnPreferenceChangeListener(
+                    (preference, value) -> {
+                        return false;
+                    });
 
             // change number user
             BSEditTextPreference numero = findPreference("number");
-            if (numero != null && !Objects.requireNonNull(numero.getText()).isEmpty()) {
+            if (!numero.getText().isEmpty()) {
                 numero.setSummary(numero.getText());
             }
         }

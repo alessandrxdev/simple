@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
@@ -97,7 +99,14 @@ public class SimFragment extends Fragment {
                     });
 
             // dualsim
-            boolean isDual = sim.isDualSIM();
+            boolean isDual = false;
+            if(checkPermission()){
+                ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.READ_PHONE_STATE}, 23);
+                isDual = sim.isDualSIM();
+                Log.e("DUALSIM", "sim " + isDual);
+            }else{
+                ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.READ_PHONE_STATE}, 23);
+            }
             M3ListPreference dualSim = findPreference("sim");
             if (isDual) {
                 dualSim.setEnabled(true);
@@ -106,7 +115,12 @@ public class SimFragment extends Fragment {
                 dualSim.setSummary(R.string.is_not_dual_sim);
             }
         }
-
+        
+    private boolean checkPermission(){
+        int permissionResult = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_PHONE_STATE);
+        return permissionResult != PackageManager.PERMISSION_GRANTED;
+}
+        
         private ActivityResultLauncher<String> requestPermissionLauncher =
                 registerForActivityResult(
                         new ActivityResultContracts.RequestPermission(),
@@ -121,4 +135,5 @@ public class SimFragment extends Fragment {
                             }
                         });
     }
+    
 }
