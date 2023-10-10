@@ -151,7 +151,7 @@ public class PortalFragment extends Fragment {
                     @Override
                     public void handlerException(Exception e) {
                         Toast.makeText(requireContext(), "" + e, Toast.LENGTH_LONG).show();
-                        image.setImageDrawable(getActivity().getDrawable(R.drawable.ic_about_24px));
+                        image.setImageDrawable(requireActivity().getDrawable(R.drawable.ic_about_24px));
                     }
                 });
     }

@@ -58,14 +58,14 @@
         tools:layout="@layout/fragment_conected_login" />
 
     <fragment
-        android:id="@+id/nav_correo"
+        android:id="@+id/nav_rail_correo"
         android:name="com.arr.simple.ui.nauta.correo.ClearFragments"
         android:label="Correos"
         tools:layout="@layout/fragment_mail" />
 
     <!-- Settings -->
     <fragment
-        android:id="@+id/nav_settings"
+        android:id="@+id/nav_rail_settings"
         android:name="com.arr.simple.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
@@ -108,14 +108,14 @@
         tools:layout="@layout/fragment_account" />
 
     <fragment
-        android:id="@+id/nav_servicios"
+        android:id="@+id/nav_rail_servicios"
         android:name="com.arr.simple.ui.servicios.SmsFragment"
         android:label="Servicios"
         tools:layout="@layout/fragment_compras" />
 
 
     <fragment
-        android:id="@+id/nav_about"
+        android:id="@+id/nav_rail_about"
         android:name="com.arr.simple.ui.home.AboutFragment"
         android:label="Acerca de"
         tools:layout="@layout/fragment_about" />

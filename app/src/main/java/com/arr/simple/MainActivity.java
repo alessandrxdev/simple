@@ -11,6 +11,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -40,6 +42,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.navigationrail.NavigationRailView;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -79,25 +82,49 @@ public class MainActivity extends AppCompatActivity {
         drawer = binding.drawerLayout;
         NavigationRailView railView = binding.navRail;
         NavigationView navigationView = binding.navView;
-        railView.setOnItemSelectedListener(
+        
+        // cambiar los iconos del navigationRail en Halloween
+        Calendar calendar = Calendar.getInstance();
+        int month = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        if(month == Calendar.OCTOBER && dayOfMonth >= 30 && dayOfMonth <= 31){
+           Menu menu = railView.getMenu();
+           MenuItem i1 = menu.findItem(R.id.nav_rail_home);
+           MenuItem i2 = menu.findItem(R.id.nav_rail_servicios);
+           MenuItem i3 = menu.findItem(R.id.nav_rail_correo);
+           MenuItem i4 = menu.findItem(R.id.nav_rail_telepuntos);
+           MenuItem i5 = menu.findItem(R.id.nav_rail_settings);
+           MenuItem i6 = menu.findItem(R.id.nav_rail_about);
+            
+            i1.setIcon(R.drawable.halloween_home);
+            i2.setIcon(R.drawable.skull_24);
+            i3.setIcon(R.drawable.halloween_pumpkin);
+            i4.setIcon(R.drawable.halloween_ghost);
+            i5.setIcon(R.drawable.halloween_spider);
+            i6.setIcon(R.drawable.halloween_about);
+        }
+        
+        //OnItemSelected railView
+            railView.setOnItemSelectedListener(
                 menuItem -> {
                     int id = menuItem.getItemId();
-                    if (id == R.id.nav_servicios) {
+                    if (id == R.id.nav_rail_servicios) {
                         navController.navigate(id, null);
                     }
-                    if (id == R.id.nav_correo) {
+                    if (id == R.id.nav_rail_correo) {
                         navController.navigate(id, null);
                     }
-                    if (id == R.id.nav_telepuntos) {
+                    if (id == R.id.nav_rail_telepuntos) {
                       openGoogleMap();
                        // startActivity(new Intent(this, Test.class));
                     }
-                    if (id == R.id.nav_settings) {
+                    if (id == R.id.nav_rail_settings) {
                         navController.navigate(id, null);
                     }
-                    if (id == R.id.nav_about) {
+                    if (id == R.id.nav_rail_about) {
                         navController.navigate(id, null);
                     }
+                
                     return false;
                 });
 
@@ -148,17 +175,17 @@ public class MainActivity extends AppCompatActivity {
         navController.addOnDestinationChangedListener(
                 (controller, destination, arguments) -> {
                     int id = destination.getId();
-                    if (id == R.id.nav_settings
+                    if (id == R.id.nav_rail_settings
                             || id == R.id.nav_ui
                             || id == R.id.nav_pref_balance
                             || id == R.id.nav_security
                             || id == R.id.nav_sim
                             || id == R.id.nav_perfil
-                            || id == R.id.nav_correo
-                            || id == R.id.nav_servicios
+                            || id == R.id.nav_rail_correo
+                            || id == R.id.nav_rail_servicios
                             || id == R.id.nav_info_nauta
                             || id == R.id.nav_conectado
-                            || id == R.id.nav_about
+                            || id == R.id.nav_rail_about
                             || id == R.id.nav_mails) {
                         binding.appBarMain.contentToolbar.setVisibility(View.GONE);
                         getWindow().setNavigationBarColor(SurfaceColors.SURFACE_0.getColor(this));

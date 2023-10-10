@@ -18,6 +18,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
@@ -28,6 +29,7 @@ import com.arr.preference.BSEditTextPreference;
 import com.arr.preference.M3Preference;
 import com.arr.simple.R;
 import com.arr.simple.databinding.FragmentProfileBinding;
+import com.arr.simple.utils.Dialog.FullScreenDialog;
 import com.arr.simple.utils.profile.ImageUtils;
 import com.bumptech.glide.Glide;
 
@@ -61,8 +63,10 @@ public class ProfileFragment extends Fragment {
                     != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(
                         requireActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 20);
-
-
+                Bitmap bitmap = utils.getSavedImage();
+                if (bitmap != null) {
+                    Glide.with(requireContext()).load(bitmap).into(binding.profileImage);
+                }
             } else {
                 Bitmap bitmap = utils.getSavedImage();
                 if (bitmap != null) {
@@ -76,6 +80,12 @@ public class ProfileFragment extends Fragment {
         // fab select photo
         binding.addPhoto.setOnClickListener(view -> add_photo());
 
+        // long view photo
+        binding.profileImage.setOnLongClickListener(view->{
+            DialogFragment dialog = new FullScreenDialog();
+            dialog.show(requireActivity().getSupportFragmentManager(), null);
+            return true;
+        });
         return binding.getRoot();
     }
 

@@ -1,8 +1,8 @@
 package com.arr.simple.utils.profile;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -14,18 +14,14 @@ import android.graphics.Shader;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
-import android.widget.ImageView;
+
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 
 public class ImageUtils {
@@ -47,7 +43,7 @@ public class ImageUtils {
             Log.d(TAG, "SDK 33 no comprobar permisos");
             return saveImageWithPermissions(imageUri);
         } else {
-            if (!hasWritePermission()) {
+            if (!hasWriteStoragePermission()) {
                 Log.e(TAG, "No tienes permisos de escritura");
                 return false;
             } else {
@@ -64,7 +60,7 @@ public class ImageUtils {
             }
             return getSavedImageWithPermissions();
         } else {
-            if (!hasWritePermission()) {
+            if (!hasWriteStoragePermission()) {
                 return null;
             } else {
                 if (isRounded()) {
@@ -124,6 +120,20 @@ public class ImageUtils {
         return true;
     }
 
+    // probar si funciona en android 10
+    private boolean hasWriteStoragePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            return true;
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 33);
+
+                return false;
+            }
+        }
+
+        return true;
+    }
     // comprobar permiso de READ_EXTERNAL_STORAGE
     private boolean hasReadPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

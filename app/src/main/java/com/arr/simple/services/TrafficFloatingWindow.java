@@ -3,12 +3,14 @@ package com.arr.simple.services;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.GradientDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
 import android.net.TrafficStats;
 import android.os.Build;
 import android.os.Handler;
@@ -145,8 +147,7 @@ public class TrafficFloatingWindow extends Service {
         layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        windowManager.addView(binding.getRoot(), layoutParams);
-
+        
         // touch floating
         binding.floating.setOnTouchListener(
                 new View.OnTouchListener() {
@@ -174,7 +175,9 @@ public class TrafficFloatingWindow extends Service {
                         return true;
                     }
                 });
-
+        // view
+        windowManager.addView(binding.getRoot(), layoutParams);
+        
         ConnectivityManager connectivityManager =
                 (ConnectivityManager) this.getSystemService(CONNECTIVITY_SERVICE);
         if (connectivityManager != null) {
@@ -190,6 +193,12 @@ public class TrafficFloatingWindow extends Service {
                     binding.connection.setImageResource(R.drawable.ic_calendar_20px);
                 }
             }
+        }
+        
+        if(connected()){
+           startService(new Intent(this, TrafficFloatingWindow.class));
+        }else{
+          stopService(new Intent(this, TrafficFloatingWindow.class));
         }
 
         // crear notofocacion
@@ -220,4 +229,13 @@ public class TrafficFloatingWindow extends Service {
             windowManager.removeView(binding.getRoot());
         }
     }
+    private boolean connected(){
+            ConnectivityManager manager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo info = manager.getActiveNetworkInfo();
+            if(info != null && info.isConnected()){
+                return true;
+            }else{
+                return false;
+            }
+        }
 }

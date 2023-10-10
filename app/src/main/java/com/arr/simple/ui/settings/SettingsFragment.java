@@ -23,7 +23,6 @@ import androidx.preference.PreferenceManager;
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 
-import com.arr.didi.Didi;
 import com.arr.preference.M3Preference;
 import com.arr.preference.WaPerfilPreference;
 import com.arr.simple.R;
@@ -32,12 +31,11 @@ import com.arr.simple.databinding.FragmentSettingsBinding;
 import com.arr.simple.utils.profile.ImageUtils;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.elevation.SurfaceColors;
-import com.google.android.material.transition.platform.MaterialSharedAxis;
 
 public class SettingsFragment extends Fragment {
 
     private FragmentSettingsBinding binding;
-    private Didi didi;
+    
 
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

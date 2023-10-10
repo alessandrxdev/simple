@@ -179,15 +179,17 @@ public class BalancesFragment extends Fragment {
             boolean isCheck = spBalance.getBoolean("vence", true);
             if (isCheck) {
                 String datos = response.getVenceData();
-                String days = calculateDays(datos);
-                addReminding(days);
-                
+                if(datos != null){
+                addReminding(calculateDays(datos));
             }
+        }
             // actualizar notificación
             boolean isNotifi = spBalance.getBoolean("balance_notif", true);
             if (isNotifi) {
-                Intent broadcast = new Intent(requireActivity(), NotificationBalances.class);
-                requireActivity().sendBroadcast(broadcast);
+                if(isAdded()){
+                Intent broadcast = new Intent(requireContext(), NotificationBalances.class);
+                requireContext().sendBroadcast(broadcast);
+                }
             }
             
             return;

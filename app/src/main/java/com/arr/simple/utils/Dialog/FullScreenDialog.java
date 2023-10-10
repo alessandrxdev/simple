@@ -2,21 +2,23 @@ package com.arr.simple.utils.Dialog;
 
 import android.app.Dialog;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.WindowManager;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import androidx.preference.PreferenceManager;
-import com.arr.didi.Didi;
-import com.arr.simple.R;
-import android.view.View;
-import android.view.ViewGroup;
+
 import androidx.fragment.app.DialogFragment;
+import androidx.preference.PreferenceManager;
+
+import com.arr.simple.R;
+import com.arr.simple.utils.profile.ImageUtils;
+import com.bumptech.glide.Glide;
 
 public class FullScreenDialog extends DialogFragment {
 
@@ -33,7 +35,12 @@ public class FullScreenDialog extends DialogFragment {
                     dismiss();
                 });
         // load profile photo
-        new Didi(getContext()).load().setDirectoryName("Profile").setRounded(true).setImage(image);
+        Bitmap bitmap = new ImageUtils(requireContext()).getSavedImage();
+        if (bitmap != null) {
+            Glide.with(requireContext())
+            .load(bitmap)
+            .into(image);
+        }
         return view;
     }
 

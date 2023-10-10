@@ -13,8 +13,8 @@ android {
         applicationId = "com.arr.simple"
         minSdk = 23
         targetSdk = 33
-        versionCode = 41
-        versionName = "4.0.1"
+        versionCode = 43
+        versionName = "4.0.3"
         
         vectorDrawables { 
             useSupportLibrary = true
@@ -67,7 +67,6 @@ dependencies {
     implementation("com.airbnb.android:lottie:6.1.0")
     implementation("com.github.applifycu:bugsend:1.0.4-alpha3")
     implementation("com.github.applifycu:nautaclear:1.0.0")
-    implementation("com.github.applifycu:didi-library:1.0.2-alpha3")
     
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation(project(":preference"))

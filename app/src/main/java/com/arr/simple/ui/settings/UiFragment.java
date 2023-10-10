@@ -4,6 +4,8 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -24,6 +26,7 @@ import androidx.preference.PreferenceManager;
 import com.arr.preference.M3ListPreference;
 import com.arr.preference.M3SwitchPreference;
 import com.arr.simple.R;
+import com.arr.simple.broadcast.StatusNetwork;
 import com.arr.simple.databinding.FragmentSettingsBinding;
 
 import com.arr.simple.services.TrafficFloatingWindow;
@@ -145,6 +148,10 @@ public class UiFragment extends Fragment {
         private void startServiceFloating() {
             Intent intent = new Intent(getActivity(), TrafficFloatingWindow.class);
             getActivity().startService(intent);
+            
+            Intent broadcast = new Intent(requireActivity(), StatusNetwork.class);
+            getActivity().sendBroadcast(broadcast);
+            
         }
 
         private void stopServiceFloating() {

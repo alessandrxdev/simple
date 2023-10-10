@@ -30,7 +30,7 @@ public class LlamadasFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         TabAdapter adapter = new TabAdapter(getChildFragmentManager(), getLifecycle());
-        adapter.addFragment(new ContactosFragment());
+        adapter.addFragment(new LlamarFragment());
         adapter.addFragment(new UtilesFragment());
 
         binding.viewPage.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);

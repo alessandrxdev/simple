@@ -15,6 +15,7 @@ import android.provider.Settings;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
 import androidx.preference.PreferenceManager;
@@ -23,6 +24,7 @@ import com.arr.simple.broadcast.BalancesBroadcast;
 import com.arr.ussd.ResponseUssd;
 import com.arr.ussd.utils.UssdUtils;
 
+@RequiresApi(28)
 public class WidgetBalances extends AppWidgetProvider {
     
     private RemoteViews views;
@@ -80,6 +82,8 @@ public class WidgetBalances extends AppWidgetProvider {
                         
                         //update to 5 seconds
                         handler.postDelayed(this, 5000);
+
+                        /* actualizar vista del widget */
                         appWidgetManager.updateAppWidget(appWidgetId, views);
                 }
             };
