@@ -36,6 +36,7 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -60,7 +61,7 @@
                 android:resource="@xml/balances_widget_info" />
         </receiver>
         <receiver
-            android:name=".broadcast.BalancesBroadcast"
+            android:name=".broadcast.BalanceBroadcast"
             android:exported="true"
             android:enabled="true">
             <intent-filter>
@@ -108,7 +109,7 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name="com.arr.simple.utils.Scanner.CustomScanner"
+            android:name="com.arr.simple.utils.scanner.ScannerQR"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity

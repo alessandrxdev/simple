@@ -9,16 +9,17 @@
     <LinearLayout
          android:layout_height="match_parent"
          android:layout_width="match_parent"
-         android:layout_margin="16dp"
-         android:orientation="vertical">
+         android:orientation="vertical"
+         android:paddingBottom="80dp"
+         android:layout_marginLeft="16dp"
+         android:layout_marginRight="16dp"
+         android:layout_marginTop="10dp">
 
         <com.google.android.material.card.MaterialCardView
              android:layout_height="wrap_content"
              android:layout_width="match_parent"
              android:layout_margin="4dp"
-             app:cardElevation="3dp"
-             app:strokeWidth="0dp"
-             app:cardCornerRadius="20dp"
+             style="@style/MaterialCardView"
              android:id="@+id/recarga">
 
             <LinearLayout
@@ -81,6 +82,12 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+             android:layout_height="match_parent"
+             android:layout_width="match_parent"
+             android:scrollbars="none"
+             android:id="@+id/recyclerView" />
 
     </LinearLayout>
 

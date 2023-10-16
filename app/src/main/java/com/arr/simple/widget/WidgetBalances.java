@@ -17,12 +17,12 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
-
 import androidx.preference.PreferenceManager;
+
+import com.arr.services.ResponseUssd;
+import com.arr.services.utils.ussd.SendUssdUtils;
 import com.arr.simple.R;
-import com.arr.simple.broadcast.BalancesBroadcast;
-import com.arr.ussd.ResponseUssd;
-import com.arr.ussd.utils.UssdUtils;
+import com.arr.simple.broadcast.BalanceBroadcast;
 
 @RequiresApi(28)
 public class WidgetBalances extends AppWidgetProvider {
@@ -36,7 +36,7 @@ public class WidgetBalances extends AppWidgetProvider {
         for(int appWidgetId : appWidgetIds) {
             
             // utils
-            UssdUtils utils = new UssdUtils(context);
+            SendUssdUtils utils = new SendUssdUtils(context);
             response = new ResponseUssd(utils);
         
             /* comprobar si la version de Android es superior a android 8 para mostrar el Widget 
@@ -59,7 +59,7 @@ public class WidgetBalances extends AppWidgetProvider {
                 }else{
                     
                     /* si el permiso esta dado permitir al usuario sincronizar los balances */
-                    Intent intent = new Intent(context, BalancesBroadcast.class);
+                    Intent intent = new Intent(context, BalanceBroadcast.class);
                     pending = PendingIntent.getBroadcast(context, 0, intent , PendingIntent.FLAG_IMMUTABLE);
                     views.setOnClickPendingIntent(R.id.appwidget_sync, pending);
                 }
@@ -69,15 +69,15 @@ public class WidgetBalances extends AppWidgetProvider {
                 Runnable runnable = new Runnable(){
                     @Override
                     public void run() {
-                        views.setTextViewText(R.id.appwidget_text_minutos, response.getMinutos());
-                        views.setTextViewText(R.id.appwidget_text_sms, response.getMensajes());
-                        views.setTextViewText(R.id.appwidget_text_paquete, response.getDataAll());
-                        views.setTextViewText(R.id.appwidget_text_lte, response.getLTE().replace(" LTE",""));
-                        views.setTextViewText(R.id.appwidget_text_vence, response.getVenceData());
+                        views.setTextViewText(R.id.appwidget_text_minutos, response.minutos());
+                        views.setTextViewText(R.id.appwidget_text_sms, response.mensajes());
+                        views.setTextViewText(R.id.appwidget_text_paquete, response.allData());
+                        views.setTextViewText(R.id.appwidget_text_lte, response.dataLte());
+                        views.setTextViewText(R.id.appwidget_text_vence, response.venceAllData());
                         
                         // actualizado 
                         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-                        String time = sp.getString("actualizado", "sin actualizar").replace("Actualizado:\n", "");
+                        String time = sp.getString("update", "sin actualizar");
                         views.setTextViewText(R.id.time_update, time);
                         
                         //update to 5 seconds

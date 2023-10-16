@@ -134,12 +134,4 @@
         android:layout_marginTop="10dp"
         android:id="@+id/recycler" />
 
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center_horizontal"
-        android:text="\u2665 por Applify" />
-
 </RelativeLayout>

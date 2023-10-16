@@ -4,18 +4,19 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
-import android.content.Intent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.widget.Toast;
+
+import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
+
+import com.arr.services.ResponseUssd;
+import com.arr.services.utils.ussd.SendUssdUtils;
 import com.arr.simple.MainActivity;
 import com.arr.simple.R;
-import androidx.core.app.NotificationCompat;
-import com.arr.ussd.ResponseUssd;
-import com.arr.ussd.utils.UssdUtils;
 
 public class NotificationBalances extends BroadcastReceiver {
 
@@ -23,7 +24,7 @@ public class NotificationBalances extends BroadcastReceiver {
     private final String CHANNEL_NAME = "Balances";
     private final String CHANNEL_DESCRIPTION =
             "Muestra información de sus balances en la barra de notificaciones";
-    private UssdUtils ussd;
+    private SendUssdUtils ussd;
     private ResponseUssd response;
     private PendingIntent pendingBalances;
 
@@ -31,16 +32,16 @@ public class NotificationBalances extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         // TODO: UssdUtils
-        ussd = new UssdUtils(context);
+        ussd = new SendUssdUtils(context);
         response = new ResponseUssd(ussd);
 
         StringBuilder strBuilder = new StringBuilder();
-        strBuilder.append("I: ").append(response.getDataAll());
+        strBuilder.append("I: ").append(response.allData());
         strBuilder.append(" | ");
-        strBuilder.append("LTE: ").append(response.getLTE().replace(" LTE", ""));
+        strBuilder.append("LTE: ").append(response.dataLte());
         strBuilder.append(" | ");
-        strBuilder.append("CU: ").append(response.getDataCu().replaceFirst("/(.*)", ""));
-        strBuilder.append(" | ").append("V: ").append(response.getVenceData());
+        strBuilder.append("CU: ").append(response.nacionales());
+        strBuilder.append(" | ").append("V: ").append(response.venceAllData());
         String content = strBuilder.toString();
 
         // open app
@@ -67,7 +68,7 @@ public class NotificationBalances extends BroadcastReceiver {
                 != PackageManager.PERMISSION_GRANTED) {
         } else {
             Intent intentBalance =
-                    new Intent(context.getApplicationContext(), BalancesBroadcast.class);
+                    new Intent(context.getApplicationContext(), BalanceBroadcast.class);
             int flag = 0;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 flag = PendingIntent.FLAG_IMMUTABLE;

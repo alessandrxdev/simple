@@ -32,7 +32,8 @@ import com.arr.simple.databinding.FragmentProfileBinding;
 import com.arr.simple.utils.Dialog.FullScreenDialog;
 import com.arr.simple.utils.profile.ImageUtils;
 import com.bumptech.glide.Glide;
-
+import de.hdodenhof.circleimageview.CircleImageView;
+import java.io.File;
 
 public class ProfileFragment extends Fragment {
 
@@ -59,10 +60,13 @@ public class ProfileFragment extends Fragment {
                 Glide.with(requireContext()).load(bitmap).into(binding.profileImage);
             }
         } else {
-            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+            if (ContextCompat.checkSelfPermission(
+                            requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(
-                        requireActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 20);
+                        requireActivity(),
+                        new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},
+                        20);
                 Bitmap bitmap = utils.getSavedImage();
                 if (bitmap != null) {
                     Glide.with(requireContext()).load(bitmap).into(binding.profileImage);
@@ -74,21 +78,27 @@ public class ProfileFragment extends Fragment {
                 }
             }
         }
-        // ImageUtils
-
 
         // fab select photo
         binding.addPhoto.setOnClickListener(view -> add_photo());
 
         // long view photo
-        binding.profileImage.setOnLongClickListener(view->{
-            DialogFragment dialog = new FullScreenDialog();
-            dialog.show(requireActivity().getSupportFragmentManager(), null);
-            return true;
-        });
+        binding.profileImage.setOnLongClickListener(
+                view -> {
+                    Bitmap bitmap = utils.getSavedImage();
+                    if (bitmap != null) {
+                        DialogFragment dialog = new FullScreenDialog();
+                        dialog.show(requireActivity().getSupportFragmentManager(), null);
+                    }
+
+                    return true;
+                });
         return binding.getRoot();
     }
 
+    public CircleImageView imageProfile() {
+        return binding.profileImage;
+    }
     // add photo to gallery and camera
     private void add_photo() {
         launchPicture.launch("image/*");
@@ -107,30 +117,25 @@ public class ProfileFragment extends Fragment {
     private boolean guardar(Uri uri) {
         if (isVersionCodeTiramisu()) {
             if (utils.saveImage(uri)) {
-                Glide.with(requireContext())
-                        .load(uri)
-                        .circleCrop()
-                        .into(binding.profileImage);
+                Glide.with(requireContext()).load(uri).circleCrop().into(binding.profileImage);
                 return true;
             }
         } else {
             // comprobar permisos
-            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            if (ContextCompat.checkSelfPermission(
+                            requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(
-                        requireActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 33);
+                        requireActivity(),
+                        new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        33);
 
                 return true;
             } else {
                 if (utils.saveImage(uri)) {
-                    Glide.with(requireContext())
-                            .load(uri)
-                            .circleCrop()
-                            .into(binding.profileImage);
-
+                    Glide.with(requireContext()).load(uri).circleCrop().into(binding.profileImage);
                 }
             }
-
         }
         return false;
     }
@@ -193,7 +198,7 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    //TODO: comprobar si el SDK es superior a 33
+    // TODO: comprobar si el SDK es superior a 33
     private boolean isVersionCodeTiramisu() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU;
     }

@@ -32,7 +32,7 @@ public class ThemeManager {
                             AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                 } else {
                     AppCompatDelegate.setDefaultNightMode(
-                            AppCompatDelegate.MODE_NIGHT_AUTO);
+                            AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY);
                 }
         }
     }

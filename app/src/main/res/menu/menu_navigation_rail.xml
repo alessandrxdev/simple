@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/nav_rail_correo"
-        android:title="@string/title_entumovil"
+        android:title="@string/title_email"
         android:icon="@drawable/ic_entumovil_24px" />
 
     <item

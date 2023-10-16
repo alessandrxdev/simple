@@ -30,6 +30,18 @@
         android:text="" />
 
     <ImageView
+        android:layout_height="32dp"
+        android:layout_width="32dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:padding="3dp"
+        android:tint="@android:color/white"
+        android:src="@drawable/ic_delete_24px"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/delete" />
+
+    <ImageView
         android:layout_height="180dp"
         android:layout_width="180dp"
         android:src="@drawable/ic_account_circle_24px"

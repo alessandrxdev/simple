@@ -13,8 +13,8 @@ android {
         applicationId = "com.arr.simple"
         minSdk = 23
         targetSdk = 33
-        versionCode = 43
-        versionName = "4.0.3"
+        versionCode = 45
+        versionName = "4.0.5"
         
         vectorDrawables { 
             useSupportLibrary = true
@@ -25,11 +25,21 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-
+    /*
+    signingConfigs {
+        release {
+            storeFile(file("signing-key.jks"))
+            storePassword("")
+            keyAlias ("")
+            keyPassword ("")
+        }
+    }
+*/
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            /*signingConfig(signingConfigs("release"))*/
         }
     }
 
@@ -39,6 +49,7 @@ android {
     }
     
 }
+
 
 dependencies {
 
@@ -67,9 +78,11 @@ dependencies {
     implementation("com.airbnb.android:lottie:6.1.0")
     implementation("com.github.applifycu:bugsend:1.0.4-alpha3")
     implementation("com.github.applifycu:nautaclear:1.0.0")
-    
     implementation("de.hdodenhof:circleimageview:3.1.0")
+    
+    /* local projects */
     implementation(project(":preference"))
     implementation(project(":fingerprint"))
     implementation(project(":ussd"))
+    implementation(project(":simple-services"))
 }

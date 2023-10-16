@@ -14,11 +14,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
 import com.arr.simple.R;
+import com.arr.simple.ui.perfil.ProfileFragment;
 import com.arr.simple.utils.profile.ImageUtils;
 import com.bumptech.glide.Glide;
+import de.hdodenhof.circleimageview.CircleImageView;
+import java.io.File;
 
 public class FullScreenDialog extends DialogFragment {
 
@@ -37,13 +41,22 @@ public class FullScreenDialog extends DialogFragment {
         // load profile photo
         Bitmap bitmap = new ImageUtils(requireContext()).getSavedImage();
         if (bitmap != null) {
-            Glide.with(requireContext())
-            .load(bitmap)
-            .into(image);
+            Glide.with(requireContext()).load(bitmap).circleCrop().into(image);
         }
+
+        // delete image
+        ImageView delete = view.findViewById(R.id.delete);
+        delete.setOnClickListener(
+                v -> {
+                    File file = new ImageUtils(requireContext()).getFile();
+                    if (file != null && file.exists()) {
+                        file.delete();
+                        dismiss();
+                    }
+                });
         return view;
     }
-
+    
     @Override
     public Dialog onCreateDialog(Bundle arg0) {
         final RelativeLayout root = new RelativeLayout(getActivity());
@@ -61,6 +74,7 @@ public class FullScreenDialog extends DialogFragment {
 
         return dialog;
     }
+    
 
     public String getNombre() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());

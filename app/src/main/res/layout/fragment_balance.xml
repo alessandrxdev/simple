@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/swipe_refresh">
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            style="@style/MaterialCardView"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textAppearance="?textAppearanceTitleLarge"
+                    android:id="@+id/saldo"
+                    android:text="0.00 CUP" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textAppearance="?textAppearanceBodySmall"
+                    android:layout_margin="4dp"
+                    android:id="@+id/text_vence_saldo"
+                    android:text="00/00/00" />
+
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:drawablePadding="6dp"
+                        android:gravity="center_horizontal"
+                        android:layout_weight="1.0"
+                        android:id="@+id/min"
+                        android:drawableTop="@drawable/ic_voz_20px" />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:drawablePadding="6dp"
+                        android:gravity="center_horizontal"
+                        android:layout_weight="1.0"
+                        android:id="@+id/sms"
+                        android:drawableTop="@drawable/ic_sms_20px" />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:drawablePadding="6dp"
+                        android:gravity="center_horizontal"
+                        android:layout_weight="1.0"
+                        android:id="@+id/vence_min_sms"
+                        android:drawableTop="@drawable/ic_calendar_20px" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_height="170dp"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="5dp"
+                style="@style/MaterialCardView"
+                android:layout_weight="1.0">
+
+                <RelativeLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_margin="10dp">
+
+                    <com.google.android.material.progressindicator.CircularProgressIndicator
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        app:indicatorSize="120dp"
+                        android:layout_centerVertical="true"
+                        app:trackColor="@color/colorSecondaryContainer"
+                        android:layout_centerHorizontal="true"
+                        app:trackCornerRadius="10dp"
+                        app:indicatorInset="10dp"
+                        app:trackThickness="10dp"
+                        android:id="@+id/progress_datos"
+                        app:indicatorColor="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:textAppearance="?textAppearanceBodyMedium"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/text_vence_datos"
+                        android:text="0 días" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_height="170dp"
+                android:layout_width="130dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="5dp"
+                style="@style/MaterialCardView"
+                android:layout_alignParentRight="true">
+
+                <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical"
+                        android:layout_weight="1.0">
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:drawablePadding="10dp"
+                            android:drawableLeft="@drawable/ic_all_data_20px"
+                            android:textAppearance="?textAppearanceBodyMedium"
+                            android:layout_margin="4dp"
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/text_datos"
+                            android:text="1000 GB" />
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:drawablePadding="10dp"
+                            android:drawableLeft="@drawable/ic_data_lte_20px"
+                            android:textAppearance="?textAppearanceBodyMedium"
+                            android:layout_margin="4dp"
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/text_datos_lte"
+                            android:text="0 GB" />
+
+                        <TextView
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:drawablePadding="10dp"
+                            android:drawableLeft="@drawable/ic_nacional_20px"
+                            android:textAppearance="?textAppearanceBodyMedium"
+                            android:layout_margin="4dp"
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/text_datos_cu"
+                            android:text="0 MB" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/background_text"
+                        android:gravity="center_horizontal"
+                        android:textAppearance="?textAppearanceLabelSmall"
+                        android:padding="5dp"
+                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/text_tarifa"
+                        android:text="Desactivada" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="16dp"
+                style="@style/MaterialCardView"
+                android:layout_marginTop="5dp"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1.0">
+
+                <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:drawablePadding="4dp"
+                        android:textAppearance="?textAppearanceBodyMedium"
+                        android:layout_margin="4dp"
+                        android:drawableTop="@drawable/ic_message_20px"
+                        android:id="@+id/text_mensajeria"
+                        android:text="000 MB" />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:textAppearance="?textAppearanceBodySmall"
+                        android:layout_margin="4dp"
+                        android:id="@+id/text_vence_mensajeria"
+                        android:text="0 días" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="5dp"
+                style="@style/MaterialCardView"
+                android:layout_marginTop="5dp"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1.0">
+
+                <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:drawablePadding="4dp"
+                        android:textAppearance="?textAppearanceBodyMedium"
+                        android:layout_margin="4dp"
+                        android:drawableTop="@drawable/ic_diaria_20px"
+                        android:id="@+id/text_diaria"
+                        android:text="000 MB" />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:textAppearance="?textAppearanceBodySmall"
+                        android:layout_margin="4dp"
+                        android:id="@+id/text_vence_diaria"
+                        android:text="0 días" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_bonos"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            style="@style/MaterialCardView"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:drawablePadding="4dp"
+                    android:visibility="gone"
+                    android:layout_weight="1.0"
+                    android:textAppearance="?textAppearanceBodyMedium"
+                    android:layout_margin="4dp"
+                    android:gravity="center_horizontal"
+                    android:drawableTop="@drawable/ic_data_ilimitado_24px"
+                    android:id="@+id/ilimitados"
+                    android:text="" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:drawablePadding="4dp"
+                    android:visibility="gone"
+                    android:layout_weight="1.0"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?textAppearanceBodyMedium"
+                    android:layout_margin="4dp"
+                    android:drawableTop="@drawable/ic_all_data_20px"
+                    android:id="@+id/bonos_datos"
+                    android:text="" />
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_weight="1.0"
+                    android:drawablePadding="4dp"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?textAppearanceBodyMedium"
+                    android:layout_margin="4dp"
+                    android:drawableTop="@drawable/ic_saldo_movil_20px"
+                    android:id="@+id/bono_saldo"
+                    android:text="" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textAppearance="?textAppearanceBodySmall"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/update_time"
+            android:background="@drawable/background_text"
+            android:padding="6dp"
+            android:text="" />
+    </LinearLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

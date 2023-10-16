@@ -3,9 +3,6 @@ package com.arr.simple.ui.settings;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -13,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.Toast;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -22,20 +18,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
 import com.arr.preference.M3ListPreference;
 import com.arr.preference.M3SwitchPreference;
 import com.arr.simple.R;
-import com.arr.simple.broadcast.StatusNetwork;
 import com.arr.simple.databinding.FragmentSettingsBinding;
 
 import com.arr.simple.services.TrafficFloatingWindow;
 import com.arr.simple.utils.ThemeManager;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class UiFragment extends Fragment {
 
@@ -148,9 +138,6 @@ public class UiFragment extends Fragment {
         private void startServiceFloating() {
             Intent intent = new Intent(getActivity(), TrafficFloatingWindow.class);
             getActivity().startService(intent);
-            
-            Intent broadcast = new Intent(requireActivity(), StatusNetwork.class);
-            getActivity().sendBroadcast(broadcast);
             
         }
 

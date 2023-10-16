@@ -17,7 +17,7 @@
         <item
             android:id="@+id/nav_entumovil"
             android:icon="@drawable/ic_entumovil_24px"
-            android:title="@string/title_entumovil" />
+            android:title="@string/title_email" />
 
         <item
             android:id="@+id/nav_telepuntos"

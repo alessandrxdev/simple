@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -22,11 +23,12 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 
 import androidx.preference.PreferenceManager;
+import com.arr.services.utils.ussd.Call;
 import com.arr.simple.MainActivity;
 import com.arr.simple.databinding.FragmentHomeBinding;
-import com.arr.simple.utils.Scanner.CustomScanner;
+
 import com.arr.simple.utils.permissions.PermissionCheck;
-import com.arr.ussd.Call;
+import com.arr.simple.utils.scanner.ScannerQR;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -94,7 +96,7 @@ public class HomeFragment extends Fragment {
                 view -> {
                     ScanOptions scanner = new ScanOptions();
                     scanner.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
-                    scanner.setCaptureActivity(CustomScanner.class);
+                    scanner.setCaptureActivity(ScannerQR.class);
                     scanner.setPrompt("Centre el QR para escanear el código de recarga");
                     scanner.setOrientationLocked(true);
                     scanner.setTorchEnabled(false);
@@ -157,9 +159,9 @@ public class HomeFragment extends Fragment {
                                 binding.inputEditTextRecarga
                                         .getText()
                                         .toString()
-                                        .replace("-", "")
+                                        .replace(" ", "")
                                         .trim();
-                        new Call(getActivity()).code("*662" + code + Uri.encode("#"), SIM);
+                    new Call(getContext()).code("*662*" + code + Uri.encode("#"), SIM);
                     }
                     binding.inputEditTextRecarga.getText().clear();
                 });

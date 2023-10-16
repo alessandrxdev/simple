@@ -33,12 +33,10 @@
                  android:id="@+id/content" />
 
             <com.google.android.material.card.MaterialCardView
-                 android:layout_height="wrap_content"
-                 android:layout_width="match_parent"
-                 android:layout_margin="4dp"
-                 app:cardElevation="3dp"
-                 app:strokeWidth="0dp"
-                 app:cardCornerRadius="20dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_margin="4dp"
+                style="@style/MaterialCardView"
                  android:id="@+id/recarga">
 
                 <LinearLayout
@@ -97,9 +95,7 @@
                  android:layout_height="wrap_content"
                  android:layout_width="match_parent"
                  android:layout_margin="4dp"
-                 app:cardElevation="3dp"
-                 app:strokeWidth="0dp"
-                 app:cardCornerRadius="20dp"
+                 style="@style/MaterialCardView"
                  android:id="@+id/transferir">
 
                 <LinearLayout

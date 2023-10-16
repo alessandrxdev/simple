@@ -121,7 +121,7 @@ public class LoginFragment extends Fragment {
     private void showSnackBar(String message) {
         CoordinatorLayout view = ((MainActivity) getContext()).getCoordinator();
         BottomNavigationView nav = ((MainActivity) getContext()).getBottomNavigation();
-        if (isVisible()) {
+        if (isAdded() && view != null && nav != null) {
             Snackbar snack = Snackbar.make(view, message, Snackbar.LENGTH_LONG);
             snack.setAnchorView(view);
             snack.show();

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -98,29 +99,52 @@ public class SimFragment extends Fragment {
                         }
                     });
 
-            // dualsim
-            boolean isDual = false;
-            if(checkPermission()){
-                ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.READ_PHONE_STATE}, 23);
-                isDual = sim.isDualSIM();
-                Log.e("DUALSIM", "sim " + isDual);
-            }else{
-                ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.READ_PHONE_STATE}, 23);
-            }
+            // comprobar si el dispositivo es dualSIM
             M3ListPreference dualSim = findPreference("sim");
-            if (isDual) {
-                dualSim.setEnabled(true);
+            if (hasReadPhoneStatePermission()) {
+                boolean isDualSIM = sim.isDualSIM();
+                if (isDualSIM) {
+                    dualSim.setEnabled(true);
+                } else {
+                    dualSim.setEnabled(false);
+                    dualSim.setSummary(R.string.is_not_dual_sim);
+                }
             } else {
-                dualSim.setEnabled(false);
-                dualSim.setSummary(R.string.is_not_dual_sim);
+                requestReadPhoneStatePermission();
             }
         }
-        
-    private boolean checkPermission(){
-        int permissionResult = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_PHONE_STATE);
-        return permissionResult != PackageManager.PERMISSION_GRANTED;
-}
-        
+
+        private boolean hasReadPhoneStatePermission() {
+            return ContextCompat.checkSelfPermission(
+                            requireContext(), Manifest.permission.READ_PHONE_STATE)
+                    == PackageManager.PERMISSION_GRANTED;
+        }
+
+        private void requestReadPhoneStatePermission() {
+            readContact.launch(Manifest.permission.READ_PHONE_STATE);
+        }
+
+        // permission launcher READ_PHONE_STATE
+        private ActivityResultLauncher<String> readContact =
+                registerForActivityResult(
+                        new ActivityResultContracts.RequestPermission(),
+                        new ActivityResultCallback<Boolean>() {
+                            @Override
+                            public void onActivityResult(Boolean result) {
+                                if (result) {
+                                    M3ListPreference dualSim = findPreference("sim");
+                                    boolean isDualSIM = sim.isDualSIM();
+                                    if (isDualSIM) {
+                                        dualSim.setEnabled(true);
+                                    } else {
+                                        dualSim.setEnabled(false);
+                                        dualSim.setSummary(R.string.is_not_dual_sim);
+                                    }
+                                }
+                            }
+                        });
+
+        // permission launcher tarifa por consumo
         private ActivityResultLauncher<String> requestPermissionLauncher =
                 registerForActivityResult(
                         new ActivityResultContracts.RequestPermission(),
@@ -135,5 +159,4 @@ public class SimFragment extends Fragment {
                             }
                         });
     }
-    
 }

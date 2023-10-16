@@ -61,19 +61,11 @@ public class AboutFragment extends Fragment {
         list.add(new About(R.drawable.ic_account_circle_24px, "Harold Adan", "Ortografía"));
         list.add(new About(R.drawable.ic_account_circle_24px, "Ordiel Victor", "Colaborador"));
         list.add(new Header("Otros"));
-        list.add(
-                new About(
-                        R.drawable.ic_google_play_24px,
-                        "Valóranos",
-                        "Ayudanos a crecer en PlayStore"));
+        list.add(new About(R.drawable.ic_google_play_24px,"Valóranos","Ayudanos a crecer en PlayStore"));
         list.add(new About(R.drawable.ic_politicas_24px, "Licencias", "Licencias de terceros"));
         list.add(new About(R.drawable.ic_favorite_24px, "Donar", "Apoyar nuestro proyecto"));
-        list.add(
-                new About(
-                        R.drawable.ic_translate_24px,
-                        "Traducir",
-                        "Ayudar a traducir la aplicación"));
-
+        list.add(new About(R.drawable.ic_translate_24px,"Traducir","Ayudar a traducir la aplicación"));
+        
         // app version
         try {
             String version =

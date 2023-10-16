@@ -34,8 +34,8 @@ import com.arr.simple.databinding.NavRailHeaderBinding;
 import com.arr.simple.log.CrashActivity;
 import com.arr.simple.services.TrafficFloatingWindow;
 import com.arr.simple.utils.Greeting.GreetingUtils;
-import com.arr.simple.utils.Scanner.CustomScanner;
 import com.arr.simple.utils.profile.ImageUtils;
+import com.arr.simple.utils.scanner.ScannerQR;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.elevation.SurfaceColors;
 import com.google.android.material.navigation.NavigationView;
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                 v -> {
                     ScanOptions scanner = new ScanOptions();
                     scanner.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
-                    scanner.setCaptureActivity(CustomScanner.class);
+                    scanner.setCaptureActivity(ScannerQR.class);
                     scanner.setPrompt("Centre el QR para escanear el numero movil");
                     scanner.setOrientationLocked(true);
                     scanner.setBeepEnabled(false);
@@ -225,8 +225,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         if (image != null) {
-            int width = 100;
-            int height = 100;
+            int width = 90;
+            int height = 90;
             Bitmap profile = Bitmap.createScaledBitmap(image, width, height, true);
             return new BitmapDrawable(getResources(), profile);
         } else {

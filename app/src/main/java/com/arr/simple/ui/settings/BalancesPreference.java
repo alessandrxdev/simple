@@ -5,11 +5,9 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,16 +18,12 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
 
 import com.arr.preference.M3ListPreference;
 import com.arr.preference.M3SwitchPreference;
 import com.arr.simple.R;
-import com.arr.simple.broadcast.BalancesBroadcast;
+import com.arr.simple.broadcast.BalanceBroadcast;
 import com.arr.simple.broadcast.NotificationBalances;
-import com.arr.simple.broadcast.UpdateBalances;
-
-import java.util.Calendar;
 
 public class BalancesPreference extends Fragment {
 
@@ -160,7 +154,7 @@ public class BalancesPreference extends Fragment {
         private void setAlarm(long time) {
             AlarmManager manager =
                     (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-            Intent intent = new Intent(getActivity(), BalancesBroadcast.class);
+            Intent intent = new Intent(getActivity(), BalanceBroadcast.class);
             int flag = 0;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 flag |= PendingIntent.FLAG_IMMUTABLE;
@@ -179,7 +173,7 @@ public class BalancesPreference extends Fragment {
             }
             PendingIntent pending =
                     PendingIntent.getBroadcast(
-                            getContext(), 0, new Intent(getActivity(), BalancesBroadcast.class), flag);
+                            getContext(), 0, new Intent(getActivity(), BalanceBroadcast.class), flag);
             manager.cancel(pending);
         }
     }

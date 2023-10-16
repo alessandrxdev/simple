@@ -73,16 +73,16 @@ public class PlanesFragment extends Fragment {
         list.add(new Grid("SMS", "Consultar", 0));
         list.add(new Grid("VOZ", "Consultar", 0));
         list.add(new Header("Minutos"));
-        list.add(new Grid("5", "45.50 CUP / 30 días", R.drawable.ic_voz_20px));
-        list.add(new Grid("10", "72.50 CUP / 30 días",R.drawable.ic_voz_20px));
-        list.add(new Grid("15", "105 CUP / 30 días", R.drawable.ic_voz_20px));
-        list.add(new Grid("25", "162.50 CUP / 30 días",R.drawable.ic_voz_20px));
-        list.add(new Grid("40", "250 CUP / 30 días", R.drawable.ic_voz_20px));
+        list.add(new Grid("5 Min", "Minutos", R.drawable.ic_voz_20px));
+        list.add(new Grid("10 Min", "Minutos",R.drawable.ic_voz_20px));
+        list.add(new Grid("15 Min", "Minutos", R.drawable.ic_voz_20px));
+        list.add(new Grid("25 Min", "Minutos",R.drawable.ic_voz_20px));
+        list.add(new Grid("40 Min", "Minutos", R.drawable.ic_voz_20px));
         list.add(new Header("Mensajes"));
-        list.add(new Grid("20", "15 CUP / 30 días",R.drawable.ic_sms_20px));
-        list.add(new Grid("50", "30 CUP / 30 días", R.drawable.ic_sms_20px));
-        list.add(new Grid("90", "50 CUP / 30 días", R.drawable.ic_sms_20px));
-        list.add(new Grid("120", "60 CUP / 30 días", R.drawable.ic_sms_20px));
+        list.add(new Grid("20 Sms", "Mensajes",R.drawable.ic_sms_20px));
+        list.add(new Grid("50 Sms", "Mensajes", R.drawable.ic_sms_20px));
+        list.add(new Grid("90 Sms", "Mensajes", R.drawable.ic_sms_20px));
+        list.add(new Grid("120 Sms", "Mensajes", R.drawable.ic_sms_20px));
     }
 
     // TODO: Manejar los onclick
@@ -295,5 +295,11 @@ public class PlanesFragment extends Fragment {
                         })
                 .setNegativeButtom(null)
                 .show();
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+        list.clear();
     }
 }

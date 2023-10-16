@@ -125,8 +125,13 @@ public class ImageUtils {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             return true;
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 33);
+            if (ContextCompat.checkSelfPermission(
+                            context, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(
+                        (Activity) context,
+                        new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        33);
 
                 return false;
             }
@@ -179,6 +184,10 @@ public class ImageUtils {
     public ImageUtils setRounded(boolean isRound) {
         this.rounded = isRound;
         return this;
+    }
+
+    public File getFile() {
+        return createFile();
     }
 
     // redondear un Bitmap

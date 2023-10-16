@@ -22,9 +22,9 @@
 
     <fragment
         android:id="@+id/nav_balance"
-        android:name="com.arr.simple.ui.balances.BalancesFragment"
+        android:name="com.arr.simple.ui.balances.BalanceFragment"
         android:label="@string/title_balances"
-        tools:layout="@layout/fragment_balances" />
+        tools:layout="@layout/fragment_balance" />
 
     <fragment
         android:id="@+id/nav_compras"
@@ -34,9 +34,9 @@
 
     <fragment
         android:id="@+id/nav_llamadas"
-        android:name="com.arr.simple.ui.llamadas.LlamadasFragment"
+        android:name="com.arr.simple.ui.llamadas.LlamarFragment"
         android:label="@string/title_llamadas"
-        tools:layout="@layout/fragment_compras" />
+        tools:layout="@layout/fragment_llamar" />
 
     <fragment
         android:id="@+id/nav_nauta"
