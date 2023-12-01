@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 import com.arr.services.ResponseUssd;
+import com.arr.services.UssdResponse;
 import com.arr.services.utils.ussd.SendUssdUtils;
 import com.arr.simple.databinding.FragmentBalanceBinding;
 import java.text.SimpleDateFormat;
@@ -30,6 +31,8 @@ public class BalanceFragment extends Fragment {
     private SendUssdUtils utils;
     private ResponseUssd response;
 
+    private UssdResponse response2;
+
     private final String[] ussdCodes = {
         "*222#", "*222*328#", "*222*266#", "*222*767#", "*222*869#",
     };
@@ -38,7 +41,7 @@ public class BalanceFragment extends Fragment {
     private SharedPreferences sp;
     private SharedPreferences.Editor edit;
     private String sim;
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle arg2) {
         binding = FragmentBalanceBinding.inflate(inflater, parent, false);
@@ -46,13 +49,14 @@ public class BalanceFragment extends Fragment {
         sp = PreferenceManager.getDefaultSharedPreferences(requireContext());
         edit = sp.edit();
         sim = sp.getString("sim", "0");
-        
+
         // services sendUssd
         utils = new SendUssdUtils(getContext());
         response = new ResponseUssd(utils);
+        response2 = new UssdResponse(utils);
 
         // mostrar contenido
-        viewContectBalances();
+        // viewContectBalances();
         binding.updateTime.setText(sp.getString("update", "sin actualizar"));
 
         // sincronizar balances
@@ -63,15 +67,43 @@ public class BalanceFragment extends Fragment {
                     showToast("Actualizando balances, espere...");
                 });
 
+        // balances datos
+        response2.balancesDatos(
+                binding.textTarifa,
+                binding.textDatos,
+                binding.textDatosLte,
+                binding.textMensajeria,
+                binding.textDiaria,
+                binding.textDatosCu);
+
+        // expire datos
+        response2.balanceVencimiento(
+                binding.textVenceDatos, binding.textVenceMensajeria, binding.textVenceDiaria);
+        int progress = response2.expireDaysProgress();
+        progress(progress);
+
+        // balances saldo
+        response2.balancesSaldo(
+                binding.saldo,
+                binding.textVenceSaldo,
+                binding.min,
+                binding.sms,
+                binding.venceMinSms);
+
+        // bonos en promoción
+        response2.balanceBonos(binding.bonoIlimitado, binding.bonoSaldoo, binding.bonoDatos);
+
         return binding.getRoot();
     }
 
     private void viewContectBalances() {
         // bonos
-        if((response.ilimitado() != null && !response.ilimitado().isBlank()) || (response.bonosDatos() != null && !response.bonosDatos().isBlank()) || (response.bonosSaldo() != null && !response.bonosSaldo().isBlank())){
+        if ((response.ilimitado() != null && !response.ilimitado().isBlank())
+                || (response.bonosDatos() != null && !response.bonosDatos().isBlank())
+                || (response.bonosSaldo() != null && !response.bonosSaldo().isBlank())) {
             binding.cardBonos.setVisibility(View.VISIBLE);
         }
-        
+
         if (!response.ilimitado().isEmpty()) {
             binding.ilimitados.setVisibility(View.VISIBLE);
             binding.ilimitados.setText(response.ilimitado());
@@ -88,29 +120,33 @@ public class BalanceFragment extends Fragment {
         // balances datos
         binding.textTarifa.setText(response.tarifa());
         binding.textDatos.setText(response.allData());
+
+        Log.w("ALLLL ", response.allData());
+
         binding.textDatosLte.setText(response.dataLte());
         binding.textDatosCu.setText(response.nacionales());
-        binding.textVenceDatos.setText(response.venceAllData());
-        
+        binding.textVenceDatos.setText(response.venceAllData().replace(" dias", " días"));
+
         // update progress bar
         if (response.venceAllData() != null) {
-            Matcher matcher = Pattern.compile("\\d+").matcher(response.venceAllData());
-            while(matcher.find()) {
-            	String strDays = matcher.group();
-                if(strDays != null){
+            Matcher matcher =
+                    Pattern.compile("\\d+").matcher(response.venceAllData().replace(" dias", ""));
+            while (matcher.find()) {
+                String strDays = matcher.group();
+                if (strDays != null) {
                     int days = Integer.parseInt(strDays);
-                   progress(days);
+                    progress(days);
                 }
             }
         } else {
             progress(0);
         }
-        
-        // bolsa diaria 
+
+        // bolsa diaria
         binding.textDiaria.setText(response.diaria());
         binding.textVenceDiaria.setText(response.venceDiaria());
-        
-        // bolsa de mensajeria 
+
+        // bolsa de mensajeria
         binding.textMensajeria.setText(response.mensajeria());
         binding.textVenceMensajeria.setText(response.venceMensajeria());
 
@@ -119,13 +155,14 @@ public class BalanceFragment extends Fragment {
         binding.textVenceSaldo.setText("Expira: " + response.venceSaldo());
         binding.min.setText(response.minutos());
         binding.sms.setText(response.mensajes());
-        binding.venceMinSms.setText(response.venceMensajes());
+        binding.venceMinSms.setText(response.venceMensajes().replace(" dias", " días"));
     }
-    
+
     // execute code ussd
     private void executeUssdRequest(Handler handler, int index) {
         if (index >= ussdCodes.length) {
             if (isVisible()) {
+
                 binding.swipeRefresh.setRefreshing(false);
                 showToast("Balances actualizados");
                 viewContectBalances();
@@ -155,8 +192,8 @@ public class BalanceFragment extends Fragment {
         binding.progressDatos.setMax(100);
         binding.progressDatos.setProgress(progress);
     }
-    
-    private void updateTime(){
+
+    private void updateTime() {
         Calendar calendar = Calendar.getInstance();
         Date dat = calendar.getTime();
         SimpleDateFormat datFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
@@ -165,8 +202,8 @@ public class BalanceFragment extends Fragment {
         edit.apply();
         String hor = sp.getString("update", "sin actualizar");
         binding.updateTime.setText(hor);
+    }
 
-}
     @Override
     public void onDestroyView() {
         super.onDestroyView();

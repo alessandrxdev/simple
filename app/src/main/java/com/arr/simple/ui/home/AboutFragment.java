@@ -66,6 +66,7 @@ public class AboutFragment extends Fragment {
         list.add(new About(R.drawable.ic_favorite_24px, "Donar", "Apoyar nuestro proyecto"));
         list.add(new About(R.drawable.ic_translate_24px,"Traducir","Ayudar a traducir la aplicación"));
         
+        
         // app version
         try {
             String version =

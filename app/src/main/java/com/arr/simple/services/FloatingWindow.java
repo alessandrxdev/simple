@@ -5,46 +5,41 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
-import android.graphics.drawable.GradientDrawable;
 import android.net.ConnectivityManager;
-import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
 import android.net.TrafficStats;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
+import android.content.Intent;
 import android.os.Looper;
 import android.provider.Settings;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
-
-import androidx.core.app.NotificationCompat;
-
-import androidx.preference.PreferenceManager;
 import com.arr.simple.R;
+import android.view.WindowManager;
+import androidx.core.app.NotificationCompat;
 import com.arr.simple.databinding.LayoutFloatingWindowBinding;
 
-public class TrafficFloatingWindow extends Service {
-
+public class FloatingWindow extends Service {
+    
     private WindowManager windowManager;
-    private WindowManager.LayoutParams layoutParams;
-    private View view;
-    private static final String CHANNEL = "traffic";
     private LayoutFloatingWindowBinding binding;
-    private BroadcastReceiver broadcastNetwork;
+    private WindowManager.LayoutParams layoutParams;
+    
+    private static final String CHANNEL = "traffic";
+    private boolean isVisible = false;
     
     @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
-
+    
+    
     private Handler handler = new Handler(Looper.getMainLooper());
 
     private long lastRxBytes = 0;
@@ -69,7 +64,6 @@ public class TrafficFloatingWindow extends Service {
                     handler.postDelayed(runnable, 1000);
                 }
         
-           
         public String calculateSpeed(long timeTaken, long downBytes, long upBytes) {
                     long downSpeed = 0;
                     long upSpeed = 0;
@@ -114,22 +108,72 @@ public class TrafficFloatingWindow extends Service {
         lastRxBytes = TrafficStats.getTotalRxBytes();
         lastTxBytes = TrafficStats.getTotalTxBytes();
         lastTime = System.currentTimeMillis();
+    
         
+        
+        registerReceiver(network, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+        
+    }
+    
+    private BroadcastReceiver network = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (activeNetwork()) {
+                if (windowManager == null)
+                initFloating();
+                showFloatWidget();
+            } else {
+                hideFloatWidget();
+            }
+        }
+    };
+    
+    private boolean activeNetwork() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (cm != null) {
+            return cm.getActiveNetworkInfo() != null;
+        }
+        return false;
+    }
+    
+    // permiso de superposición
+    private boolean permission(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            return Settings.canDrawOverlays(this);
+        }
+        return true;
+    }
+    
+    private void hideFloatWidget() {
+        if (isVisible && windowManager != null) {
+            windowManager.removeView(binding.getRoot());
+            isVisible = false;
+        }
+    }
 
-        windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
-        binding = LayoutFloatingWindowBinding.inflate(LayoutInflater.from(this));
+    private void showFloatWidget() {
+        if (!isVisible && windowManager != null) {
+        if (binding.getRoot().isAttachedToWindow()) {
+            return;
+        }
+            int fx = 0;
+            int fy = 0;
 
-        SharedPreferences spColor = PreferenceManager.getDefaultSharedPreferences(this);
-        String selectColor = spColor.getString("floating_color", "colorPrimary");
-        int color =
-                getResources()
-                        .getColor(
-                                getResources()
-                                        .getIdentifier(selectColor, "color", getPackageName()));
-        GradientDrawable drawable = (GradientDrawable) binding.floating.getBackground();
-        drawable.setColor(color);
+            layoutParams.x = fx;
+            layoutParams.y = fy;
 
-        //
+            windowManager.addView(binding.getRoot(), layoutParams);
+            isVisible = true;
+        }
+    }
+
+    // iniciar superposicion
+    private void initFloating(){
+        if(permission()){
+            windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+            binding = LayoutFloatingWindowBinding.inflate(LayoutInflater.from(this));
+            
+        // inflating window
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             layoutParams =
                     new WindowManager.LayoutParams(
@@ -152,8 +196,7 @@ public class TrafficFloatingWindow extends Service {
         layoutParams.verticalMargin = 0.1f;
         layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-
-        
+            
         // touch floating
         binding.floating.setOnTouchListener(
                 new View.OnTouchListener() {
@@ -181,27 +224,10 @@ public class TrafficFloatingWindow extends Service {
                         return true;
                     }
                 });
-        // view
-        windowManager.addView(binding.getRoot(), layoutParams);
-        
-        ConnectivityManager connectivityManager =
-                (ConnectivityManager) this.getSystemService(CONNECTIVITY_SERVICE);
-        if (connectivityManager != null) {
-            NetworkCapabilities network =
-                    connectivityManager.getNetworkCapabilities(
-                            connectivityManager.getActiveNetwork());
-            if (network != null) {
-                if (network.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                    binding.connection.setImageResource(R.drawable.ic_data_lte_20px);
-                } else if (network.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                    binding.connection.setImageResource(R.drawable.ic_nauta_fill_24px);
-                } else {
-                    binding.connection.setImageResource(R.drawable.ic_calendar_20px);
-                }
-            }
-        }
-        
-        // crear notofocacion
+            
+            windowManager.addView(binding.getRoot(), layoutParams);
+            
+                    // crear notofocacion
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel =
                     new NotificationChannel(
@@ -220,36 +246,11 @@ public class TrafficFloatingWindow extends Service {
         int NOTIFICATION_ID = 1;
         startForeground(NOTIFICATION_ID, builder.build());
         handler.post(runnable);
+        }
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (binding != null) {
-            windowManager.removeView(binding.getRoot());
-        }
-    }
-    private boolean connected(){
-            ConnectivityManager manager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo info = manager.getActiveNetworkInfo();
-            if(info != null && info.isConnected()){
-                return true;
-            }else{
-                return false;
-            }
-        }
-    
-    private void startFloating(){
-        if(permissions()){
-            
-        }
-    }
-    
-    private boolean permissions(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-        return Settings.canDrawOverlays(this);
-        
-        }
-        return true;
+        unregisterReceiver(network);
     }
 }

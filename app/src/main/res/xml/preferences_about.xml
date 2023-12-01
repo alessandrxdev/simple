@@ -1,0 +1,22 @@
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.arr.preference.M3Preference
+        app:key="support"
+        app:icon="@drawable/ic_support_24px"
+        app:title="Soporte"
+        app:summary="Obten ayuda, contáctenos" />
+
+    <com.arr.preference.M3Preference
+        app:key="legal"
+        app:icon="@drawable/ic_file_24px"
+        app:title="Legal"
+        app:summary="Condiciones y Políticas de privacidad" />
+
+    <com.arr.preference.M3Preference
+        app:key="about"
+        app:icon="@drawable/ic_about_24px"
+        app:title="Acerca de"
+        app:summary="Información de la aplicación" />
+
+</PreferenceScreen>

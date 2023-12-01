@@ -9,9 +9,11 @@ import java.util.regex.Pattern;
 public class ResponseUssd {
 
     private final SendUssdUtils utils;
-    private String testBonos = "Datos: ilimitados vence 26-08-23. 25.18 GB vence 26-08-23. Datos.cu 297 MB vence 14-09-23.";
-    private String testBonosSaldo = "$831.72 vence 29-06-23. Datos: ilimitados vence 25-07-23. 24.64 GB vence 25-07-23. Datos.cu 295 MB vence 25-07-23.";
-    
+    private String testBonos =
+            "Datos: ilimitados vence 26-08-23. 25.18 GB vence 26-08-23. Datos.cu 297 MB vence 14-09-23.";
+    private String testBonosSaldo =
+            "$831.72 vence 29-06-23. Datos: ilimitados vence 25-07-23. 24.64 GB vence 25-07-23. Datos.cu 295 MB vence 25-07-23.";
+
     public ResponseUssd(SendUssdUtils util) {
         this.utils = util;
     }
@@ -106,10 +108,10 @@ public class ResponseUssd {
         Pattern pattern = Pattern.compile(cadena);
         Matcher matcher = pattern.matcher(response);
         if (matcher.find()) {
-            String result = matcher.group("vence").replace(" dias", " días");
-            return (result != null) ? result : "0 días";
+            String result = matcher.group("vence");
+            return (result != null) ? result : "0 dias";
         }
-        return "0 días";
+        return "0 dias";
     }
 
     // TODO: obtener cantidad de datos de la bolsa diaria
@@ -159,9 +161,9 @@ public class ResponseUssd {
         Matcher matcher = pattern.matcher(response);
         if (matcher.find()) {
             String result = matcher.group("dias");
-                return (result != null) ? result : "0 días";
+                return (result != null) ? result : "0 dias";
         }
-        return "0 días";
+        return "0 dias";
     }
     
     // TODO: obtener cantidad de minutos 

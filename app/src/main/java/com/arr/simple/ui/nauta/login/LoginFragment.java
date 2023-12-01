@@ -51,14 +51,14 @@ public class LoginFragment extends Fragment {
         // rellenado
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity());
         boolean isActive = sp.getBoolean("autocomplete", false);
-        if(isActive){
+        if (isActive) {
             binding.editUser.setText(sp.getString("internet", ""));
-            binding.editPassword.setText(sp.getString("passInternet",""));
-        }else{
+            binding.editPassword.setText(sp.getString("passInternet", ""));
+        } else {
             binding.editUser.getText().clear();
             binding.editPassword.getText().clear();
         }
-        
+
         // VPN Activo
         if (isVpnActive()) {
             Toast.makeText(getActivity(), "Desactive su VPN para poder acceder ", Toast.LENGTH_LONG)
@@ -106,9 +106,10 @@ public class LoginFragment extends Fragment {
                             map.put("estado", info.getAccountInfo().getAccountStatus());
                             map.put("account", usuario);
                             new Data(getActivity()).save("login", map);
+
+                            // next to info
+                            navigation.navigate(R.id.nav_conectado, null, options());
                         }
-                        // next to info
-                        navigation.navigate(R.id.nav_conectado, null, options());
                     }
 
                     @Override

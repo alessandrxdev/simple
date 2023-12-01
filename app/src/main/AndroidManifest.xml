@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-feature
@@ -14,11 +14,11 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
     <uses-permission
-            android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32"
         tools:ignore="ScopedStorage" />
     <uses-permission
-            android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -36,7 +36,6 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -68,14 +67,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver
-            android:name=".broadcast.StatusNetwork"
-            android:exported="true"
-            android:enabled="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
+
         <receiver
             android:name="com.arr.simple.broadcast.NotificationBalances"
             android:exported="true">
@@ -86,10 +78,25 @@
                     android:scheme="package" />
             </intent-filter>
         </receiver>
-
+        <receiver
+            android:name=".broadcast.NotificationNewYear"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.arr.simple.NOTIFICATION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
         <service
-            android:name="com.arr.simple.services.TrafficFloatingWindow" />
-
+            android:name=".services.TrafficFloatingWindow" />
+        <service
+            android:name=".services.FloatingWindow" />
+        <receiver
+            android:name=".service.network"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
         <activity
             android:name=".activity.WelcomeActivity"
             android:screenOrientation="portrait"

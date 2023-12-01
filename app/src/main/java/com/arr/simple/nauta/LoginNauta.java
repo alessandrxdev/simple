@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.widget.Toast;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import com.arr.simple.App;
@@ -35,8 +36,7 @@ public class LoginNauta {
     public long time() {
         return mTime;
     }
-    
-    
+
     // hacer coneccion con el login nauta
     public void connect(String usuario, String password, LoginCallback callback) {
         Executor executor = Executors.newSingleThreadExecutor();
@@ -103,7 +103,7 @@ public class LoginNauta {
                         mActivity.runOnUiThread(() -> callback.loadCaptcha(bitmap));
                     } catch (Exception e) {
                         e.printStackTrace();
-                        mActivity.runOnUiThread(() -> callback.handlerException(e));
+                        showToast("Error: " + e);
                     }
                 });
     }
@@ -125,5 +125,9 @@ public class LoginNauta {
     // navigate to next fragment
     private NavController navigation() {
         return Navigation.findNavController(mActivity, R.id.nav_host_fragment_content_main);
+    }
+
+    private void showToast(String message) {
+        mActivity.runOnUiThread(() -> Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show());
     }
 }

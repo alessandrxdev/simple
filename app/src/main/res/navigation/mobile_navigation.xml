@@ -127,4 +127,10 @@
         android:label="@string/perfil_title"
         tools:layout="@layout/fragment_profile" />
 
+    <fragment
+        android:id="@+id/nav_help"
+        android:name="com.arr.simple.ui.settings.AboutPreference"
+        android:label="Ayuda"
+        tools:layout="@layout/fragment_settings" />
+    
 </navigation>

@@ -2,8 +2,12 @@
 <resources>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title" translatable="false">Applify</string>
-    <string name="nav_header_subtitle" translatable="false">soporteapplify@gmail.com</string>
+    <string
+            name="nav_header_title"
+            translatable="false">Applify</string>
+    <string
+            name="nav_header_subtitle"
+            translatable="false">soporteapplify@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="app_name">SIMple</string>
@@ -167,4 +171,5 @@
     <string name="update_balances">¡Se han actualizado sus balances!</string>
     <string name="update">Actualizado:\n</string>
     <string name="vencimiento_message">Sus datos están próximos a vencer</string>
+    <string name="happy_new_year">Que este año esté lleno de alegría, éxito y momentos inolvidables para ti. Agradecemos su apoyo continuo, por formar parte de nuestra comunidad y por elegir nuestra aplicación para ser parte de su día a día. ¡Gracias por todo!</string>
 </resources>

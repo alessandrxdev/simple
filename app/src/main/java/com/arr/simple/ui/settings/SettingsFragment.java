@@ -173,7 +173,10 @@ public class SettingsFragment extends Fragment {
             M3Preference info = findPreference("help");
             info.setOnPreferenceClickListener(
                     v -> {
-                        Toast.makeText(getActivity(), "Próximamente...", Toast.LENGTH_LONG).show();
+                       nav.navigate(
+                                R.id.nav_help,
+                                null,
+                                new NavOptions.Builder().setLaunchSingleTop(true).build());
                         return true;
                     });
         }

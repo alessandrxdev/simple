@@ -2,6 +2,9 @@ package com.arr.simple;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -29,6 +32,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.preference.PreferenceManager;
 
 import com.arr.bugsend.BugSend;
+import com.arr.simple.broadcast.NotificationNewYear;
 import com.arr.simple.databinding.ActivityMainBinding;
 import com.arr.simple.databinding.NavRailHeaderBinding;
 import com.arr.simple.log.CrashActivity;
@@ -60,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         setSupportActionBar(binding.appBarMain.toolbar);
 
+        // mostrar una notificación por año nuevo
+        initNotificationNewYear();
+
         // TODO: Quitar el foco de los TextInputEditText al entrar a una Activity o Fragment
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
@@ -82,30 +89,37 @@ public class MainActivity extends AppCompatActivity {
         drawer = binding.drawerLayout;
         NavigationRailView railView = binding.navRail;
         NavigationView navigationView = binding.navView;
-        
+
         // cambiar los iconos del navigationRail en Halloween
         Calendar calendar = Calendar.getInstance();
         int month = calendar.get(Calendar.MONTH);
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-        if(month == Calendar.OCTOBER && dayOfMonth >= 30 && dayOfMonth <= 31){
-           Menu menu = railView.getMenu();
-           MenuItem i1 = menu.findItem(R.id.nav_rail_home);
-           MenuItem i2 = menu.findItem(R.id.nav_rail_servicios);
-           MenuItem i3 = menu.findItem(R.id.nav_rail_correo);
-           MenuItem i4 = menu.findItem(R.id.nav_rail_telepuntos);
-           MenuItem i5 = menu.findItem(R.id.nav_rail_settings);
-           MenuItem i6 = menu.findItem(R.id.nav_rail_about);
-            
+        Menu menu = railView.getMenu();
+        MenuItem i1 = menu.findItem(R.id.nav_rail_home);
+        MenuItem i2 = menu.findItem(R.id.nav_rail_servicios);
+        MenuItem i3 = menu.findItem(R.id.nav_rail_correo);
+        MenuItem i4 = menu.findItem(R.id.nav_rail_telepuntos);
+        MenuItem i5 = menu.findItem(R.id.nav_rail_settings);
+
+        if (month == Calendar.OCTOBER && dayOfMonth >= 30 && dayOfMonth <= 31) {
             i1.setIcon(R.drawable.halloween_home);
             i2.setIcon(R.drawable.skull_24);
             i3.setIcon(R.drawable.halloween_pumpkin);
             i4.setIcon(R.drawable.halloween_ghost);
             i5.setIcon(R.drawable.halloween_spider);
-            i6.setIcon(R.drawable.halloween_about);
         }
-        
-        //OnItemSelected railView
-            railView.setOnItemSelectedListener(
+
+        // * del 25 al 31 se agregan iconos de navidad
+        if (month == Calendar.DECEMBER && dayOfMonth >= 25 && dayOfMonth <= 31) {
+            i1.setIcon(R.drawable.navidad_home);
+            i2.setIcon(R.drawable.navidad_services);
+            i3.setIcon(R.drawable.navidad_correo);
+            i4.setIcon(R.drawable.navidad_telepuntos);
+            i5.setIcon(R.drawable.navidad_settings);
+        }
+
+        // OnItemSelected railView
+        railView.setOnItemSelectedListener(
                 menuItem -> {
                     int id = menuItem.getItemId();
                     if (id == R.id.nav_rail_servicios) {
@@ -115,16 +129,13 @@ public class MainActivity extends AppCompatActivity {
                         navController.navigate(id, null);
                     }
                     if (id == R.id.nav_rail_telepuntos) {
-                      openGoogleMap();
-                       // startActivity(new Intent(this, Test.class));
+                        openGoogleMap();
+                        // startActivity(new Intent(this, Test.class));
                     }
                     if (id == R.id.nav_rail_settings) {
                         navController.navigate(id, null);
                     }
-                    if (id == R.id.nav_rail_about) {
-                        navController.navigate(id, null);
-                    }
-                
+
                     return false;
                 });
 
@@ -157,11 +168,11 @@ public class MainActivity extends AppCompatActivity {
         // TODO: menu should be considered as top level destinations.
         mAppBarConfiguration =
                 new AppBarConfiguration.Builder(
-                        R.id.nav_home,
-                        R.id.nav_balance,
-                        R.id.nav_compras,
-                        R.id.nav_llamadas,
-                        R.id.nav_nauta)
+                                R.id.nav_home,
+                                R.id.nav_balance,
+                                R.id.nav_compras,
+                                R.id.nav_llamadas,
+                                R.id.nav_nauta)
                         .setOpenableLayout(drawer)
                         .build();
 
@@ -186,7 +197,8 @@ public class MainActivity extends AppCompatActivity {
                             || id == R.id.nav_info_nauta
                             || id == R.id.nav_conectado
                             || id == R.id.nav_rail_about
-                            || id == R.id.nav_mails) {
+                            || id == R.id.nav_mails
+                            || id == R.id.nav_help) {
                         binding.appBarMain.contentToolbar.setVisibility(View.GONE);
                         getWindow().setNavigationBarColor(SurfaceColors.SURFACE_0.getColor(this));
                         binding.appBarMain.bottomNavigation.setVisibility(View.GONE);
@@ -294,20 +306,20 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, TrafficFloatingWindow.class);
             startService(intent);
         }
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      /*
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
->>>>>>> 46ba879976366f0f3ccee8c77ffebe88a9b18b6f
-            boolean isNotifi = spFloating.getBoolean("balance_notif", true);
-            if (isNotifi) {
-                Intent broadcast = new Intent(this, NotificationBalances.class);
-                sendBroadcast(broadcast);
-            }
-
-       */
-        }
     }
 
+    private void initNotificationNewYear() {
+        AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, NotificationNewYear.class);
+        intent.setAction("com.arr.simple.NOTIFICATION");
+        PendingIntent pIntent =
+                PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.MONTH, Calendar.JANUARY);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        alarm.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pIntent);
+    }
 }

@@ -133,7 +133,7 @@ public class ClearFragments extends Fragment {
     }
 
     private void showToast(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show();
     }
 
     private boolean isVpnActive() {

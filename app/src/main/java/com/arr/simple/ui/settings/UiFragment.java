@@ -23,6 +23,7 @@ import com.arr.preference.M3SwitchPreference;
 import com.arr.simple.R;
 import com.arr.simple.databinding.FragmentSettingsBinding;
 
+import com.arr.simple.services.FloatingWindow;
 import com.arr.simple.services.TrafficFloatingWindow;
 import com.arr.simple.utils.ThemeManager;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;

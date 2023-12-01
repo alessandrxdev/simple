@@ -100,6 +100,7 @@ public class SimFragment extends Fragment {
                     });
 
             // comprobar si el dispositivo es dualSIM
+            /*
             M3ListPreference dualSim = findPreference("sim");
             if (hasReadPhoneStatePermission()) {
                 boolean isDualSIM = sim.isDualSIM();
@@ -111,7 +112,7 @@ public class SimFragment extends Fragment {
                 }
             } else {
                 requestReadPhoneStatePermission();
-            }
+            }*/
         }
 
         private boolean hasReadPhoneStatePermission() {

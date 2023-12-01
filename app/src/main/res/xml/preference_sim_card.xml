@@ -19,7 +19,7 @@
         app:entryValues="@array/entry_sim"
         app:icon="@drawable/ic_sim_card_24px"
         app:key="sim"
-        app:summary="Seleccione la SIM por la cual desea que se ejecute la aplicación"
+        app:summary="Seleccione la SIM por la cual desea que se ejecute la aplicación (no es funcional en balances poe el momento)"
         app:title="Dual SIM" />
 
 </PreferenceScreen>

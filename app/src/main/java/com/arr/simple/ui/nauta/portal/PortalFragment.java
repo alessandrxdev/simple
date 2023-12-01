@@ -57,14 +57,14 @@ public class PortalFragment extends Fragment {
         // rellenado
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity());
         boolean isActive = sp.getBoolean("autocomplete", false);
-        if(isActive){
+        if (isActive) {
             binding.editUser.setText(sp.getString("internet", ""));
-            binding.editPassword.setText(sp.getString("passInternet",""));
-        }else{
+            binding.editPassword.setText(sp.getString("passInternet", ""));
+        } else {
             binding.editUser.getText().clear();
             binding.editPassword.getText().clear();
         }
-        
+
         // load captcha
         if (isVpnActive()) {
             binding.imageCaptcha.setImageDrawable(
@@ -150,8 +150,9 @@ public class PortalFragment extends Fragment {
 
                     @Override
                     public void handlerException(Exception e) {
-                        Toast.makeText(requireContext(), "" + e, Toast.LENGTH_LONG).show();
-                        image.setImageDrawable(requireActivity().getDrawable(R.drawable.ic_about_24px));
+                        //   Toast.makeText(getActivity(), "" + e, Toast.LENGTH_LONG).show();
+                        image.setImageDrawable(
+                                requireActivity().getDrawable(R.drawable.ic_about_24px));
                     }
                 });
     }

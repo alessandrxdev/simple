@@ -1,94 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
-     xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:app="http://schemas.android.com/apk/res-auto"
-     android:layout_height="match_parent"
-     android:layout_width="match_parent"
-     android:id="@+id/coordinator">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/coordinator">
 
-    <LinearLayout
-         android:layout_height="match_parent"
-         android:layout_width="match_parent"
-         android:orientation="vertical"
-         android:paddingBottom="80dp"
-         android:layout_marginLeft="16dp"
-         android:layout_marginRight="16dp"
-         android:layout_marginTop="10dp">
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <com.google.android.material.card.MaterialCardView
-             android:layout_height="wrap_content"
-             android:layout_width="match_parent"
-             android:layout_margin="4dp"
-             style="@style/MaterialCardView"
-             android:id="@+id/recarga">
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="80dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp">
 
-            <LinearLayout
-                 android:layout_height="wrap_content"
-                 android:layout_width="match_parent"
-                 android:padding="10dp"
-                 android:orientation="vertical">
-
-                <com.google.android.material.textfield.TextInputLayout
-                     android:layout_height="wrap_content"
-                     android:layout_width="match_parent"
-                     app:boxCornerRadiusBottomEnd="30dp"
-                     app:boxCornerRadiusTopStart="30dp"
-                     app:boxStrokeWidth="0dp"
-                     app:boxCornerRadiusTopEnd="30dp"
-                     app:endIconMode="custom"
-                     android:hint="Número móvil"
-                     android:layout_margin="4dp"
-                     app:boxCornerRadiusBottomStart="30dp"
-                     app:boxStrokeWidthFocused="0dp"
-                     app:endIconDrawable="@drawable/ic_contacts_24px"
-                     style="?attr/textInputFilledStyle"
-                     app:errorEnabled="true"
-                     android:id="@+id/input_layout_numero">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                         android:layout_height="wrap_content"
-                         android:layout_width="match_parent"
-                         android:imeOptions="actionDone"
-                         android:singleLine="true"
-                         android:maxLength="8"
-                         android:inputType="numberDecimal"
-                         android:id="@+id/input_edit_text_numero" />
-
-                </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_margin="4dp"
+                style="@style/MaterialCardView"
+                android:id="@+id/recarga">
 
                 <LinearLayout
-                     android:layout_height="wrap_content"
-                     android:layout_width="match_parent"
-                     android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:padding="10dp"
+                    android:orientation="vertical">
 
-                    <Button
-                         android:layout_height="wrap_content"
-                         android:layout_width="wrap_content"
-                         android:layout_margin="4dp"
-                         android:layout_weight="1.0"
-                         android:id="@+id/button_privado"
-                         android:text="Número privado" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        app:boxCornerRadiusBottomEnd="30dp"
+                        app:boxCornerRadiusTopStart="30dp"
+                        app:boxStrokeWidth="0dp"
+                        app:boxCornerRadiusTopEnd="30dp"
+                        app:endIconMode="custom"
+                        android:hint="Número móvil"
+                        android:layout_margin="4dp"
+                        app:boxCornerRadiusBottomStart="30dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:endIconDrawable="@drawable/ic_contacts_24px"
+                        style="?attr/textInputFilledStyle"
+                        app:errorEnabled="true"
+                        android:id="@+id/input_layout_numero">
 
-                    <Button
-                         android:layout_height="wrap_content"
-                         android:layout_width="wrap_content"
-                         android:layout_margin="4dp"
-                         android:layout_weight="1.0"
-                         android:id="@+id/button_asterisco"
-                         android:text="Asterisco 99" />
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:imeOptions="actionDone"
+                            android:singleLine="true"
+                            android:maxLength="8"
+                            android:inputType="numberDecimal"
+                            android:id="@+id/input_edit_text_numero" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1.0"
+                            android:id="@+id/button_privado"
+                            android:text="Número privado" />
+
+                        <Button
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1.0"
+                            android:id="@+id/button_asterisco"
+                            android:text="Asterisco 99" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-        </com.google.android.material.card.MaterialCardView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:scrollbars="none"
+                android:id="@+id/recyclerView" />
 
-        <androidx.recyclerview.widget.RecyclerView
-             android:layout_height="match_parent"
-             android:layout_width="match_parent"
-             android:scrollbars="none"
-             android:id="@+id/recyclerView" />
-
-    </LinearLayout>
-
+        </LinearLayout>
+        
+    </androidx.core.widget.NestedScrollView>
+    
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
