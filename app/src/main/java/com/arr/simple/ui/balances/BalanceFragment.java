@@ -56,7 +56,8 @@ public class BalanceFragment extends Fragment {
         response2 = new UssdResponse(utils);
 
         // mostrar contenido
-        // viewContectBalances();
+        viewContectBalances();
+
         binding.updateTime.setText(sp.getString("update", "sin actualizar"));
 
         // sincronizar balances
@@ -67,6 +68,10 @@ public class BalanceFragment extends Fragment {
                     showToast("Actualizando balances, espere...");
                 });
 
+        return binding.getRoot();
+    }
+
+    private void viewContectBalances() {
         // balances datos
         response2.balancesDatos(
                 binding.textTarifa,
@@ -91,81 +96,23 @@ public class BalanceFragment extends Fragment {
                 binding.venceMinSms);
 
         // bonos en promoción
-        response2.balanceBonos(binding.bonoIlimitado, binding.bonoSaldoo, binding.bonoDatos);
-
-        return binding.getRoot();
-    }
-
-    private void viewContectBalances() {
-        // bonos
-        if ((response.ilimitado() != null && !response.ilimitado().isBlank())
-                || (response.bonosDatos() != null && !response.bonosDatos().isBlank())
-                || (response.bonosSaldo() != null && !response.bonosSaldo().isBlank())) {
-            binding.cardBonos.setVisibility(View.VISIBLE);
-        }
-
-        if (!response.ilimitado().isEmpty()) {
-            binding.ilimitados.setVisibility(View.VISIBLE);
-            binding.ilimitados.setText(response.ilimitado());
-        }
-        if (!response.bonosDatos().isEmpty()) {
-            binding.bonosDatos.setVisibility(View.VISIBLE);
-            binding.bonosDatos.setText(response.bonosDatos());
-        }
-        if (!response.bonosSaldo().isEmpty() && response.bonosSaldo() != null) {
-            binding.bonoSaldo.setVisibility(View.VISIBLE);
-            binding.bonoSaldo.setText(response.bonosSaldo());
-        }
-
-        // balances datos
-        binding.textTarifa.setText(response.tarifa());
-        binding.textDatos.setText(response.allData());
-
-        Log.w("ALLLL ", response.allData());
-
-        binding.textDatosLte.setText(response.dataLte());
-        binding.textDatosCu.setText(response.nacionales());
-        binding.textVenceDatos.setText(response.venceAllData().replace(" dias", " días"));
-
-        // update progress bar
-        if (response.venceAllData() != null) {
-            Matcher matcher =
-                    Pattern.compile("\\d+").matcher(response.venceAllData().replace(" dias", ""));
-            while (matcher.find()) {
-                String strDays = matcher.group();
-                if (strDays != null) {
-                    int days = Integer.parseInt(strDays);
-                    progress(days);
-                }
-            }
-        } else {
-            progress(0);
-        }
-
-        // bolsa diaria
-        binding.textDiaria.setText(response.diaria());
-        binding.textVenceDiaria.setText(response.venceDiaria());
-
-        // bolsa de mensajeria
-        binding.textMensajeria.setText(response.mensajeria());
-        binding.textVenceMensajeria.setText(response.venceMensajeria());
-
-        // saldo movil
-        binding.saldo.setText(response.saldoMovil());
-        binding.textVenceSaldo.setText("Expira: " + response.venceSaldo());
-        binding.min.setText(response.minutos());
-        binding.sms.setText(response.mensajes());
-        binding.venceMinSms.setText(response.venceMensajes().replace(" dias", " días"));
+        response2.balanceBonos(
+                binding.cardBonosPromo,
+                binding.bonoIlimitado,
+                binding.bonoSaldoo,
+                binding.bonoDatos,
+                binding.bonoDatosLte,
+                binding.bonoVoz,
+                binding.bonoSms);
     }
 
     // execute code ussd
     private void executeUssdRequest(Handler handler, int index) {
         if (index >= ussdCodes.length) {
             if (isVisible()) {
-
+                viewContectBalances();
                 binding.swipeRefresh.setRefreshing(false);
                 showToast("Balances actualizados");
-                viewContectBalances();
                 updateTime();
             }
             return;

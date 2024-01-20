@@ -3,25 +3,34 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    android:background="@drawable/background_floating"
+    android:layout_width="wrap_content"
     android:gravity="center_vertical"
-    android:padding="5dp"
+    android:padding="10dp"
     android:orientation="horizontal"
     android:id="@+id/floating">
 
-    <ImageView
-        android:layout_height="12dp"
-        android:layout_width="12dp"
-        android:tint="#FFFFFF"
-        android:id="@+id/connection" />
-
-    <TextView
+    <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textSize="10dp"
-        android:layout_marginLeft="4dp"
-        android:textColor="#FFFFFF"
-        android:id="@+id/textSpeed" />
+        android:padding="3dp"
+        android:clickable="true"
+        android:background="@drawable/background_floating"
+        android:id="@+id/back">
+
+        <ImageView
+            android:layout_height="12dp"
+            android:layout_width="12dp"
+            android:layout_margin="5dp"
+            android:tint="#FFFFFF"
+            android:id="@+id/connection" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="10dp"
+            android:textColor="#FFFFFF"
+            android:id="@+id/textSpeed" />
+    </LinearLayout>
 
 </LinearLayout>

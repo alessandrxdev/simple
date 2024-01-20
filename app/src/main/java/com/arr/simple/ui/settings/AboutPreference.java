@@ -76,8 +76,7 @@ public class AboutPreference extends Fragment {
                         startActivity(
                                 new Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse(
-                                                "https://applifycu.github.io/website/politicas.html")));
+                                        Uri.parse("https://site-8n0.pages.dev/politicas")));
                         return true;
                     });
 

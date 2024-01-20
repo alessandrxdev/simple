@@ -75,19 +75,19 @@ public class SmsFragment extends Fragment {
 
         // lista
         list.add(new Header("Gratis"));
-        list.add(new Grid("Oferta", "Ofertas móviles",0));
-        list.add(new Grid("Tarifa", "Tarifas móviles",0));
-        list.add(new Grid("4G", "Activar servicio 4G",0));
+        list.add(new Grid("Oferta", "Ofertas móviles", 0));
+        list.add(new Grid("Tarifa", "Tarifas móviles", 0));
+        list.add(new Grid("4G", "Activar servicio 4G", 0));
         list.add(new Grid("Red", "Redes que soporta su móvil", 0));
         list.add(new Header("De pago"));
-        list.add(new Grid("DHL", "Rastree su paquete",0));
-        list.add(new Grid("Clima", "Estado del tiempo",0));
-        list.add(new Grid("Vuelos", "Información de vuelos",0));
-        list.add(new Grid("Embajadas", "Embajadas en Cuba",0));
-        list.add(new Grid("Cambio", "Tasa de cambio oficial",0));
-        list.add(new Grid("Apagón", "Apagón en La Habana",0));
-        list.add(new Grid("Cubadebate", "Titulares de noticias",0));
-        list.add(new Grid("Grannma", "Titulares de noticias",0));
+        list.add(new Grid("DHL", "Rastree su paquete", 0));
+        list.add(new Grid("Clima", "Estado del tiempo", 0));
+        list.add(new Grid("Vuelos", "Información de vuelos", 0));
+        list.add(new Grid("Embajadas", "Embajadas en Cuba", 0));
+        list.add(new Grid("Cambio", "Tasa de cambio oficial", 0));
+        list.add(new Grid("Apagón", "Apagón en La Habana", 0));
+        list.add(new Grid("Cubadebate", "Titulares de noticias", 0));
+        list.add(new Grid("Grannma", "Titulares de noticias", 0));
     }
 
     private void onClick(int position) {

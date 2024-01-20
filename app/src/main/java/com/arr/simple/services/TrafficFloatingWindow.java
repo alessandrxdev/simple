@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.ServiceInfo;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.GradientDrawable;
 import android.net.ConnectivityManager;
@@ -19,17 +21,20 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
+import android.widget.LinearLayout;
 import androidx.core.app.NotificationCompat;
 
 import androidx.preference.PreferenceManager;
 import com.arr.simple.R;
 import com.arr.simple.databinding.LayoutFloatingWindowBinding;
+import com.arr.simple.databinding.LayoutViewDeleteServiceBinding;
 
 public class TrafficFloatingWindow extends Service {
 
@@ -39,7 +44,10 @@ public class TrafficFloatingWindow extends Service {
     private static final String CHANNEL = "traffic";
     private LayoutFloatingWindowBinding binding;
     private BroadcastReceiver broadcastNetwork;
-    
+
+    private LayoutViewDeleteServiceBinding delete;
+    private WindowManager.LayoutParams lParamsDelete;
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -68,9 +76,8 @@ public class TrafficFloatingWindow extends Service {
 
                     handler.postDelayed(runnable, 1000);
                 }
-        
-           
-        public String calculateSpeed(long timeTaken, long downBytes, long upBytes) {
+
+                public String calculateSpeed(long timeTaken, long downBytes, long upBytes) {
                     long downSpeed = 0;
                     long upSpeed = 0;
 
@@ -114,10 +121,10 @@ public class TrafficFloatingWindow extends Service {
         lastRxBytes = TrafficStats.getTotalRxBytes();
         lastTxBytes = TrafficStats.getTotalTxBytes();
         lastTime = System.currentTimeMillis();
-        
 
         windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         binding = LayoutFloatingWindowBinding.inflate(LayoutInflater.from(this));
+        delete = LayoutViewDeleteServiceBinding.inflate(LayoutInflater.from(this));
 
         SharedPreferences spColor = PreferenceManager.getDefaultSharedPreferences(this);
         String selectColor = spColor.getString("floating_color", "colorPrimary");
@@ -126,7 +133,7 @@ public class TrafficFloatingWindow extends Service {
                         .getColor(
                                 getResources()
                                         .getIdentifier(selectColor, "color", getPackageName()));
-        GradientDrawable drawable = (GradientDrawable) binding.floating.getBackground();
+        GradientDrawable drawable = (GradientDrawable) binding.back.getBackground();
         drawable.setColor(color);
 
         //
@@ -137,8 +144,22 @@ public class TrafficFloatingWindow extends Service {
                             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                                     | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
                             PixelFormat.TRANSLUCENT);
+
+            lParamsDelete =
+                    new WindowManager.LayoutParams(
+                            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+                            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                                    | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
+                            PixelFormat.TRANSLUCENT);
         } else {
             layoutParams =
+                    new WindowManager.LayoutParams(
+                            WindowManager.LayoutParams.TYPE_PHONE,
+                            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                                    | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
+                            PixelFormat.TRANSLUCENT);
+
+            lParamsDelete =
                     new WindowManager.LayoutParams(
                             WindowManager.LayoutParams.TYPE_PHONE,
                             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
@@ -153,9 +174,18 @@ public class TrafficFloatingWindow extends Service {
         layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        
+        lParamsDelete.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
+        lParamsDelete.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lParamsDelete.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
         // touch floating
-        binding.floating.setOnTouchListener(
+        binding.textSpeed.setOnLongClickListener(
+                view -> {
+                    stopSelf();
+                    return true;
+                });
+
+        binding.back.setOnTouchListener(
                 new View.OnTouchListener() {
                     int x = 0;
                     int y = 0;
@@ -183,7 +213,8 @@ public class TrafficFloatingWindow extends Service {
                 });
         // view
         windowManager.addView(binding.getRoot(), layoutParams);
-        
+        //  windowManager.addView(delete.getRoot(), lParamsDelete);
+
         ConnectivityManager connectivityManager =
                 (ConnectivityManager) this.getSystemService(CONNECTIVITY_SERVICE);
         if (connectivityManager != null) {
@@ -192,15 +223,15 @@ public class TrafficFloatingWindow extends Service {
                             connectivityManager.getActiveNetwork());
             if (network != null) {
                 if (network.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                    binding.connection.setImageResource(R.drawable.ic_data_lte_20px);
+                    binding.connection.setImageResource(R.drawable.ic_signal_mobile);
                 } else if (network.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                    binding.connection.setImageResource(R.drawable.ic_nauta_fill_24px);
+                    binding.connection.setImageResource(R.drawable.ic_signal_wifi);
                 } else {
-                    binding.connection.setImageResource(R.drawable.ic_calendar_20px);
+                    binding.connection.setImageResource(R.drawable.ic_signal_none);
                 }
             }
         }
-        
+
         // crear notofocacion
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel =
@@ -217,8 +248,12 @@ public class TrafficFloatingWindow extends Service {
                                 getString(R.string.app_name)
                                         + " se está ejecutando en segundo plano")
                         .setSmallIcon(R.drawable.ic_logo_simple);
-        int NOTIFICATION_ID = 1;
-        startForeground(NOTIFICATION_ID, builder.build());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            startForeground(
+                    1, builder.build(), ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE);
+        } else {
+            startForeground(1, builder.build());
+        }
         handler.post(runnable);
     }
 
@@ -229,27 +264,44 @@ public class TrafficFloatingWindow extends Service {
             windowManager.removeView(binding.getRoot());
         }
     }
-    private boolean connected(){
-            ConnectivityManager manager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo info = manager.getActiveNetworkInfo();
-            if(info != null && info.isConnected()){
-                return true;
-            }else{
-                return false;
-            }
-        }
-    
-    private void startFloating(){
-        if(permissions()){
-            
+
+    private boolean connected() {
+        ConnectivityManager manager =
+                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = manager.getActiveNetworkInfo();
+        if (info != null && info.isConnected()) {
+            return true;
+        } else {
+            return false;
         }
     }
-    
-    private boolean permissions(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-        return Settings.canDrawOverlays(this);
-        
+
+    private void startFloating() {
+        if (permissions()) {}
+    }
+
+    private boolean permissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return Settings.canDrawOverlays(this);
         }
         return true;
+    }
+
+    private boolean estaEncimaDelCesto(int x, int y) {
+        // Calcula la posición del cesto en la pantalla (ajusta según tus necesidades)
+        int[] cestoLocation = new int[2];
+        delete.getRoot().getLocationOnScreen(cestoLocation);
+        int cestoX = cestoLocation[0];
+        int cestoY = cestoLocation[1];
+
+        // Comprueba si las coordenadas están dentro del área del cesto
+        if (x >= cestoX
+                && x <= cestoX + delete.getRoot().getWidth()
+                && y >= cestoY
+                && y <= cestoY + delete.getRoot().getHeight()) {
+            return true;
+        }
+
+        return false;
     }
 }

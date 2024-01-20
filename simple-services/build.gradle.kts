@@ -7,7 +7,6 @@ plugins {
 android {
     namespace = "com.arr.services"
     compileSdk = 34
-    buildToolsVersion = "34.0.0"
 
     defaultConfig {
         minSdk = 21
@@ -30,7 +29,7 @@ android {
     }
 
     buildFeatures {
-        viewBinding = false
+        viewBinding = true
         
     }
     

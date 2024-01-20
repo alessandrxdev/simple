@@ -2,7 +2,11 @@ package com.arr.services;
 
 import android.view.View;
 import android.widget.TextView;
+
 import com.arr.services.utils.ussd.SendUssdUtils;
+import com.google.android.material.card.MaterialCardView;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +22,8 @@ public class UssdResponse {
             "Datos: ilimitados vence 26-08-23. 25.18 GB vence 26-08-23. Datos.cu 297 MB vence 14-09-23.";
     private String testBonosSaldo =
             "$831.72 vence 29-06-23. Datos: ilimitados vence 25-07-23. 24.64 GB vence 25-07-23. Datos.cu 295 MB vence 25-07-23.";
+    private String newDatos =
+            "Datos: 19.91 GB + 24.02 GB LTE vence 06-01-24. Voz: 05:06:05 vence 06-01-24. SMS: 399 vence 06-01-24. Datos.cu 300 MB vence 06-01-24.";
 
     public UssdResponse(SendUssdUtils util) {
         this.utils = util;
@@ -29,7 +35,7 @@ public class UssdResponse {
             TextView minutos,
             TextView mensajes,
             TextView minSmsExpire) {
-        expireSaldo.setText(getExpireSIM());
+        expireSaldo.setText("Expira: " + getExpireSIM());
         saldo.setText(getSaldoMovil() + " CUP");
         minutos.setText(getMinutos());
         mensajes.setText(getMensajes() + " SMS");
@@ -64,7 +70,25 @@ public class UssdResponse {
         diariaExpire.setText(getExpireDiaria());
     }
 
-    public void balanceBonos(TextView ilimitados, TextView bonoSaldo, TextView bonosDatos) {
+    public void balanceBonos(
+            MaterialCardView cardBonos,
+            TextView ilimitados,
+            TextView bonoSaldo,
+            TextView bonosDatos,
+            TextView bonosLte,
+            TextView bonoVoz,
+            TextView bonoSMS) {
+        if (getIlimitados() != null
+                || getBonosDatos() != null
+                || getBonoSaldo() != null
+                || getBonosLTE() != null
+                || getBonosSMS() != null
+                || getBonosVOZ() != null) {
+            cardBonos.setVisibility(View.VISIBLE);
+        } else {
+            cardBonos.setVisibility(View.GONE);
+        }
+
         if (getIlimitados() != null) {
             ilimitados.setVisibility(View.VISIBLE);
             ilimitados.setText(getIlimitados());
@@ -86,6 +110,27 @@ public class UssdResponse {
             bonosDatos.setText(getBonosDatos());
         } else {
             bonosDatos.setVisibility(View.GONE);
+        }
+
+        if (getBonosLTE() != null) {
+            bonosLte.setVisibility(View.VISIBLE);
+            bonosLte.setText(getBonosLTE());
+        } else {
+            bonosLte.setVisibility(View.GONE);
+        }
+
+        if (getBonosVOZ() != null) {
+            bonoVoz.setVisibility(View.VISIBLE);
+            bonoVoz.setText(getBonosVOZ());
+        } else {
+            bonoVoz.setVisibility(View.GONE);
+        }
+
+        if (getBonosSMS() != null) {
+            bonoSMS.setVisibility(View.VISIBLE);
+            bonoSMS.setText(getBonosSMS() + " SMS");
+        } else {
+            bonoSMS.setVisibility(View.GONE);
         }
     }
 
@@ -363,14 +408,55 @@ public class UssdResponse {
 
     public String getBonosDatos() {
         String response = utils.response("bonos");
-        String cadena =
-                "(Datos:\\s+(?:ilimitados\\s+vence\\s+)?(?:\\d{2}-\\d{2}-\\d{2}).?(?:\\s+)?(?<datos>(?:\\d+(?:\\.\\d+)?)(?:\\s)*[GMK]B)?(?:\\s+\\+\\s+)?(?<bonoLTE>(?:\\d+(?:\\.\\d+)?)(?:\\s)*[GMK]B)?\\s+vence\\s+(?<vence>\\d{2}-\\d{2}-\\d{2}))";
-        Pattern pattern = Pattern.compile(cadena);
+        String regex = "Datos:\\s+(?<datos>(\\d+(\\.\\d+)?)(\\s)*(G|M|K)?B)";
+        Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(response);
         if (matcher.find()) {
             String result = matcher.group("datos");
-            String result2 = matcher.group("vence");
             if (result != null) {
+                return result;
+            }
+        }
+        return null;
+    }
+
+    public String getBonosLTE() {
+        String response = utils.response("bonos");
+        String regex = "\\+\\s+(?<lte>(\\d+(\\.\\d+)?)(\\s)*(G|M|K)?B)";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(response);
+        if (matcher.find()) {
+            String result = matcher.group("lte");
+            if (result != null) {
+                return result;
+            }
+        }
+        return null;
+    }
+
+    public String getBonosVOZ() {
+        String response = utils.response("bonos");
+        String regex = "Voz:\\s(?<voz>(\\d+:\\d{2}:\\d{2}))";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(response);
+        if (matcher.find()) {
+            String result = matcher.group("voz");
+            if (result != null) {
+                return result;
+            }
+        }
+        return null;
+    }
+
+    public String getBonosSMS() {
+        String response = utils.response("bonos");
+        String regex = "SMS:\\s+(?<sms>(\\d+))";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(response);
+        if (matcher.find()) {
+            String result = matcher.group("sms");
+            if (result != null) {
+                System.out.println("SMS " + result);
                 return result;
             }
         }

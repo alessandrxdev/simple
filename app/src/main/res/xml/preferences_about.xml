@@ -10,8 +10,8 @@
     <com.arr.preference.M3Preference
         app:key="legal"
         app:icon="@drawable/ic_file_24px"
-        app:title="Legal"
-        app:summary="Condiciones y Políticas de privacidad" />
+        app:title="Políticas de Privacidad"
+        app:summary="Lea nuestras políticas de privacidad" />
 
     <com.arr.preference.M3Preference
         app:key="about"

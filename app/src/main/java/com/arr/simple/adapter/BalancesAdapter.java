@@ -2,15 +2,14 @@ package com.arr.simple.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import androidx.annotation.NonNull;
-import androidx.viewpager.widget.PagerAdapter;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
+import com.arr.simple.databinding.LayoutViewItemsBonosBalanceBinding;
 import com.arr.simple.model.Balances;
 import java.util.List;
-import com.arr.simple.R;
 
-public class BalancesAdapter extends PagerAdapter {
+public class BalancesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context mContext;
     private List<Balances> list;
@@ -21,25 +20,37 @@ public class BalancesAdapter extends PagerAdapter {
     }
 
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return list.size();
     }
 
     @Override
-    public boolean isViewFromObject(@NonNull View view, @NonNull Object arg1) {
-        return view == arg1;
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof Bonos) {
+            Balances model = list.get(position);
+            Bonos view = (Bonos) holder;
+
+            view.binding.icon.setImageResource(model.getIcon());
+            view.binding.typeBono.setText(model.getTitle());
+            view.binding.expire.setText(model.getVence());
+        }
     }
 
-    @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        View view = inflater.inflate(R.layout.slider_item_bonos, container, false);
-        return view;
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutViewItemsBonosBalanceBinding view =
+                LayoutViewItemsBonosBalanceBinding.inflate(
+                        LayoutInflater.from(parent.getContext()), parent, false);
+        return new Bonos(view);
     }
 
-    @Override
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
+    class Bonos extends RecyclerView.ViewHolder {
+
+        private LayoutViewItemsBonosBalanceBinding binding;
+
+        public Bonos(LayoutViewItemsBonosBalanceBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
     }
 }
